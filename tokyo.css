@@ -535,3 +535,44 @@ main, .lgb, .pied { position: relative; z-index: 1; }
 .swipe-carte .swipe-infos { background: #050507; margin-top: 0; }
 .swipe-tete h2 { white-space: nowrap; font-size: clamp(17px, 5vw, 22px); min-width: 0; }
 .swipe-tete select { width: auto; max-width: 140px; flex-shrink: 1; }
+
+/* ===== Fait main : moins de néon, moins parfait ===== */
+/* Le néon reste sur le logo, les enseignes katakana, le bandeau LED et le bouton LoveGoBuy. Le reste est mat. */
+.titre-bloc h2, .swipe-tete h2, .start { text-shadow: none; }
+.swipe-tete h2::after { text-shadow: none; }
+.puce[aria-pressed="true"] { box-shadow: none; }
+.couv:hover { box-shadow: 0 10px 22px rgba(0, 0, 0, .5); border-color: #e9eef7; }
+.carte:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, .55); border-color: #3a3f52; }
+.swipe-carte[data-rang="0"] .boitier { box-shadow: 0 0 0 2px #c9ced8, 0 0 0 3px #6e7484, 0 24px 40px rgba(0, 0, 0, .6); }
+.couv-desc { display: none; }
+
+/* Grain photo sur tout le site (image fixe, très légère) */
+body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-events: none; opacity: .09;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Rien n'est parfaitement droit : boîtiers, tampons et cartes d'univers légèrement de travers */
+.grille .carte:nth-child(4n+1) { rotate: -.6deg; }
+.grille .carte:nth-child(4n+2) { rotate: .4deg; }
+.grille .carte:nth-child(4n+3) { rotate: .7deg; translate: 0 2px; }
+.grille .carte:nth-child(4n) { rotate: -.3deg; }
+.hanko { rotate: -12deg; opacity: .92; }
+.carte:nth-child(3n) .hanko { rotate: 9deg; right: 11px; bottom: 6px; }
+.carte:nth-child(3n+1) .hanko { rotate: -4deg; bottom: 10px; }
+.hanko { mask: radial-gradient(circle at 30% 70%, #000 55%, rgba(0, 0, 0, .55) 75%, #000 90%); }
+.couv:nth-child(odd) { rotate: -.5deg; }
+.couv:nth-child(3n) { rotate: .6deg; }
+/* Bout de scotch sur les cartes d'univers */
+.couv { overflow: visible; }
+.couv::before { content: ""; position: absolute; z-index: 3; top: -9px; left: 50%; width: 74px; height: 20px; translate: -50% 0; rotate: -3deg;
+  background: rgba(235, 228, 205, .55); box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  clip-path: polygon(0 8%, 4% 0, 9% 10%, 15% 0, 100% 4%, 97% 50%, 100% 96%, 92% 100%, 86% 90%, 80% 100%, 0 94%, 3% 50%); }
+.couv:nth-child(even)::before { rotate: 4deg; left: 38%; }
+.couv:nth-child(3n)::before { left: 64%; rotate: -6deg; }
+/* Prix façon étiquette collée */
+.carte .prix-eur { display: inline-block; padding: 1px 7px 2px; background: #f4efe2; color: #111; border-radius: 2px; rotate: -1.5deg; box-shadow: 1px 2px 0 rgba(0, 0, 0, .5); }
+.carte .prix-eur abbr { color: #d6311f; text-decoration: none; }
+.carte:nth-child(even) .prix-eur { rotate: 1deg; }
+/* Note de la fiche produit */
+.fiche-note { margin: 14px 0 0; font: 400 12.5px/1.45 var(--ui); color: var(--doux); opacity: .85; }
+@media (prefers-reduced-motion: reduce) { .grille .carte, .couv { rotate: none !important; translate: none !important; } }
+.carte .prix-eur { width: fit-content; align-self: flex-start; justify-self: start; }
