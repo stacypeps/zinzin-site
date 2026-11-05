@@ -1,0 +1,210 @@
+{
+ "clean": [
+  {
+   "id": "1688:847633328328",
+   "case": "haut",
+   "img": "assets/couvertures/clean-1.webp",
+   "ratio": 1.037
+  },
+  {
+   "id": "taobao:1004263816554",
+   "case": "bas",
+   "img": "assets/couvertures/clean-2.webp",
+   "ratio": 0.664
+  },
+  {
+   "id": "weidian:7611437473",
+   "case": "chaussures",
+   "img": "assets/couvertures/clean-3.webp",
+   "ratio": 1.923
+  }
+ ],
+ "rockstar": [
+  {
+   "id": "weidian:7693486783",
+   "case": "haut",
+   "img": "assets/couvertures/rockstar-1.webp",
+   "ratio": 0.759
+  },
+  {
+   "id": "weidian:7751949808",
+   "case": "bas",
+   "img": "assets/couvertures/rockstar-2.webp",
+   "ratio": 0.419
+  },
+  {
+   "id": "taobao:1011765349300",
+   "case": "chaussures",
+   "img": "assets/couvertures/rockstar-3.webp",
+   "ratio": 1.275
+  }
+ ],
+ "streetwear": [
+  {
+   "id": "weidian:7718130444",
+   "case": "haut",
+   "img": "assets/couvertures/streetwear-1.webp",
+   "ratio": 1.222
+  },
+  {
+   "id": "weidian:7696364614",
+   "case": "bas",
+   "img": "assets/couvertures/streetwear-2.webp",
+   "ratio": 0.59
+  },
+  {
+   "id": "weidian:7711769865",
+   "case": "chaussures",
+   "img": "assets/couvertures/streetwear-3.webp",
+   "ratio": 1.72
+  }
+ ],
+ "gorpcore": [
+  {
+   "id": "weidian:7693472843",
+   "case": "haut",
+   "img": "assets/couvertures/gorpcore-1.webp",
+   "ratio": 0.63
+  },
+  {
+   "id": "weidian:7693351009",
+   "case": "bas",
+   "img": "assets/couvertures/gorpcore-2.webp",
+   "ratio": 0.411
+  },
+  {
+   "id": "taobao:946095291364",
+   "case": "chaussures",
+   "img": "assets/couvertures/gorpcore-3.webp",
+   "ratio": 1.25
+  }
+ ],
+ "oldmoney": [
+  {
+   "id": "weidian:7710987951",
+   "case": "haut",
+   "img": "assets/couvertures/oldmoney-1.webp",
+   "ratio": 0.916
+  },
+  {
+   "id": "weidian:7693374713",
+   "case": "bas",
+   "img": "assets/couvertures/oldmoney-2.webp",
+   "ratio": 0.484
+  },
+  {
+   "id": "taobao:855897650165",
+   "case": "chaussures",
+   "img": "assets/couvertures/oldmoney-3.webp",
+   "ratio": 0.364
+  }
+ ],
+ "y2k": [
+  {
+   "id": "weidian:7710879221",
+   "case": "haut",
+   "img": "assets/couvertures/y2k-1.webp",
+   "ratio": 1.259
+  },
+  {
+   "id": "weidian:7780606910",
+   "case": "bas",
+   "img": "assets/couvertures/y2k-2.webp",
+   "ratio": 0.599
+  },
+  {
+   "id": "weidian:7711769767",
+   "case": "chaussures",
+   "img": "assets/couvertures/y2k-3.webp",
+   "ratio": 2.102
+  }
+ ],
+ "opium": [
+  {
+   "id": "weidian:7838315858",
+   "case": "haut",
+   "img": "assets/couvertures/opium-1.webp",
+   "ratio": 1.099
+  },
+  {
+   "id": "taobao:662777460912",
+   "case": "chaussures",
+   "img": "assets/couvertures/opium-2.webp",
+   "ratio": 1.222
+  }
+ ],
+ "designer": [
+  {
+   "id": "weidian:7696364630",
+   "case": "bas",
+   "img": "assets/couvertures/designer-1.webp",
+   "ratio": 0.673
+  },
+  {
+   "id": "weidian:7714535276",
+   "case": "chaussures",
+   "img": "assets/couvertures/designer-2.webp",
+   "ratio": 1.777
+  }
+ ],
+ "hiver": [
+  {
+   "id": "weidian:7713908704",
+   "case": "haut",
+   "img": "assets/couvertures/hiver-1.webp",
+   "ratio": 0.763
+  },
+  {
+   "id": "weidian:7696409904",
+   "case": "bas",
+   "img": "assets/couvertures/hiver-2.webp",
+   "ratio": 0.469
+  },
+  {
+   "id": "weidian:7842501061",
+   "case": "chaussures",
+   "img": "assets/couvertures/hiver-3.webp",
+   "ratio": 2.083
+  }
+ ],
+ "archive": [
+  {
+   "id": "taobao:1089805246283",
+   "case": "haut",
+   "img": "assets/couvertures/archive-1.webp",
+   "ratio": 0.926
+  },
+  {
+   "id": "weidian:7696458744",
+   "case": "bas",
+   "img": "assets/couvertures/archive-2.webp",
+   "ratio": 0.757
+  },
+  {
+   "id": "weidian:7693330849",
+   "case": "chaussures",
+   "img": "assets/couvertures/archive-3.webp",
+   "ratio": 0.816
+  }
+ ],
+ "sneakers": [
+  {
+   "id": "weidian:7711726117",
+   "case": "chaussures",
+   "img": "assets/couvertures/sneakers-1.webp",
+   "ratio": 1.064
+  },
+  {
+   "id": "weidian:7714639374",
+   "case": "chaussures",
+   "img": "assets/couvertures/sneakers-2.webp",
+   "ratio": 2.035
+  },
+  {
+   "id": "weidian:7713101451",
+   "case": "chaussures",
+   "img": "assets/couvertures/sneakers-3.webp",
+   "ratio": 0.93
+  }
+ ]
+}

@@ -1,0 +1,100 @@
+[
+ {
+  "id": "weidian:7718130444",
+  "style": "streetwear",
+  "type": "tshirts",
+  "img": "assets/vitrine/1.webp",
+  "ratio": 1.224
+ },
+ {
+  "id": "weidian:7719419317",
+  "style": "streetwear",
+  "type": "chemises",
+  "img": "assets/vitrine/2.webp",
+  "ratio": 1.22
+ },
+ {
+  "id": "weidian:7693531903",
+  "style": "streetwear",
+  "type": "tshirts",
+  "img": "assets/vitrine/3.webp",
+  "ratio": 1.001
+ },
+ {
+  "id": "weidian:7696665135",
+  "style": "sneakers",
+  "type": "chaussures",
+  "img": "assets/vitrine/5.webp",
+  "ratio": 0.816
+ },
+ {
+  "id": "weidian:7861112509",
+  "style": "sneakers",
+  "type": "chaussures",
+  "img": "assets/vitrine/6.webp",
+  "ratio": 1.768
+ },
+ {
+  "id": "weidian:7864061720",
+  "style": "rockstar",
+  "type": "pantalons",
+  "img": "assets/vitrine/7.webp",
+  "ratio": 0.546
+ },
+ {
+  "id": "weidian:7831347055",
+  "style": "rockstar",
+  "type": "chaussures",
+  "img": "assets/vitrine/8.webp",
+  "ratio": 1.636
+ },
+ {
+  "id": "weidian:7693508353",
+  "style": "clean",
+  "type": "tshirts",
+  "img": "assets/vitrine/9.webp",
+  "ratio": 0.954
+ },
+ {
+  "id": "weidian:7696515836",
+  "style": "clean",
+  "type": "vestes",
+  "img": "assets/vitrine/10.webp",
+  "ratio": 1.136
+ },
+ {
+  "id": "weidian:7696425370",
+  "style": "y2k",
+  "type": "vestes",
+  "img": "assets/vitrine/11.webp",
+  "ratio": 0.916
+ },
+ {
+  "id": "weidian:7693366825",
+  "style": "y2k",
+  "type": "pantalons",
+  "img": "assets/vitrine/12.webp",
+  "ratio": 0.501
+ },
+ {
+  "id": "weidian:7448271026",
+  "style": "gorpcore",
+  "type": "chaussures",
+  "img": "assets/vitrine/13.webp",
+  "ratio": 1.275
+ },
+ {
+  "id": "taobao:1079680034017",
+  "style": "opium",
+  "type": "tshirts",
+  "img": "assets/vitrine/14.webp",
+  "ratio": 0.991
+ },
+ {
+  "id": "taobao:662777460912",
+  "style": "opium",
+  "type": "chaussures",
+  "img": "assets/vitrine/15.webp",
+  "ratio": 1.22
+ }
+]

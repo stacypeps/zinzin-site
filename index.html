@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les finds de Zinzin</title>
+  <meta name="description" content="Des milliers de pièces repérées en Chine, rangées par style, avec un lien direct vers LoveGoBuy.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#111010">
+  <link rel="icon" href="assets/icone.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://img.alicdn.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
+  <div class="intro" id="intro" aria-hidden="true" hidden><img data-perso-img alt=""><p class="intro-nom" id="intro-nom"></p></div>
+  <header class="barre">
+    <a class="marque" href="#haut"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="30" height="30"><span data-perso>Zinzin</span></a>
+    <nav class="barre-nav" aria-label="Raccourcis">
+      <button class="btn btn-fantome btn-petit nav-look" id="ouvrir-look" type="button">Compose ton look</button>
+      <button class="btn-rond" id="ouvrir-collections" type="button" aria-label="Mes collections et favoris">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
+        <span class="pastille-n" id="nb-coll" hidden>0</span>
+      </button>
+      <a id="lien-discord" class="btn btn-fantome btn-petit" target="_blank" rel="noopener" hidden>Discord</a>
+      <a id="lien-lgb-barre" class="btn btn-orange btn-petit" target="_blank" rel="noopener">LoveGoBuy</a>
+    </nav>
+  </header>
+
+  <section class="accueil" id="haut" aria-labelledby="titre-accueil">
+    <div class="fond-texte" aria-hidden="true"><span data-perso>Zinzin</span><span data-perso>Zinzin</span></div>
+    <div class="accueil-texte">
+      <p class="surtitre"><b id="stat-total">…</b> pièces · <b id="stat-marques">…</b> marques · rangées par style</p>
+      <h1 id="titre-accueil"><span class="h1-ligne">Les finds <span class="mot-tournant" id="mot-tournant">streetwear</span></span><span class="h1-ligne">de <span class="h1-perso" data-perso>Zinzin</span></span><em>trouvés en Chine, triés pour toi.</em></h1>
+      <form class="recherche-accueil" id="form-accueil" role="search">
+        <label class="champ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="sr">Rechercher</span>
+          <input id="q-accueil" type="search" placeholder="Une pièce, une marque : jorts, Rick Owens, bonnet…" autocomplete="off" enterkeyhint="search">
+        </label>
+        <button class="btn btn-orange" type="submit" data-aimant>Chercher</button>
+      </form>
+      <div class="sugg" id="sugg" aria-label="Suggestions de recherche"></div>
+      <div class="accueil-actions">
+        <button class="btn btn-clair" id="ouvrir-look-2" type="button" data-aimant>Compose ton look</button>
+        <button class="btn btn-fantome" id="ouvrir-surprise" type="button">Surprends-moi</button>
+        <a id="lien-lgb" class="lien-discret" target="_blank" rel="noopener">Pas encore de compte LoveGoBuy ?</a>
+      </div>
+    </div>
+    <div class="scene" aria-label="Quelques pièces du catalogue">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="orbite" id="orbite"></div>
+      <button class="lapin" id="lapin" type="button" aria-label="Le lapin : clique pour une sélection surprise"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="320" height="320"></button>
+    </div>
+  </section>
+
+  <div class="ruban-zone" aria-hidden="true"><div class="ruban"><div class="ruban-piste" id="ruban"></div></div></div>
+
+  <section class="lgb" id="lgb" aria-labelledby="lgb-titre" hidden>
+    <div class="lgb-gauche" data-revele>
+      <img class="lgb-lapin" data-img="imageCoupon" alt="" width="300" height="400" loading="lazy">
+      <div class="ticket">
+        <p class="lgb-kicker">Nouveau sur LoveGoBuy ?</p>
+        <p class="ticket-montant"><span data-compte="400" data-suffixe=" $">0 $</span></p>
+        <h2 id="lgb-titre">de coupons à l’inscription</h2>
+        <p class="ticket-detail" id="lgb-coupon"></p>
+        <a class="btn btn-orange btn-grand" id="lgb-inscription" target="_blank" rel="noopener" data-aimant>Récupérer mes coupons</a>
+      </div>
+    </div>
+    <div class="lgb-droite" data-revele>
+      <img class="lgb-lapin-2" data-img="imageFouille" alt="" width="300" height="400" loading="lazy">
+      <ol class="lgb-etapes">
+        <li><b>1</b><span><strong>Crée ton compte</strong> LoveGoBuy avec notre lien : les coupons sont pour toi.</span></li>
+        <li><b>2</b><span><strong>Choisis tes pièces</strong> ici, chaque bouton t’emmène direct sur la bonne page.</span></li>
+        <li><b>3</b><span><strong>LoveGoBuy achète</strong>, vérifie et t’envoie le colis.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <main>
+    <section class="bloc" id="univers" aria-labelledby="titre-univers">
+      <div class="titre-bloc" data-revele><h2 id="titre-univers"><span class="kicker">01</span> Les univers</h2><p>Une tenue par style, pour voir tout de suite de quoi on parle.</p></div>
+      <div class="univers-grille" id="univers-grille"></div>
+    </section>
+
+    <section class="bloc" aria-labelledby="titre-sel">
+      <div class="titre-bloc" data-revele><h2 id="titre-sel"><span class="kicker">02</span> La sélection de <span data-perso>Zinzin</span></h2><p>Calculée sur le catalogue, sans fausse popularité.</p></div>
+      <div id="rails"></div>
+      <div id="rail-vus"></div>
+    </section>
+
+    <section class="bande-look" aria-labelledby="bande-look-titre" data-revele>
+      <img data-img="imageContent" alt="" width="280" height="380" loading="lazy">
+      <div>
+        <p class="lgb-kicker">Le jeu du jour</p>
+        <h2 id="bande-look-titre">Compose ton look</h2>
+        <p>Choisis un style et un budget : <span data-perso>Zinzin</span> te sort haut, bas et chaussures du catalogue. Tu gardes ce qui te plaît, tu relances le reste.</p>
+        <button class="btn btn-orange btn-grand" id="ouvrir-look-3" type="button" data-aimant>Lancer une tenue</button>
+      </div>
+    </section>
+
+    <section class="bloc catalogue" id="catalogue" aria-labelledby="titre-cat">
+      <div class="titre-bloc" data-revele><h2 id="titre-cat"><span class="kicker">03</span> Tout le catalogue</h2><p id="resultat" aria-live="polite"></p></div>
+      <div class="outils" id="outils">
+        <form class="champ champ-barre" id="form-barre" role="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <label class="sr" for="q">Rechercher dans le catalogue</label>
+          <input id="q" type="search" placeholder="Rechercher" autocomplete="off" enterkeyhint="search">
+        </form>
+        <button class="btn btn-fantome btn-filtres" id="ouvrir-filtres" type="button" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span>Filtres</span><b class="pastille-n" id="nb-filtres" hidden>0</b>
+        </button>
+        <label class="sr" for="tri">Trier</label>
+        <select id="tri">
+          <option value="">Pertinence</option>
+          <option value="prix-asc">Prix croissant</option>
+          <option value="prix-desc">Prix décroissant</option>
+          <option value="recent">Ajout récent</option>
+        </select>
+      </div>
+      <div class="types-rapides" id="types-rapides" role="toolbar" aria-label="Type de pièce"></div>
+      <div class="pastilles" id="pastilles" aria-label="Filtres actifs" hidden></div>
+      <div class="grille" id="grille"></div>
+      <div class="vide" id="vide" hidden>
+        <img src="assets/lapin-confus.png" alt="" width="120" height="120">
+        <p><strong>Zinzin a fouillé, rien trouvé.</strong><br><span id="vide-texte"></span></p>
+        <div class="vide-sugg" id="vide-suggestions"></div>
+        <button class="btn btn-fantome btn-petit" id="vide-effacer" type="button">Tout effacer</button>
+      </div>
+      <button class="btn btn-fantome plus" id="plus" type="button" hidden>Voir plus de pièces</button>
+      <div id="suite" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="pied-marque"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="44" height="44"><p><strong data-perso>Zinzin</strong> fouille Taobao et Weidian pour la commu.</p></div>
+    <div class="pied-notes">
+      <p>Prix en euros = estimation (conversion à la louche), hors livraison et frais. Le vrai prix est sur la page de l’article.</p>
+      <p>Les liens LoveGoBuy contiennent notre code parrain <b id="code-parrain"></b>. Les mentions « best batch », « 1:1 »… viennent des vendeurs : on ne les vérifie pas.</p>
+      <p>Favoris, collections et tenues restent dans ton navigateur (pas de compte). Vider les données du site les efface : pour les retrouver ailleurs, partage-les par lien.</p>
+      <p id="credits" hidden></p>
+      <p class="petit">Fan-art Lapins Crétins · non affilié à Ubisoft. Les marques citées appartiennent à leurs propriétaires. Photos : pages des vendeurs.</p>
+    </div>
+  </footer>
+
+  <!-- Filtres -->
+  <dialog class="panneau" id="panneau" aria-labelledby="panneau-titre">
+    <div class="panneau-boite">
+      <header class="panneau-tete"><h2 id="panneau-titre">Filtres</h2><button class="fermer" id="panneau-fermer" type="button" aria-label="Fermer les filtres">✕</button></header>
+      <div class="panneau-corps">
+        <fieldset><legend>Style</legend><div class="puces" id="f-style"></div></fieldset>
+        <fieldset><legend>Type de pièce</legend><div class="puces" id="f-type"></div></fieldset>
+        <fieldset><legend>Marque</legend>
+          <label class="sr" for="f-marque-q">Chercher une marque</label>
+          <input class="champ-simple" id="f-marque-q" type="search" placeholder="Chercher une marque…" autocomplete="off">
+          <div class="puces" id="f-marque"></div>
+        </fieldset>
+        <fieldset><legend>Budget (estimation en €)</legend>
+          <div class="budget">
+            <label>Min <input class="champ-simple" id="f-min" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+            <label>Max <input class="champ-simple" id="f-max" type="number" min="0" inputmode="numeric" placeholder="∞"></label>
+          </div>
+          <div class="puces" id="f-budgets">
+            <button class="puce" type="button" data-min="" data-max="20">Moins de 20 €</button>
+            <button class="puce" type="button" data-min="20" data-max="50">20 à 50 €</button>
+            <button class="puce" type="button" data-min="50" data-max="100">50 à 100 €</button>
+            <button class="puce" type="button" data-min="100" data-max="">Plus de 100 €</button>
+          </div>
+        </fieldset>
+      </div>
+      <footer class="panneau-pied">
+        <button class="btn btn-fantome" id="panneau-effacer" type="button">Tout effacer</button>
+        <button class="btn btn-orange" id="panneau-voir" type="button">Voir <span id="nb-panneau">0</span> pièces</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Fiche -->
+  <dialog class="fiche" id="fiche" aria-labelledby="fiche-titre">
+    <div class="fiche-boite">
+      <button class="fermer fiche-fermer" id="fiche-fermer" type="button" aria-label="Fermer la fiche et revenir à la liste">✕</button>
+      <div class="fiche-photo"><img id="fiche-img" alt=""><span class="photo-vide">Photo indisponible</span>
+        <button class="fiche-nav prec" id="fiche-prec" type="button" aria-label="Pièce précédente">‹</button>
+        <button class="fiche-nav suiv" id="fiche-suiv" type="button" aria-label="Pièce suivante">›</button>
+      </div>
+      <div class="fiche-infos">
+        <div id="fiche-tags"></div>
+        <p class="fiche-marque" id="fiche-marque"></p>
+        <h2 id="fiche-titre"></h2>
+        <div id="fiche-prix"></div>
+        <div class="fiche-actions">
+          <a class="btn btn-orange btn-grand" id="fiche-lgb" target="_blank" rel="noopener sponsored">Acheter sur LoveGoBuy</a>
+          <div class="fiche-actions-2">
+            <button class="btn btn-fantome" id="fiche-fav" type="button" aria-pressed="false">♥ <span>Favori</span></button>
+            <label class="sr" for="fiche-coll">Ajouter à une collection</label>
+            <select id="fiche-coll"></select>
+          </div>
+          <div class="fiche-actions-3">
+            <a class="lien-discret" id="fiche-origine" target="_blank" rel="noopener">Page d’origine ↗</a>
+            <button class="lien-discret" id="fiche-copier" type="button">Copier le lien LoveGoBuy</button>
+            <button class="lien-discret" id="fiche-partager" type="button">Partager la fiche</button>
+          </div>
+        </div>
+        <ul class="fiche-details" id="fiche-infos"></ul>
+        <div id="fiche-sim-bloc"><p class="sous-titre">Dans le même style</p><div class="mini-grille" id="fiche-similaires"></div></div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Compose ton look -->
+  <dialog class="plein" id="look" aria-labelledby="look-titre">
+    <div class="look-boite">
+      <header class="plein-tete"><h2 id="look-titre">Compose ton look</h2><button class="fermer" id="look-fermer" type="button" aria-label="Fermer">✕</button></header>
+      <div class="look-controles">
+        <div><p class="sous-titre">1. Le style</p><div class="puces" id="look-styles"></div></div>
+        <div class="look-budget">
+          <p class="sous-titre">2. Le budget max</p>
+          <label class="sr" for="look-budget">Budget maximum en euros</label>
+          <input id="look-budget" type="range" min="30" max="500" step="10" value="120"><output id="look-budget-val">120 €</output>
+          <label class="interrupteur"><input type="checkbox" id="look-accessoire"> Ajouter un accessoire</label>
+        </div>
+        <button class="btn btn-orange" id="look-proposer" type="button">Proposer une tenue</button>
+      </div>
+      <p class="look-message" id="look-message" role="status" hidden></p>
+      <div class="look-cases" id="look-cases"></div>
+      <div class="look-pied">
+        <p class="look-total" id="look-total" aria-live="polite"></p>
+        <button class="btn btn-clair" id="look-enregistrer" type="button">Enregistrer la tenue</button>
+      </div>
+      <p class="petit" id="look-note"></p>
+      <div id="look-sauvees-bloc" hidden><p class="sous-titre">Tes tenues enregistrées</p><div class="look-sauvees" id="look-sauvees"></div></div>
+    </div>
+  </dialog>
+
+  <!-- Collections -->
+  <dialog class="plein" id="collections" aria-labelledby="coll-h">
+    <div class="look-boite">
+      <header class="plein-tete"><h2 id="coll-h">Tes collections</h2><button class="fermer" id="coll-fermer" type="button" aria-label="Fermer">✕</button></header>
+      <p class="petit">Tout est gardé dans ce navigateur, sans compte. Si tu vides les données du site, ça disparaît : pour retrouver une collection sur un autre appareil ou l’envoyer à un pote, utilise « Partager ».</p>
+      <div class="puces" id="coll-liste"></div>
+      <div class="coll-tete"><h3 id="coll-titre"></h3><p class="petit" id="coll-total"></p>
+        <div class="coll-actions">
+          <button class="btn btn-fantome btn-petit" id="coll-partager" type="button">Partager</button>
+          <button class="btn btn-fantome btn-petit" id="coll-renommer" type="button">Renommer</button>
+          <button class="btn btn-fantome btn-petit" id="coll-supprimer" type="button">Supprimer</button>
+        </div>
+      </div>
+      <div id="coll-contenu"></div>
+      <div class="coll-tete"><h3>Tes tenues</h3></div><div class="coll-looks" id="coll-looks"></div>
+      <div class="coll-tete"><h3>Vu récemment</h3><button class="lien-discret" id="coll-vider-vus" type="button">Effacer l’historique</button></div>
+      <div id="coll-vus"></div>
+    </div>
+  </dialog>
+
+  <!-- Sélection partagée -->
+  <dialog class="plein" id="partage" aria-labelledby="partage-titre">
+    <div class="look-boite">
+      <header class="plein-tete"><h2><span class="petit-kicker">Sélection partagée</span> <span id="partage-titre"></span></h2><button class="fermer" type="button" aria-label="Fermer">✕</button></header>
+      <p class="petit" id="partage-info"></p>
+      <button class="btn btn-orange" id="partage-garder" type="button">Garder dans mes collections</button>
+      <div id="partage-contenu"></div>
+    </div>
+  </dialog>
+
+  <!-- Surprends-moi -->
+  <dialog class="plein" id="surprise" aria-labelledby="surprise-titre">
+    <div class="look-boite">
+      <header class="plein-tete"><h2 id="surprise-titre">Surprends-moi</h2><button class="fermer" type="button" aria-label="Fermer">✕</button></header>
+      <div class="surprise-controles">
+        <label>Style <select id="surprise-style"></select></label>
+        <label>Max (€) <input class="champ-simple" id="surprise-max" type="number" min="5" step="5" inputmode="numeric"></label>
+        <button class="btn btn-orange" id="surprise-encore" type="button">Encore !</button>
+      </div>
+      <div class="surprise-intro"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="48" height="48"><p id="surprise-intro"></p></div>
+      <div class="grille grille-petite" id="surprise-contenu"></div>
+    </div>
+  </dialog>
+
+  <div class="lapin-bulle" id="lapin-bulle" role="status" aria-live="polite" hidden><img alt="" width="44" height="44"><p></p></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
