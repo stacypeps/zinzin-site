@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://img.alicdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1793917990">
-  <link rel="stylesheet" href="tokyo.css?v=1793917990">
+  <link rel="stylesheet" href="style.css?v=1793918580">
+  <link rel="stylesheet" href="tokyo.css?v=1793918580">
 </head>
 <body>
   <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
@@ -56,10 +56,7 @@
     <circle cx="318" cy="80" r="15" fill="url(#noir)"/><circle cx="350" cy="112" r="15" fill="url(#noir)"/>
     <circle cx="318" cy="144" r="15" fill="url(#noir)"/><circle cx="286" cy="112" r="15" fill="url(#noir)"/>
   </g>
-  <path d="M320 70 l-7 11 h6 l-3 9 l9 -12 h-6 z" fill="#ffb066"/>
-  <path d="M350 103 l2.6 5.4 5.9 .9 -4.3 4.1 1 5.9 -5.2 -2.8 -5.2 2.8 1 -5.9 -4.3 -4.1 5.9 -.9 z" fill="#9ff6ff"/>
-  <path d="M318 152 c-7 -5 -9 -8 -9 -11 a4.5 4.5 0 0 1 9 -1 a4.5 4.5 0 0 1 9 1 c0 3 -2 6 -9 11 z" fill="#ff8ad8"/>
-  <path d="M286 102 l9 10 -9 10 -9 -10 z" fill="#ffe36b"/>
+  <g fill="none" stroke="#e9eef7" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M318 72.5 l7.5 13 h-15 z"/><circle cx="350" cy="112" r="7"/><path d="M312.5 138.5 l11 11 M323.5 138.5 l-11 11"/><rect x="279.5" y="105.5" width="13" height="13" rx="1"/></g>
   <!-- centre : nom, emblème, select / start, analog -->
   <text x="210" y="74" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="3" fill="#5a5f69" text-anchor="middle">ZINZIN</text>
   <g transform="translate(198 82) scale(.36)"><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#1f8fff" transform="translate(4 3)"/><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#ff7a1a"/></g>
@@ -114,7 +111,7 @@
         <button type="submit" aria-label="Chercher">○</button>
       </form>
       <p class="start" id="start" aria-hidden="true">Appuie sur start</p>
-      <p class="touches" aria-hidden="true"><span class="touche t-eclair"><svg viewBox="0 0 24 24"><path d="M13 3l-6 10h5l-1 8 6-11h-5z"/></svg>OK</span><span class="touche t-etoile"><svg viewBox="0 0 24 24"><path d="M12 4l2.4 5 5.4.8-3.9 3.8.9 5.4L12 16.5 7.2 19l.9-5.4L4.2 9.8 9.6 9z"/></svg>Retour</span><span class="touche t-coeur"><svg viewBox="0 0 24 24"><path d="M12 19s-6-4-6-8.5A3.3 3.3 0 0 1 12 8.6a3.3 3.3 0 0 1 6 1.9C18 15 12 19 12 19z"/></svg>Menu</span><span class="touche t-losange"><svg viewBox="0 0 24 24"><path d="M12 4l7 8-7 8-7-8z"/></svg>Aide</span></p>
+      <p class="touches" aria-hidden="true"><span class="touche t-forme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>OK</span><span class="touche t-forme"><svg viewBox="0 0 24 24"><path d="M7.5 7.5l9 9M16.5 7.5l-9 9"/></svg>Retour</span><span class="touche t-forme"><svg viewBox="0 0 24 24"><path d="M12 6l6.5 11h-13z"/></svg>Menu</span><span class="touche t-forme"><svg viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="1"/></svg>Aide</span></p>
     </div>
     <div hidden>
       <span id="stat-marques"></span><span id="mot-tournant"></span><div id="sugg"></div><div class="scene"><div id="orbite"></div></div>
@@ -362,6 +359,6 @@
 
   <div class="lapin-bulle" id="lapin-bulle" role="status" aria-live="polite" hidden><div class="bulle-portrait"><img alt="" width="64" height="80"></div><div class="bulle-texte"><b class="bulle-nom" data-perso>Zinzin</b><p></p></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="js/app.js?v=1793917990"></script>
+  <script type="module" src="js/app.js?v=1793918580"></script>
 </body>
 </html>

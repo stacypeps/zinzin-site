@@ -435,3 +435,5 @@ html.fige, html.fige body { overflow: hidden; }
 .touche.t-eclair svg { color: #ffb066; } .touche.t-etoile svg { color: #9ff6ff; } .touche.t-coeur svg { color: #ff8ad8; } .touche.t-losange svg { color: #ffe36b; }
 .touche svg path { fill: currentColor; stroke: none; }
 .manette { width: min(430px, 94vw); }
+.touche.t-forme svg { color: #e9eef7; }
+.touche.t-forme svg path, .touche.t-forme svg circle, .touche.t-forme svg rect { fill: none; stroke: currentColor; stroke-width: 2.2; }

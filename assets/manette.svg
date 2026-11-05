@@ -29,10 +29,7 @@
     <circle cx="318" cy="80" r="15" fill="url(#noir)"/><circle cx="350" cy="112" r="15" fill="url(#noir)"/>
     <circle cx="318" cy="144" r="15" fill="url(#noir)"/><circle cx="286" cy="112" r="15" fill="url(#noir)"/>
   </g>
-  <path d="M320 70 l-7 11 h6 l-3 9 l9 -12 h-6 z" fill="#ffb066"/>
-  <path d="M350 103 l2.6 5.4 5.9 .9 -4.3 4.1 1 5.9 -5.2 -2.8 -5.2 2.8 1 -5.9 -4.3 -4.1 5.9 -.9 z" fill="#9ff6ff"/>
-  <path d="M318 152 c-7 -5 -9 -8 -9 -11 a4.5 4.5 0 0 1 9 -1 a4.5 4.5 0 0 1 9 1 c0 3 -2 6 -9 11 z" fill="#ff8ad8"/>
-  <path d="M286 102 l9 10 -9 10 -9 -10 z" fill="#ffe36b"/>
+  <g fill="none" stroke="#e9eef7" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M318 72.5 l7.5 13 h-15 z"/><circle cx="350" cy="112" r="7"/><path d="M312.5 138.5 l11 11 M323.5 138.5 l-11 11"/><rect x="279.5" y="105.5" width="13" height="13" rx="1"/></g>
   <!-- centre : nom, emblème, select / start, analog -->
   <text x="210" y="74" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="3" fill="#5a5f69" text-anchor="middle">ZINZIN</text>
   <g transform="translate(198 82) scale(.36)"><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#1f8fff" transform="translate(4 3)"/><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#ff7a1a"/></g>
