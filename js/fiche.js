@@ -37,6 +37,7 @@ export function carte(a, { i = 0, liste = null, petite = false } = {}) {
   const cadre = $('.carte-photo', el);
   cadre.setAttribute('aria-label', `Voir la fiche : ${titre(a)}`);
   photo($('img', cadre), a, petite ? 300 : 400, cadre);
+  cadre.append($('.badge', el)); // l'encart de la tranche va dans le boîtier
   $('.carte-marque', el).textContent = a.marque || S.TYPES[a.type]?.nom || '';
   const bt = $('.lien-titre', el); bt.textContent = titre(a); bt.tabIndex = -1;
   const ouvrir = () => ouvrirFiche(a, liste);
