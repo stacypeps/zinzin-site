@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 270">
+  <!-- Manette Zinzin : design original (argent, deux joysticks), symboles propres au site -->
+  <defs>
+    <linearGradient id="argent" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f2f5"/><stop offset=".45" stop-color="#c9ccd3"/><stop offset="1" stop-color="#8d929c"/></linearGradient>
+    <linearGradient id="argentSombre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9bdc6"/><stop offset="1" stop-color="#7d828c"/></linearGradient>
+    <linearGradient id="creux" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3a8b2"/><stop offset="1" stop-color="#dfe1e6"/></linearGradient>
+    <radialGradient id="noir" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#4a4d57"/><stop offset="1" stop-color="#16171c"/></radialGradient>
+    <radialGradient id="stick" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#55585f"/><stop offset=".7" stop-color="#202126"/><stop offset="1" stop-color="#0d0d10"/></radialGradient>
+  </defs>
+  <!-- gâchettes -->
+  <rect x="62" y="6" width="88" height="34" rx="12" fill="url(#argentSombre)" stroke="#6b7079"/>
+  <rect x="270" y="6" width="88" height="34" rx="12" fill="url(#argentSombre)" stroke="#6b7079"/>
+  <text x="106" y="30" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#5d626c" text-anchor="middle">L</text>
+  <text x="314" y="30" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#5d626c" text-anchor="middle">R</text>
+  <!-- corps : deux têtes rondes reliées par un pont, poignées vers le bas -->
+  <path d="M110 36 C150 30 270 30 310 36 C372 40 404 78 408 130 C412 186 398 236 366 256 C340 270 318 254 304 226 L284 190 C240 178 180 178 136 190 L116 226 C102 254 80 270 54 256 C22 236 8 186 12 130 C16 78 48 40 110 36 Z" fill="url(#argent)" stroke="#7a7f89" stroke-width="2"/>
+  <path d="M130 52 C180 46 240 46 290 52" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3" stroke-linecap="round"/>
+  <!-- croix directionnelle (4 touches séparées) -->
+  <circle cx="102" cy="112" r="50" fill="url(#creux)" stroke="#9aa0aa"/>
+  <g fill="url(#noir)" stroke="#0b0b0e" stroke-width="1">
+    <path d="M92 70 h20 l4 6 v18 l-14 10 l-14 -10 v-18 z"/>
+    <path d="M92 154 h20 l4 -6 v-18 l-14 -10 l-14 10 v18 z"/>
+    <path d="M60 102 v20 l6 4 h18 l10 -14 l-10 -14 h-18 z"/>
+    <path d="M144 102 v20 l-6 4 h-18 l-10 -14 l10 -14 h18 z"/>
+  </g>
+  <!-- boutons d'action avec nos symboles -->
+  <circle cx="318" cy="112" r="50" fill="url(#creux)" stroke="#9aa0aa"/>
+  <g stroke="#0b0b0e">
+    <circle cx="318" cy="80" r="15" fill="url(#noir)"/><circle cx="350" cy="112" r="15" fill="url(#noir)"/>
+    <circle cx="318" cy="144" r="15" fill="url(#noir)"/><circle cx="286" cy="112" r="15" fill="url(#noir)"/>
+  </g>
+  <path d="M320 70 l-7 11 h6 l-3 9 l9 -12 h-6 z" fill="#ffb066"/>
+  <path d="M350 103 l2.6 5.4 5.9 .9 -4.3 4.1 1 5.9 -5.2 -2.8 -5.2 2.8 1 -5.9 -4.3 -4.1 5.9 -.9 z" fill="#9ff6ff"/>
+  <path d="M318 152 c-7 -5 -9 -8 -9 -11 a4.5 4.5 0 0 1 9 -1 a4.5 4.5 0 0 1 9 1 c0 3 -2 6 -9 11 z" fill="#ff8ad8"/>
+  <path d="M286 102 l9 10 -9 10 -9 -10 z" fill="#ffe36b"/>
+  <!-- centre : nom, emblème, select / start, analog -->
+  <text x="210" y="74" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="3" fill="#5a5f69" text-anchor="middle">ZINZIN</text>
+  <g transform="translate(198 82) scale(.36)"><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#1f8fff" transform="translate(4 3)"/><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#ff7a1a"/></g>
+  <rect x="160" y="104" width="22" height="11" rx="2.5" fill="url(#noir)"/>
+  <g class="manette-start"><rect x="238" y="104" width="26" height="11" rx="5.5" fill="#ff7a1a" stroke="#a84700"/></g>
+  <text x="171" y="128" font-family="Inter, Arial, sans-serif" font-size="8" fill="#6a6f79" text-anchor="middle">SELECT</text>
+  <text x="251" y="128" font-family="Inter, Arial, sans-serif" font-size="8" fill="#6a6f79" text-anchor="middle">START</text>
+  <text x="210" y="146" font-family="Inter, Arial, sans-serif" font-size="7.5" fill="#6a6f79" text-anchor="middle">ANALOG</text>
+  <rect x="198" y="150" width="24" height="9" rx="2" fill="#2a2c33"/><rect x="210" y="151" width="10" height="7" rx="1.5" fill="#d9dbe1"/>
+  <rect x="204" y="163" width="12" height="4" rx="2" fill="#ff3b3b"><animate attributeName="opacity" values="1;.35;1" dur="1.6s" repeatCount="indefinite"/></rect>
+  <!-- joysticks -->
+  <circle cx="160" cy="186" r="34" fill="url(#creux)" stroke="#9aa0aa"/><circle cx="160" cy="186" r="26" fill="url(#stick)"/><circle cx="160" cy="186" r="18" fill="none" stroke="#3a3c43" stroke-width="2"/>
+  <circle cx="260" cy="186" r="34" fill="url(#creux)" stroke="#9aa0aa"/><circle cx="260" cy="186" r="26" fill="url(#stick)"/><circle cx="260" cy="186" r="18" fill="none" stroke="#3a3c43" stroke-width="2"/>
+</svg>

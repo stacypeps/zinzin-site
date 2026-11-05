@@ -432,3 +432,6 @@ html.fige, html.fige body { overflow: hidden; }
 .carte .carte-photo .badge { display: none; }
 .carte-photo::before { padding: 0; top: 22%; bottom: 6%; height: auto; font-size: clamp(12px, 3.2vw, 19px); letter-spacing: .02em; overflow: hidden; white-space: nowrap; }
 .manette:focus-visible, .manette:focus { outline: none; }
+.touche.t-eclair svg { color: #ffb066; } .touche.t-etoile svg { color: #9ff6ff; } .touche.t-coeur svg { color: #ff8ad8; } .touche.t-losange svg { color: #ffe36b; }
+.touche svg path { fill: currentColor; stroke: none; }
+.manette { width: min(430px, 94vw); }
