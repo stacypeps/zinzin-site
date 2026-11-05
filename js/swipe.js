@@ -13,7 +13,7 @@ function remplir() {
 function boitier(a, dessus) {
   const el = document.createElement('article');
   el.className = `swipe-carte${dessus ? ' dessus' : ''}`;
-  el.innerHTML = `<div class="boitier"><span class="boitier-bande"><b data-perso>${S.DATA.meta.perso}</b><i>${PLATEFORME[a.plateforme] ?? ''}</i></span>
+  el.innerHTML = `<div class="boitier"><span class="boitier-bande"><b>${(PLATEFORME[a.plateforme] ?? '').toUpperCase()}</b><i>2003</i></span>
     <div class="boitier-cover"><img alt=""></div></div>
     <div class="swipe-infos"><p class="swipe-marque"></p><h3></h3><p class="swipe-prix"></p></div>
     <span class="tampon tampon-oui">GARDÉ</span><span class="tampon tampon-non">SUIVANT</span>`;

@@ -296,6 +296,12 @@ function construire(d, couv) {
   $('#ouvrir-look').onclick = () => ouvrirLook();
   $('#ouvrir-look-2').onclick = () => ouvrirLook();
   $('#ouvrir-look-3').onclick = () => ouvrirLook();
+  // Aperçu de la bande « Compose ton look » : une vraie tenue du catalogue en mini-boîtiers.
+  const apercu = composer({ style: 'streetwear', budget: 120, accessoire: false, garder: false });
+  if (apercu.ok) $('#bande-apercu').replaceChildren(...['haut', 'bas', 'chaussures'].map((k, i) => {
+    const a = apercu.pieces[k], d = document.createElement('div'); d.className = 'mini-boitier'; d.style.setProperty('--r', `${[-6, 2, 7][i]}deg`);
+    const im = document.createElement('img'); im.alt = ''; photo(im, a, 300, d); d.append(Object.assign(document.createElement('span'), { textContent: 'ZINZIN' }), im); return d;
+  }));
   $('#ouvrir-surprise').onclick = () => ouvrirSurprise({});
   $('#ouvrir-collections').onclick = () => ouvrirCollections();
   const majNb = () => { const n = C.total(); $('#nb-coll').textContent = n; $('#nb-coll').hidden = !n; };

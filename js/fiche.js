@@ -24,7 +24,7 @@ export function tagsEl(a, max = 3) {
 // Carte : la photo et le titre ouvrent la fiche ; le cœur et LoveGoBuy sont toujours visibles (pas seulement au survol).
 export function carte(a, { i = 0, liste = null, petite = false } = {}) {
   const el = document.createElement('article');
-  el.className = petite ? 'carte petite' : 'carte'; el.dataset.id = a.id; el.style.setProperty('--i', i % 12);
+  el.className = petite ? 'carte petite' : 'carte'; el.dataset.id = a.id; el.dataset.plateforme = (PLATEFORME[a.plateforme] ?? '').toUpperCase(); el.style.setProperty('--i', i % 12);
   el.innerHTML = `
     <button class="carte-photo" type="button"><img loading="lazy" decoding="async" alt=""><span class="photo-vide">Photo indisponible</span></button>
     <button class="coeur" type="button" aria-pressed="false">${COEUR}</button>

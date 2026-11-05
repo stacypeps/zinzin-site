@@ -285,3 +285,40 @@ body {
 }
 @media (min-width: 900px) { .titre-lapin { height: min(50svh, 470px); opacity: .95; } }
 .carte .coeur { top: 38px; bottom: auto; left: 12px; right: auto; width: 36px; height: 36px; }
+
+/* ===== Coupon, étapes et bande look : sans grosse image, bien cadrés ===== */
+.lgb { display: grid; gap: 14px; max-width: 1180px; margin: 30px auto 0; padding: 0 var(--g); }
+.ticket2 { position: relative; display: grid; gap: 14px 28px; align-items: center; padding: 22px 22px 24px; border-radius: 14px; border: 2px dashed rgba(255, 150, 70, .75); background: radial-gradient(120% 140% at 0% 0%, rgba(255, 122, 26, .28), transparent 55%), linear-gradient(180deg, #0c2457, #061232); }
+.ticket2::before, .ticket2::after { content: ""; position: absolute; top: 50%; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; background: #04091a; }
+.ticket2::before { left: -14px; } .ticket2::after { right: -14px; }
+.ticket2 .ticket-montant { font-size: clamp(52px, 12vw, 96px); line-height: .9; margin: 4px 0 2px; }
+.ticket2 h2 { font: 900 clamp(18px, 3vw, 26px)/1.05 var(--titre); text-transform: uppercase; }
+.ticket2 .ticket-detail { margin: 0 0 12px; color: var(--doux); font-size: 13px; }
+.ticket2 .btn { width: 100%; }
+@media (min-width: 760px) { .ticket2 { grid-template-columns: 1.1fr 1fr; padding: 28px 40px; } .ticket2-droite { border-left: 2px dashed rgba(255, 150, 70, .4); padding-left: 28px; } }
+.etapes2 { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+@media (min-width: 760px) { .etapes2 { grid-template-columns: repeat(3, 1fr); } }
+.etapes2 li { position: relative; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 14px; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--ligne-forte); background: linear-gradient(180deg, rgba(16, 38, 86, .65), rgba(6, 18, 50, .75)); color: var(--doux); font-size: 14px; }
+.etapes2 svg { grid-row: span 2; width: 34px; height: 34px; fill: none; stroke: var(--cyan); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(69, 233, 255, .5)); }
+.etapes2 b { position: absolute; top: 10px; right: 12px; font: 900 14px var(--titre); color: rgba(159, 246, 255, .35); }
+.etapes2 strong { color: #fff; }
+.bande-look { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+@media (min-width: 760px) { .bande-look { grid-template-columns: auto 1fr; padding: 26px 34px; } }
+.bande-apercu { display: flex; justify-content: center; align-items: flex-end; height: 170px; padding-top: 8px; }
+.mini-boitier { position: relative; width: 104px; aspect-ratio: 5 / 7; margin: 0 -8px; padding: 22px 5px 5px; border-radius: 6px; background: linear-gradient(90deg, #08080c, #16171f 8%, #0b0b11 14%); border: 1.5px solid #2a3046; box-shadow: 0 14px 24px rgba(0, 0, 0, .55); transform: rotate(var(--r)); transition: transform .3s var(--rebond); }
+.mini-boitier:nth-child(2) { z-index: 1; transform: rotate(var(--r)) translateY(-10px) scale(1.06); border-color: var(--cyan); }
+.mini-boitier span { position: absolute; top: 5px; left: 7px; font: 900 8px var(--titre); letter-spacing: .25em; color: #fff; }
+.mini-boitier img { width: 100%; height: 100%; object-fit: contain; padding: 6%; border-radius: 2px; background: radial-gradient(120% 90% at 50% 30%, #fff, #cde8ff 60%, #8fc6ff); mix-blend-mode: normal; }
+.bande-look:hover .mini-boitier:nth-child(1) { transform: rotate(-10deg) translateX(-6px); }
+.bande-look:hover .mini-boitier:nth-child(3) { transform: rotate(11deg) translateX(6px); }
+
+/* ===== Boîtiers plus réalistes : bande console (nom de la plateforme), sans notre nom ===== */
+.carte::before { content: attr(data-plateforme); justify-content: flex-start; height: 28px; padding: 0 10px; background: linear-gradient(180deg, #050506, #000 60%, #111 100%); border-bottom: 1px solid #2c2f3a;
+  font: italic 600 13px/1 "Chakra Petch", sans-serif; letter-spacing: .18em; color: #f2f5ff; text-transform: uppercase; }
+.carte .badge { display: none; }
+.carte .coeur { top: 36px; }
+.carte-photo, .carte-photo.charge { margin: 0 5px; width: calc(100% - 10px); border-left: 1px solid rgba(255, 255, 255, .06); }
+.carte { border-color: #15161d; background: linear-gradient(90deg, #020203, #17181f 4%, #060608 9%, #060608 92%, #101118); }
+.carte::after { border-radius: inherit; }
+.boitier-bande { background: linear-gradient(180deg, #050506, #000 60%, #111); font: italic 600 15px "Chakra Petch", sans-serif; letter-spacing: .2em; }
+.boitier-bande i { color: #8a93ab; }

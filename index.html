@@ -65,24 +65,22 @@
 
 
   <section class="lgb" id="lgb" aria-labelledby="lgb-titre" hidden>
-    <div class="lgb-gauche" data-revele>
-      <img class="lgb-lapin" data-img="imageCoupon" alt="" width="300" height="400" loading="lazy">
-      <div class="ticket">
+    <div class="ticket2" data-revele>
+      <div class="ticket2-gauche">
         <p class="lgb-kicker">Nouveau sur LoveGoBuy ?</p>
         <p class="ticket-montant"><span data-compte="400" data-suffixe=" $">0 $</span></p>
         <h2 id="lgb-titre">de coupons à l’inscription</h2>
+      </div>
+      <div class="ticket2-droite">
         <p class="ticket-detail" id="lgb-coupon"></p>
-        <a class="btn btn-orange btn-grand" id="lgb-inscription" target="_blank" rel="noopener" data-aimant>Récupérer mes coupons</a>
+        <a class="btn btn-orange btn-grand" id="lgb-inscription" target="_blank" rel="noopener">Récupérer mes coupons</a>
       </div>
     </div>
-    <div class="lgb-droite" data-revele>
-      <img class="lgb-lapin-2" data-img="imageFouille" alt="" width="300" height="400" loading="lazy">
-      <ol class="lgb-etapes">
-        <li><b>1</b><span><strong>Crée ton compte</strong> LoveGoBuy avec notre lien : les coupons sont pour toi.</span></li>
-        <li><b>2</b><span><strong>Choisis tes pièces</strong> ici, chaque bouton t’emmène direct sur la bonne page.</span></li>
-        <li><b>3</b><span><strong>LoveGoBuy achète</strong>, vérifie et t’envoie le colis.</span></li>
-      </ol>
-    </div>
+    <ol class="etapes2" data-revele>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><b>1</b><span><strong>Crée ton compte</strong> LoveGoBuy avec notre lien : les coupons sont pour toi.</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b>2</b><span><strong>Choisis tes pièces</strong> ici : chaque bouton t’emmène direct sur la bonne page.</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg><b>3</b><span><strong>LoveGoBuy achète</strong>, vérifie et t’envoie le colis.</span></li>
+    </ol>
   </section>
 
   <main>
@@ -98,7 +96,7 @@
     </section>
 
     <section class="bande-look" aria-labelledby="bande-look-titre" data-revele>
-      <img data-img="imageContent" alt="" width="280" height="380" loading="lazy">
+      <div class="bande-apercu" id="bande-apercu" aria-hidden="true"></div>
       <div>
         <p class="lgb-kicker">Le jeu du jour</p>
         <h2 id="bande-look-titre">Compose ton look</h2>
