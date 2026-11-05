@@ -4,6 +4,8 @@ import { carte, ouvrirFiche, initFiche } from './fiche.js';
 import { initLook, ouvrirLook, composer } from './look.js';
 import { initCollections, ouvrirCollections, afficherPartage, ouvrirSurprise } from './collections.js';
 import { initEffets, motsTournants } from './effets.js';
+import { initMenu, charger } from './menu.js';
+import { initSwipe, ouvrirSwipe } from './swipe.js';
 
 const PAR_LOT = 30;
 const etat = { q: '', style: '', type: '', marque: '', min: '', max: '', tri: '' };
@@ -302,14 +304,22 @@ function construire(d, couv) {
 
   rendre();
   initEffets();
-  // Ruban des styles qui défile.
-  const noms = m.styles.filter((s) => s.n && !['a-verifier', 'archive'].includes(s.id)).map((s) => s.nom);
-  $('#ruban').replaceChildren(...[...noms, ...noms].map((t) => Object.assign(document.createElement('span'), { textContent: t })));
+  initSwipe();
+  const aller = (sel) => charger(() => $(sel).scrollIntoView({ behavior: 'auto' }));
+  initMenu({
+    catalogue: () => aller('#catalogue'),
+    univers: () => aller('#univers'),
+    look: () => charger(() => ouvrirLook()),
+    swipe: () => charger(() => ouvrirSwipe()),
+    coupons: () => aller(m.couponMontant ? '#lgb' : '#catalogue'),
+    favoris: () => ouvrirCollections(),
+  });
+  if (m.couponMontant) $('#menu-coupon').textContent = `${m.couponMontant} ${m.couponDevise} de coupons`;
   // Intro : le lapin surgit et le nom s'assemble (une fois par visite, coupée si on réduit les animations).
   let vue = false; try { vue = sessionStorage.getItem('zinzin-intro') === '1'; sessionStorage.setItem('zinzin-intro', '1'); } catch {}
   if (!vue && !MOUVEMENT_REDUIT && !p0.get('article') && !p0.get('selection')) {
     const intro = $('#intro'); intro.hidden = false;
-    $('#intro-nom').replaceChildren(...[...m.perso].map((c, i) => Object.assign(document.createElement('span'), { textContent: c, style: `--k:${i}` })));
+    $('#intro-nom').textContent = m.perso;
     setTimeout(() => intro.classList.add('fin'), 1300); setTimeout(() => (intro.hidden = true), 1900);
   }
   motsTournants($('#mot-tournant'), m.styles.filter((s) => s.n && !['a-verifier', 'designer', 'archive'].includes(s.id)).map((s) => s.nom.split(' / ')[0].toLowerCase()));

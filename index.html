@@ -6,20 +6,24 @@
   <title>Les finds de Zinzin</title>
   <meta name="description" content="Des milliers de pièces repérées en Chine, rangées par style, avec un lien direct vers LoveGoBuy.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#111010">
+  <meta name="theme-color" content="#050b1e">
   <link rel="icon" href="assets/icone.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://img.alicdn.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tokyo.css">
 </head>
 <body>
   <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
-  <div class="intro" id="intro" aria-hidden="true" hidden><img data-perso-img alt=""><p class="intro-nom" id="intro-nom"></p></div>
+  <div class="intro" id="intro" aria-hidden="true" hidden><p class="intro-nom" id="intro-nom"></p><p class="intro-charge">Chargement<span>…</span></p></div>
+  <div class="chargement" id="chargement" aria-hidden="true" hidden><span></span><span></span><span></span><span></span><p>Chargement</p></div>
   <header class="barre">
     <a class="marque" href="#haut"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="30" height="30"><span data-perso>Zinzin</span></a>
     <nav class="barre-nav" aria-label="Raccourcis">
+      <button class="btn-rond btn-son" id="btn-son" type="button" aria-pressed="false" aria-label="Activer les sons">♪</button>
       <button class="btn btn-fantome btn-petit nav-look" id="ouvrir-look" type="button">Compose ton look</button>
       <button class="btn-rond" id="ouvrir-collections" type="button" aria-label="Mes collections et favoris">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
@@ -30,34 +34,35 @@
     </nav>
   </header>
 
-  <section class="accueil" id="haut" aria-labelledby="titre-accueil">
-    <div class="fond-texte" aria-hidden="true"><span data-perso>Zinzin</span><span data-perso>Zinzin</span></div>
-    <div class="accueil-texte">
-      <p class="surtitre"><b id="stat-total">…</b> pièces · <b id="stat-marques">…</b> marques · rangées par style</p>
-      <h1 id="titre-accueil"><span class="h1-ligne">Les finds <span class="mot-tournant" id="mot-tournant">streetwear</span></span><span class="h1-ligne">de <span class="h1-perso" data-perso>Zinzin</span></span><em>trouvés en Chine, triés pour toi.</em></h1>
-      <form class="recherche-accueil" id="form-accueil" role="search">
-        <label class="champ">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <span class="sr">Rechercher</span>
-          <input id="q-accueil" type="search" placeholder="Une pièce, une marque : jorts, Rick Owens, bonnet…" autocomplete="off" enterkeyhint="search">
-        </label>
-        <button class="btn btn-orange" type="submit" data-aimant>Chercher</button>
+<section class="titre-jeu" id="haut" aria-labelledby="titre-accueil">
+    <picture class="titre-fond" aria-hidden="true"><source media="(min-width: 760px)" srcset="assets/tokyo/fond-akiba-ordi.jpg"><img src="assets/tokyo/fond-akiba-mobile.jpg" alt="" fetchpriority="high"></picture>
+    <div class="titre-voile" aria-hidden="true"></div>
+    <div class="titre-pluie" aria-hidden="true"></div>
+    <div class="titre-contenu">
+      <h1 id="titre-accueil" class="logo-jeu"><span class="logo-chrome" data-perso>Zinzin</span><span class="logo-kata" lang="ja">ジンジン</span><span class="logo-sous">Les finds de la commu · <b id="stat-total">…</b> pièces</span></h1>
+      <img class="titre-lapin" data-img="imageHeros" alt="" width="600" height="800">
+      <nav class="menu-jeu" id="menu-jeu" aria-label="Menu principal">
+        <button type="button" data-action="catalogue">Catalogue</button>
+        <button type="button" data-action="univers">Univers</button>
+        <button type="button" data-action="look">Compose ton look</button>
+        <button type="button" data-action="swipe">Swipe</button>
+        <button type="button" data-action="coupons" id="menu-coupon">Coupons</button>
+        <button type="button" data-action="favoris">Favoris</button>
+      </nav>
+      <form class="recherche-jeu" id="form-accueil" role="search">
+        <label class="sr" for="q-accueil">Rechercher</label>
+        <input id="q-accueil" type="search" placeholder="Chercher une pièce, une marque…" autocomplete="off" enterkeyhint="search">
+        <button type="submit" aria-label="Chercher">○</button>
       </form>
-      <div class="sugg" id="sugg" aria-label="Suggestions de recherche"></div>
-      <div class="accueil-actions">
-        <button class="btn btn-clair" id="ouvrir-look-2" type="button" data-aimant>Compose ton look</button>
-        <button class="btn btn-fantome" id="ouvrir-surprise" type="button">Surprends-moi</button>
-        <a id="lien-lgb" class="lien-discret" target="_blank" rel="noopener">Pas encore de compte LoveGoBuy ?</a>
-      </div>
+      <p class="start" id="start" aria-hidden="true">Appuie sur start</p>
+      <p class="touches" aria-hidden="true"><span class="t-rond">○</span> OK <span class="t-croix">✕</span> Retour <span class="t-tri">△</span> Menu <span class="t-carre">□</span> Aide</p>
     </div>
-    <div class="scene" aria-label="Quelques pièces du catalogue">
-      <div class="halo" aria-hidden="true"></div>
-      <div class="orbite" id="orbite"></div>
-      <button class="lapin" id="lapin" type="button" aria-label="Le lapin : clique pour une sélection surprise"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="320" height="320"></button>
+    <div hidden>
+      <span id="stat-marques"></span><span id="mot-tournant"></span><div id="sugg"></div><div class="scene"><div id="orbite"></div></div>
+      <button id="lapin" type="button"></button><button id="ouvrir-look-2" type="button"></button><button id="ouvrir-surprise" type="button"></button><a id="lien-lgb"></a>
     </div>
   </section>
 
-  <div class="ruban-zone" aria-hidden="true"><div class="ruban"><div class="ruban-piste" id="ruban"></div></div></div>
 
   <section class="lgb" id="lgb" aria-labelledby="lgb-titre" hidden>
     <div class="lgb-gauche" data-revele>
@@ -276,6 +281,25 @@
       </div>
       <div class="surprise-intro"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="48" height="48"><p id="surprise-intro"></p></div>
       <div class="grille grille-petite" id="surprise-contenu"></div>
+    </div>
+  </dialog>
+
+  <dialog class="swipe" id="swipe" aria-labelledby="swipe-titre">
+    <div class="swipe-boite">
+      <header class="swipe-tete">
+        <h2 id="swipe-titre">Swipe</h2>
+        <label class="sr" for="swipe-style">Style</label>
+        <select id="swipe-style"></select>
+        <button class="fermer" id="swipe-fermer" type="button" aria-label="Fermer">✕</button>
+      </header>
+      <p class="swipe-aide">← passer · → garder en favori · ↑ voir sur LoveGoBuy</p>
+      <div class="swipe-pile" id="swipe-pile"></div>
+      <div class="swipe-actions">
+        <button class="swipe-btn non" id="swipe-non" type="button" aria-label="Passer">✕</button>
+        <button class="swipe-btn lgb" id="swipe-lgb" type="button" aria-label="Voir sur LoveGoBuy">↑</button>
+        <button class="swipe-btn oui" id="swipe-oui" type="button" aria-label="Garder en favori">♥</button>
+      </div>
+      <p class="swipe-compteur" id="swipe-compteur" aria-live="polite"></p>
     </div>
   </dialog>
 
