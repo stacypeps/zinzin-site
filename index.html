@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://img.alicdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1793919724">
-  <link rel="stylesheet" href="tokyo.css?v=1793919724">
+  <link rel="stylesheet" href="style.css?v=1793920379">
+  <link rel="stylesheet" href="tokyo.css?v=1793920379">
 </head>
 <body>
   <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
@@ -77,7 +77,7 @@
   </div>
   <div class="chargement" id="chargement" aria-hidden="true" hidden><span></span><span></span><span></span><span></span><p>Chargement</p></div>
   <header class="barre">
-    <a class="marque" href="#haut"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="30" height="30"><span data-perso>Zinzin</span></a>
+    <a class="marque" href="#haut"><img src="assets/logo-z.svg" alt="" width="30" height="30"><span data-perso>Zinzin</span></a>
     <nav class="barre-nav" aria-label="Raccourcis">
       <button class="btn-rond btn-son" id="btn-son" type="button" aria-pressed="false" aria-label="Activer les sons">♪</button>
       <button class="btn btn-fantome btn-petit nav-look" id="ouvrir-look" type="button">Compose ton look</button>
@@ -139,14 +139,17 @@
     </ol>
   </section>
 
+  <div class="decor" aria-hidden="true"><div class="decor-pluie"></div><span class="lanterne l1"></span><span class="lanterne l2"></span><span class="lanterne l3"></span><span class="lanterne l4"></span></div>
   <main>
     <section class="bloc" id="univers" aria-labelledby="titre-univers">
-      <div class="titre-bloc" data-revele><h2 id="titre-univers"><span class="kicker">01</span> Les univers</h2><p>Une tenue par style, pour voir tout de suite de quoi on parle.</p></div>
+      <div class="titre-bloc" data-revele><span class="neon-jp" lang="ja" aria-hidden="true">ユニバース</span><h2 id="titre-univers"><span class="kicker">01</span> Les univers</h2><p>Une tenue par style, pour voir tout de suite de quoi on parle.</p></div>
       <div class="univers-grille" id="univers-grille"></div>
     </section>
 
+    <div class="led" aria-hidden="true"><div class="led-piste" id="led"></div></div>
+
     <section class="bloc" aria-labelledby="titre-sel">
-      <div class="titre-bloc" data-revele><h2 id="titre-sel"><span class="kicker">02</span> La sélection de <span data-perso>Zinzin</span></h2><p>Calculée sur le catalogue, sans fausse popularité.</p></div>
+      <div class="titre-bloc" data-revele><span class="neon-jp" lang="ja" aria-hidden="true">セレクト</span><h2 id="titre-sel"><span class="kicker">02</span> La sélection de <span data-perso>Zinzin</span></h2><p>Calculée sur le catalogue, sans fausse popularité.</p></div>
       <div id="rails"></div>
       <div id="rail-vus"></div>
     </section>
@@ -162,7 +165,7 @@
     </section>
 
     <section class="bloc catalogue" id="catalogue" aria-labelledby="titre-cat">
-      <div class="titre-bloc" data-revele><h2 id="titre-cat"><span class="kicker">03</span> Tout le catalogue</h2><p id="resultat" aria-live="polite"></p></div>
+      <div class="titre-bloc" data-revele><span class="neon-jp" lang="ja" aria-hidden="true">カタログ</span><h2 id="titre-cat"><span class="kicker">03</span> Tout le catalogue</h2><p id="resultat" aria-live="polite"></p></div>
       <div class="outils" id="outils">
         <form class="champ champ-barre" id="form-barre" role="search">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -194,13 +197,16 @@
     </section>
   </main>
 
-  <footer class="pied">
-    <div class="pied-marque"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="44" height="44"><p><strong data-perso>Zinzin</strong> fouille Taobao et Weidian pour la commu.</p></div>
+  <footer class="pied ticket-caisse">
+    <p class="caisse-tete"><b data-perso>Zinzin</b> 商店 · Reçu n°<span id="caisse-num">0001</span></p>
+    <div class="pied-marque"><img src="assets/logo-z.svg" alt="" width="44" height="44"><p><strong data-perso>Zinzin</strong> fouille Taobao et Weidian pour la commu.</p></div>
     <div class="pied-notes">
       <p>Prix en euros = estimation (conversion à la louche), hors livraison et frais. Le vrai prix est sur la page de l’article.</p>
       <p>Les liens LoveGoBuy contiennent notre code parrain <b id="code-parrain"></b>. Les mentions « best batch », « 1:1 »… viennent des vendeurs : on ne les vérifie pas.</p>
       <p>Favoris, collections et tenues restent dans ton navigateur (pas de compte). Vider les données du site les efface : pour les retrouver ailleurs, partage-les par lien.</p>
       <p id="credits" hidden></p>
+      <p class="caisse-merci" lang="ja">ありがとうございました</p>
+      <p class="caisse-code" aria-hidden="true"></p>
       <p class="petit">Fan-art Lapins Crétins · non affilié à Ubisoft. Les marques citées appartiennent à leurs propriétaires. Photos : pages des vendeurs.</p>
     </div>
   </footer>
@@ -359,6 +365,6 @@
 
   <div class="lapin-bulle" id="lapin-bulle" role="status" aria-live="polite" hidden><div class="bulle-portrait"><img alt="" width="64" height="80"></div><div class="bulle-texte"><b class="bulle-nom" data-perso>Zinzin</b><p></p></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="js/app.js?v=1793919724"></script>
+  <script type="module" src="js/app.js?v=1793920379"></script>
 </body>
 </html>

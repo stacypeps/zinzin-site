@@ -67,7 +67,7 @@ export function toast(msg) {
 let lapinT;
 export function lapinDit(texte, humeur = 'normal') {
   const b = $('#lapin-bulle');
-  $('img', b).src = S.DATA.meta[humeur === 'content' ? 'imageContent' : humeur === 'confus' ? 'imageConfus' : 'image'] || S.DATA.meta.image;
+  $('img', b).src = 'assets/logo-z.svg';
   $('p', b).textContent = texte;
   b.hidden = false; requestAnimationFrame(() => b.classList.add('visible'));
   clearTimeout(lapinT); lapinT = setTimeout(() => { b.classList.remove('visible'); setTimeout(() => (b.hidden = true), 300); }, 4200);

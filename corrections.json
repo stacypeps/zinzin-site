@@ -1,0 +1,25 @@
+{
+  "_doc": "Corrections manuelles, PRIORITAIRES sur les règles. Une entrée = un article (par \"id\", ex. \"weidian:7780465862\") ou plusieurs (par \"titre\", une expression régulière sur le titre d'origine). Champs possibles : type, styles (remplace), ajouterStyles, retirerStyles, marque. Ensuite : node site-spread/import.mjs. Les cas incertains sont listés dans data/a-verifier.csv.",
+  "corrections": [
+    {
+      "titre": "^Chrome 00",
+      "marque": "Chrome Hearts",
+      "ajouterStyles": [
+        "designer"
+      ]
+    },
+    {
+      "titre": "NBA basketball uniforms",
+      "type": "ensembles",
+      "styles": [
+        "streetwear"
+      ]
+    },
+    {
+      "titre": "Balenciaga Blank Tower",
+      "retirerStyles": [
+        "clean"
+      ]
+    }
+  ]
+}

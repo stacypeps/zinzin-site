@@ -198,7 +198,7 @@ function rail(titreRail, phrase, articles, { voir, extra } = {}) {
   if (!articles.length) return null;
   const sec = document.createElement('section'); sec.className = 'rail';
   sec.innerHTML = `<header class="rail-tete"><img class="avatar" alt="" width="40" height="40"><div><h3></h3><p></p></div></header><div class="rail-piste"></div>`;
-  $('.avatar', sec).src = S.DATA.meta.image;
+  $('.avatar', sec).src = 'assets/logo-z.svg';
   $('h3', sec).textContent = titreRail; $('p', sec).textContent = phrase;
   $('.rail-piste', sec).append(...articles.map((a, i) => carte(a, { i, liste: articles, petite: true })));
   if (voir) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-fantome btn-petit rail-voir'; b.textContent = voir.texte; b.onclick = voir.action; $('.rail-tete', sec).append(b); }
@@ -331,6 +331,10 @@ function construire(d, couv) {
 
   rendre();
   initEffets();
+  // Panneau LED façon gare + numéro de ticket.
+  const ledTxt = [`次は ${(m.styles.find((x) => x.id === 'streetwear')?.nom ?? 'STREETWEAR').toUpperCase()}`, `${nombre(d.articles.length)} PIÈCES`, `DÈS ${euros(Math.min(...d.articles.filter((a) => a.eur).map((a) => a.eur)))} €`, m.couponMontant ? `${m.couponMontant} ${m.couponDevise} DE COUPONS` : '', '新着 NOUVEAUTÉS', '冬 SPÉCIAL HIVER'].filter(Boolean);
+  $('#led').replaceChildren(...[...ledTxt, ...ledTxt].map((t) => Object.assign(document.createElement('span'), { textContent: t })));
+  $('#caisse-num').textContent = String(d.articles.length).padStart(4, '0');
   initSwipe();
   const aller = (sel) => charger(() => $(sel).scrollIntoView({ behavior: 'auto' }));
   initMenu({

@@ -1,0 +1,16 @@
+{
+  "_doc": "Réglages affichés sur le site. perso = nom ; image* = poses de la mascotte (fichiers dans assets/lapin/, générées avec creative/directions/lapins-Z/zinzin/generer.mjs). Vide = bouton masqué. Puis : node site-spread/import.mjs",
+  "perso": "Zinzin",
+  "image": "assets/tokyo/lapin-pointe.webp",
+  "titre": "Les finds de Zinzin",
+  "discord": "",
+  "discordNom": "La Zizanie",
+  "imageConfus": "assets/tokyo/lapin-confus.webp",
+  "imageContent": "assets/tokyo/lapin-content.webp",
+  "coupon": "Offerts à l’inscription sur LoveGoBuy avec notre lien. Les conditions d’utilisation des coupons sont indiquées sur LoveGoBuy.",
+  "imageCoupon": "assets/lapin/coupon.webp",
+  "imageFouille": "assets/lapin/fouille.webp",
+  "couponMontant": 400,
+  "couponDevise": "$",
+  "imageHeros": "assets/tokyo/lapin-heros.webp"
+}

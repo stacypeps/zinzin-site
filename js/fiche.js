@@ -38,6 +38,9 @@ export function carte(a, { i = 0, liste = null, petite = false } = {}) {
   cadre.setAttribute('aria-label', `Voir la fiche : ${titre(a)}`);
   photo($('img', cadre), a, petite || innerWidth < 760 ? 300 : 400, cadre);
   cadre.append($('.badge', el)); // l'encart de la tranche va dans le boîtier
+  // Tampon : 冬 hiver, 安 pas cher (< 20 €), 新 ajouté il y a moins de 30 jours.
+  const tampon = a.styles.includes('hiver') ? ['冬', 'Spécial hiver'] : a.eur && a.eur < 20 ? ['安', 'Moins de 20 €'] : a.ajoute && Date.now() - Date.parse(a.ajoute) < 30 * 864e5 ? ['新', 'Nouveau'] : null;
+  if (tampon) cadre.append(Object.assign(document.createElement('span'), { className: 'hanko', textContent: tampon[0], title: tampon[1], lang: 'ja' }));
   $('.carte-marque', el).textContent = a.marque || S.TYPES[a.type]?.nom || '';
   const bt = $('.lien-titre', el); bt.textContent = titre(a); bt.tabIndex = -1;
   const ouvrir = () => ouvrirFiche(a, liste);

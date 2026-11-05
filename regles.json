@@ -1,0 +1,1565 @@
+{
+  "_doc": "Règles de classement, éditables. Trois dimensions séparées : TYPE (ce que c'est), STYLE (l'univers), MARQUE (filtre à part). Les mots sont cherchés sans accents ni majuscules, en début de mot. Corrections au cas par cas : corrections.json. Après modif : node site-spread/import.mjs puis node site-spread/verif-classement.mjs",
+  "_typesDoc": "Le type vient du NOM de l'article : on prend le mot de produit le plus à droite du titre (en anglais le nom principal est à la fin : « knitted hat » = bonnet, « cargo pants » = pantalon). À égalité, le mot le plus long gagne (« t-shirt » bat « shirt »). Sans mot reconnu, on prend la catégorie de la spread (categoriesSource), et l'article est marqué « à vérifier ». groupe = case dans « Compose ton look ».",
+  "types": [
+    {
+      "id": "tshirts",
+      "nom": "T-shirts & tops",
+      "groupe": "haut",
+      "mots": [
+        "tee",
+        "tees",
+        "t-shirt",
+        "t-shirts",
+        "tshirt",
+        "t shirt",
+        "tank",
+        "tanktop",
+        "tank top",
+        "top",
+        "longsleeve",
+        "long sleeve",
+        "longsleeves",
+        "jersey",
+        "jerseys",
+        "maillot",
+        "polo",
+        "polos",
+        "baby tee",
+        "debardeur",
+        "thermal",
+        "tee-shirt"
+      ]
+    },
+    {
+      "id": "chemises",
+      "nom": "Chemises",
+      "groupe": "haut",
+      "mots": [
+        "shirt",
+        "shirts",
+        "chemise",
+        "button up",
+        "button-up",
+        "button down",
+        "button-down",
+        "overshirt",
+        "flannel"
+      ]
+    },
+    {
+      "id": "pulls",
+      "nom": "Pulls & sweats",
+      "groupe": "haut",
+      "mots": [
+        "hoodie",
+        "hoodies",
+        "hoody",
+        "sweater",
+        "sweaters",
+        "sweatshirt",
+        "sweat",
+        "sweats",
+        "crewneck",
+        "pull",
+        "pullover",
+        "knit",
+        "knitwear",
+        "cardigan",
+        "jumper",
+        "zip up",
+        "zip-up",
+        "zipup",
+        "zip hoodie",
+        "quarter zip",
+        "half zip",
+        "fleece",
+        "sweatshirts",
+        "crewnecks",
+        "knit sweater",
+        "zip",
+        "zippe",
+        "zippé",
+        "sweat zip",
+        "gilet zip",
+        "maille",
+        "col roule"
+      ]
+    },
+    {
+      "id": "vestes",
+      "nom": "Vestes & manteaux",
+      "groupe": "haut",
+      "mots": [
+        "jacket",
+        "jackets",
+        "veste",
+        "coat",
+        "manteau",
+        "puffer",
+        "doudoune",
+        "parka",
+        "blazer",
+        "bomber",
+        "varsity",
+        "windbreaker",
+        "gilet",
+        "vest",
+        "shell",
+        "down jacket",
+        "trench",
+        "anorak",
+        "overcoat",
+        "fleece jacket",
+        "softshell",
+        "blouson"
+      ]
+    },
+    {
+      "id": "pantalons",
+      "nom": "Pantalons & jeans",
+      "groupe": "bas",
+      "mots": [
+        "pant",
+        "pants",
+        "pantalon",
+        "jean",
+        "jeans",
+        "denim",
+        "trouser",
+        "trousers",
+        "jogger",
+        "joggers",
+        "cargo",
+        "cargos",
+        "chino",
+        "chinos",
+        "sweatpants",
+        "sweatpant",
+        "trackpants",
+        "track pants",
+        "flare",
+        "flares",
+        "bootcut",
+        "leggings",
+        "jogging",
+        "joggings",
+        "pantalon cargo",
+        "jean flare"
+      ]
+    },
+    {
+      "id": "shorts",
+      "nom": "Shorts",
+      "groupe": "bas",
+      "mots": [
+        "short",
+        "shorts",
+        "jorts",
+        "swim shorts",
+        "board shorts",
+        "bermuda"
+      ]
+    },
+    {
+      "id": "ensembles",
+      "nom": "Ensembles",
+      "groupe": "ensemble",
+      "mots": [
+        "set",
+        "sets",
+        "tracksuit",
+        "tracksuits",
+        "ensemble",
+        "suit",
+        "survetement",
+        "2 piece",
+        "two piece",
+        "uniform",
+        "uniforms",
+        "sportswear set",
+        "pyjama",
+        "pajama"
+      ]
+    },
+    {
+      "id": "chaussures",
+      "nom": "Chaussures",
+      "groupe": "chaussures",
+      "mots": [
+        "shoe",
+        "shoes",
+        "sneaker",
+        "sneakers",
+        "boot",
+        "boots",
+        "loafer",
+        "loafers",
+        "slide",
+        "slides",
+        "sandal",
+        "sandals",
+        "clog",
+        "clogs",
+        "derby",
+        "mule",
+        "mules",
+        "runner",
+        "runners",
+        "trainer",
+        "trainers",
+        "basket",
+        "baskets",
+        "chaussure",
+        "chaussures",
+        "bottes",
+        "high tops",
+        "low tops",
+        "jordan",
+        "dunk",
+        "dunks",
+        "af1",
+        "air force",
+        "air max",
+        "airmax",
+        "yeezy",
+        "samba",
+        "gazelle",
+        "campus",
+        "spezial",
+        "geobasket",
+        "ramones",
+        "gats",
+        "9060",
+        "2002r",
+        "1906r",
+        "550",
+        "gel-",
+        "xt-6",
+        "xt6",
+        "tn",
+        "shox",
+        "vomero",
+        "bapesta",
+        "triple s",
+        "cortez",
+        "mocassins",
+        "derbies",
+        "bottines"
+      ]
+    },
+    {
+      "id": "couvrechefs",
+      "nom": "Casquettes & bonnets",
+      "groupe": "accessoire",
+      "mots": [
+        "cap",
+        "caps",
+        "casquette",
+        "hat",
+        "hats",
+        "beanie",
+        "beanies",
+        "bonnet",
+        "bucket",
+        "balaclava",
+        "cagoule",
+        "trucker",
+        "snapback",
+        "headband"
+      ]
+    },
+    {
+      "id": "sacs",
+      "nom": "Sacs & maroquinerie",
+      "groupe": "accessoire",
+      "mots": [
+        "bag",
+        "bags",
+        "sac",
+        "backpack",
+        "backpacks",
+        "tote",
+        "crossbody",
+        "pouch",
+        "duffle",
+        "duffel",
+        "messenger",
+        "wallet",
+        "wallets",
+        "cardholder",
+        "card holder",
+        "card holders",
+        "purse",
+        "passport",
+        "handbag",
+        "handbags",
+        "clutch",
+        "portefeuille"
+      ]
+    },
+    {
+      "id": "bijoux",
+      "nom": "Bijoux",
+      "groupe": "accessoire",
+      "mots": [
+        "ring",
+        "rings",
+        "bague",
+        "necklace",
+        "collier",
+        "bracelet",
+        "chain",
+        "chains",
+        "chaine",
+        "pendant",
+        "earring",
+        "earrings",
+        "jewelry",
+        "jewellery",
+        "jewel"
+      ]
+    },
+    {
+      "id": "accessoires",
+      "nom": "Autres accessoires",
+      "groupe": "accessoire",
+      "mots": [
+        "belt",
+        "belts",
+        "ceinture",
+        "sunglasses",
+        "glasses",
+        "lunettes",
+        "scarf",
+        "echarpe",
+        "gloves",
+        "gants",
+        "socks",
+        "sock",
+        "chaussettes",
+        "keychain",
+        "watch",
+        "montre",
+        "underwear",
+        "boxer",
+        "boxers",
+        "case",
+        "phone",
+        "tie",
+        "lighter"
+      ]
+    },
+    {
+      "id": "tech",
+      "nom": "High-tech & maison",
+      "groupe": "autre",
+      "mots": [
+        "airwrap",
+        "hairdryer",
+        "hair dryer",
+        "straightener",
+        "speaker",
+        "speakers",
+        "headphone",
+        "headphones",
+        "earbuds",
+        "earphones",
+        "charger",
+        "power bank",
+        "powerbank",
+        "pencil",
+        "airpods",
+        "beats",
+        "jbl",
+        "marshall",
+        "dyson",
+        "ghd",
+        "harman kardon",
+        "console",
+        "keyboard",
+        "mouse",
+        "lego",
+        "building blocks",
+        "perfume",
+        "parfum",
+        "figurine"
+      ]
+    }
+  ],
+  "_ignorerDoc": "Expressions qui contiennent un mot de type mais n'en sont pas un (« short sleeve » n'est pas un short).",
+  "ignorerPourType": [
+    "short sleeve",
+    "short-sleeve",
+    "cap sleeve",
+    "top quality",
+    "top grade",
+    "top version",
+    "top batch",
+    "polo ralph lauren",
+    "set of",
+    "chain stitch",
+    "suit up",
+    "boot cut",
+    "flare fit"
+  ],
+  "categoriesSource": {
+    "T-SHIRTS": "tshirts",
+    "LONGSLEEVES": "tshirts",
+    "LONG SLEEVES": "tshirts",
+    "LONGLSEEVES": "tshirts",
+    "TANKTOPS": "tshirts",
+    "JERSEYS": "tshirts",
+    "⚽Maillot de football⚽": "tshirts",
+    "SHIRTS": "chemises",
+    "HOODIES": "pulls",
+    "ZIP-UPS": "pulls",
+    "ZIPUPS": "pulls",
+    "SWEATS": "pulls",
+    "SWEATERS": "pulls",
+    "JACKETS": "vestes",
+    "PANTS": "pantalons",
+    "SWEATPANTS": "pantalons",
+    "SHORTS": "shorts",
+    "SHOES": "chaussures",
+    "BOOTS": "chaussures",
+    "SLIDES": "chaussures",
+    "RUNNING": "chaussures",
+    "CAPS": "couvrechefs",
+    "HATS": "couvrechefs",
+    "BAGS": "sacs",
+    "BACKPACKS": "sacs",
+    "JEWELLERY": "bijoux",
+    "ACCESSORIES": "accessoires",
+    "BELTS": "accessoires",
+    "TECH": "accessoires",
+    "FIGURINES": "accessoires",
+    "BOXERS": "accessoires"
+  },
+  "_marquesDoc": "Dictionnaire des marques : [nom affiché, façons de l'écrire…]. La marque est un filtre à part et ne décide JAMAIS seule d'un style (sauf « Designer », qui veut justement dire grande maison).",
+  "marques": [
+    [
+      "Rick Owens",
+      "rick owens",
+      "drkshdw",
+      "drksdhw",
+      "drkshw"
+    ],
+    [
+      "Maison Margiela",
+      "maison margiela",
+      "margiela",
+      "mm6"
+    ],
+    [
+      "Chrome Hearts",
+      "chrome hearts",
+      "chrome heart",
+      "chrome 00"
+    ],
+    [
+      "Balenciaga",
+      "balenciaga"
+    ],
+    [
+      "Prada",
+      "prada"
+    ],
+    [
+      "Dior",
+      "dior"
+    ],
+    [
+      "Louis Vuitton",
+      "louis vuitton",
+      "lv"
+    ],
+    [
+      "Gucci",
+      "gucci"
+    ],
+    [
+      "Saint Laurent",
+      "saint laurent",
+      "ysl"
+    ],
+    [
+      "Raf Simons",
+      "raf simons"
+    ],
+    [
+      "Helmut Lang",
+      "helmut lang"
+    ],
+    [
+      "Yohji Yamamoto",
+      "yohji"
+    ],
+    [
+      "Comme des Garçons",
+      "comme des garcons",
+      "cdg"
+    ],
+    [
+      "Issey Miyake",
+      "issey miyake"
+    ],
+    [
+      "Number (N)ine",
+      "number nine",
+      "number (n)ine"
+    ],
+    [
+      "Undercover",
+      "undercover"
+    ],
+    [
+      "Kapital",
+      "kapital"
+    ],
+    [
+      "Hysteric Glamour",
+      "hysteric glamour"
+    ],
+    [
+      "Vivienne Westwood",
+      "vivienne westwood"
+    ],
+    [
+      "Jean Paul Gaultier",
+      "jean paul gaultier"
+    ],
+    [
+      "Givenchy",
+      "givenchy"
+    ],
+    [
+      "Valentino",
+      "valentino"
+    ],
+    [
+      "Bottega Veneta",
+      "bottega"
+    ],
+    [
+      "Loewe",
+      "loewe"
+    ],
+    [
+      "Celine",
+      "celine"
+    ],
+    [
+      "Miu Miu",
+      "miu miu"
+    ],
+    [
+      "Fendi",
+      "fendi"
+    ],
+    [
+      "Burberry",
+      "burberry"
+    ],
+    [
+      "Versace",
+      "versace"
+    ],
+    [
+      "Moncler",
+      "moncler"
+    ],
+    [
+      "Stone Island",
+      "stone island"
+    ],
+    [
+      "CP Company",
+      "cp company",
+      "c.p. company"
+    ],
+    [
+      "Amiri",
+      "amiri"
+    ],
+    [
+      "Alyx",
+      "1017 alyx",
+      "alyx"
+    ],
+    [
+      "Enfants Riches Déprimés",
+      "enfants riches",
+      "erd"
+    ],
+    [
+      "Vetements",
+      "vetements"
+    ],
+    [
+      "Acne Studios",
+      "acne studios",
+      "acne"
+    ],
+    [
+      "Lanvin",
+      "lanvin"
+    ],
+    [
+      "Thom Browne",
+      "thom browne"
+    ],
+    [
+      "Ann Demeulemeester",
+      "ann demeulemeester"
+    ],
+    [
+      "Boris Bidjan Saberi",
+      "boris bidjan"
+    ],
+    [
+      "Carol Christian Poell",
+      "carol christian poell",
+      "ccp"
+    ],
+    [
+      "Julius",
+      "julius"
+    ],
+    [
+      "Guidi",
+      "guidi"
+    ],
+    [
+      "Hermès",
+      "hermes"
+    ],
+    [
+      "Chanel",
+      "chanel"
+    ],
+    [
+      "Ralph Lauren",
+      "polo ralph lauren",
+      "ralph lauren",
+      "rrl"
+    ],
+    [
+      "Lacoste",
+      "lacoste"
+    ],
+    [
+      "Loro Piana",
+      "loro piana"
+    ],
+    [
+      "Brunello Cucinelli",
+      "brunello"
+    ],
+    [
+      "Tommy Hilfiger",
+      "tommy hilfiger"
+    ],
+    [
+      "Gant",
+      "gant"
+    ],
+    [
+      "Max Mara",
+      "max mara"
+    ],
+    [
+      "Zegna",
+      "zegna"
+    ],
+    [
+      "Arc'teryx",
+      "arc'teryx",
+      "arcteryx",
+      "arc teryx"
+    ],
+    [
+      "The North Face",
+      "the north face",
+      "north face",
+      "tnf"
+    ],
+    [
+      "Salomon",
+      "salomon"
+    ],
+    [
+      "Patagonia",
+      "patagonia"
+    ],
+    [
+      "Montbell",
+      "montbell"
+    ],
+    [
+      "Mammut",
+      "mammut"
+    ],
+    [
+      "Columbia",
+      "columbia"
+    ],
+    [
+      "And Wander",
+      "and wander"
+    ],
+    [
+      "Hoka",
+      "hoka"
+    ],
+    [
+      "Canada Goose",
+      "canada goose"
+    ],
+    [
+      "Stüssy",
+      "stussy"
+    ],
+    [
+      "Supreme",
+      "supreme"
+    ],
+    [
+      "Bape",
+      "a bathing ape",
+      "bape"
+    ],
+    [
+      "Palace",
+      "palace"
+    ],
+    [
+      "Corteiz",
+      "corteiz",
+      "crtz"
+    ],
+    [
+      "Trapstar",
+      "trapstar"
+    ],
+    [
+      "Denim Tears",
+      "denim tears"
+    ],
+    [
+      "Sp5der",
+      "sp5der",
+      "spider worldwide"
+    ],
+    [
+      "Hellstar",
+      "hellstar"
+    ],
+    [
+      "Gallery Dept",
+      "gallery dept"
+    ],
+    [
+      "Fear of God",
+      "fear of god",
+      "fog essentials",
+      "essentials"
+    ],
+    [
+      "Broken Planet",
+      "broken planet"
+    ],
+    [
+      "Eric Emanuel",
+      "eric emanuel"
+    ],
+    [
+      "Syna World",
+      "syna"
+    ],
+    [
+      "Carhartt",
+      "carhartt"
+    ],
+    [
+      "Kith",
+      "kith"
+    ],
+    [
+      "Aimé Leon Dore",
+      "aime leon dore"
+    ],
+    [
+      "Off-White",
+      "off-white",
+      "off white"
+    ],
+    [
+      "Travis Scott",
+      "travis scott",
+      "cactus jack"
+    ],
+    [
+      "Vlone",
+      "vlone"
+    ],
+    [
+      "Anti Social Social Club",
+      "anti social social club",
+      "assc"
+    ],
+    [
+      "Nike",
+      "nike"
+    ],
+    [
+      "Jordan",
+      "air jordan"
+    ],
+    [
+      "Adidas",
+      "adidas"
+    ],
+    [
+      "New Balance",
+      "new balance"
+    ],
+    [
+      "Asics",
+      "asics"
+    ],
+    [
+      "Onitsuka Tiger",
+      "onitsuka"
+    ],
+    [
+      "Converse",
+      "converse"
+    ],
+    [
+      "Vans",
+      "vans"
+    ],
+    [
+      "Puma",
+      "puma"
+    ],
+    [
+      "Golden Goose",
+      "golden goose"
+    ],
+    [
+      "Maison Mihara Yasuhiro",
+      "mihara"
+    ],
+    [
+      "Ed Hardy",
+      "ed hardy"
+    ],
+    [
+      "Von Dutch",
+      "von dutch"
+    ],
+    [
+      "True Religion",
+      "true religion"
+    ],
+    [
+      "Evisu",
+      "evisu"
+    ],
+    [
+      "Juicy Couture",
+      "juicy couture"
+    ],
+    [
+      "Dsquared2",
+      "dsquared"
+    ],
+    [
+      "Diesel",
+      "diesel"
+    ],
+    [
+      "Levi's",
+      "levi's",
+      "levis"
+    ],
+    [
+      "Our Legacy",
+      "our legacy"
+    ],
+    [
+      "Lemaire",
+      "lemaire"
+    ],
+    [
+      "Jil Sander",
+      "jil sander"
+    ],
+    [
+      "The Row",
+      "the row"
+    ],
+    [
+      "Uniqlo",
+      "uniqlo"
+    ],
+    [
+      "Auralee",
+      "auralee"
+    ],
+    [
+      "Jacquemus",
+      "jacquemus"
+    ],
+    [
+      "Ami Paris",
+      "ami paris"
+    ],
+    [
+      "Maison Kitsuné",
+      "maison kitsune"
+    ],
+    [
+      "Kenzo",
+      "kenzo"
+    ],
+    [
+      "Marni",
+      "marni"
+    ],
+    [
+      "Dolce & Gabbana",
+      "dolce & gabbana",
+      "dolce gabbana"
+    ],
+    [
+      "Rhude",
+      "rhude"
+    ],
+    [
+      "Represent",
+      "represent"
+    ],
+    [
+      "Who Decides War",
+      "who decides war"
+    ],
+    [
+      "Vultures",
+      "vultures"
+    ],
+    [
+      "Grailz",
+      "grailz"
+    ],
+    [
+      "Rock Revival",
+      "rock revival"
+    ],
+    [
+      "Real Madrid",
+      "real madrid"
+    ],
+    [
+      "FC Barcelone",
+      "barcelona"
+    ],
+    [
+      "PSG",
+      "psg",
+      "paris saint-germain"
+    ]
+  ],
+  "_marquesSourceIgnorees": "Valeurs de colonne « marque » des spreads qui ne sont pas des marques.",
+  "marquesSourceIgnorees": "^(other|autre|none|n/a|-|.*\\bbrands?\\b.*|.*merch.*|japanese|luxury|archive|vintage|ro)?$",
+  "_stylesDoc": "Un style est donné par des MOTS qui décrivent la pièce (suffisants seuls). Les MARQUES d'un style ne comptent que si la pièce a aussi un type compatible (typesAvecMarque) ou un mot compatible (motsAvecMarque). Exemple : Ralph Lauren + « cable knit » = Old Money, mais Ralph Lauren + « bear t-shirt » ne l'est pas. Une doudoune seule n'est pas Gorpcore, une pièce noire n'est pas Opium.",
+  "styles": [
+    {
+      "id": "clean",
+      "nom": "Clean / Minimal",
+      "desc": "Basiques unis, coupes propres, pas de gros logo",
+      "mots": [
+        "blank",
+        "plain",
+        "no logo",
+        "essential tee"
+      ],
+      "marques": [
+        "Our Legacy",
+        "Lemaire",
+        "Jil Sander",
+        "The Row",
+        "Uniqlo",
+        "Auralee"
+      ],
+      "typesAvecMarque": [
+        "tshirts",
+        "pulls",
+        "chemises",
+        "pantalons",
+        "vestes"
+      ]
+    },
+    {
+      "id": "rockstar",
+      "nom": "Rockstar / Grunge",
+      "desc": "Cuir, jean flare ou bootcut, clous, bottes",
+      "mots": [
+        "leather jacket",
+        "biker",
+        "moto jacket",
+        "flare",
+        "flared",
+        "flares",
+        "bootcut",
+        "boot cut",
+        "studded",
+        "studs",
+        "clous",
+        "distressed",
+        "ripped",
+        "destroyed",
+        "grunge",
+        "rockstar",
+        "punk",
+        "skull",
+        "band tee",
+        "tour tee",
+        "mohair",
+        "western",
+        "cowboy",
+        "leather pants",
+        "paint splatter",
+        "waxed denim",
+        "faded",
+        "rock revival"
+      ],
+      "marques": [
+        "Hysteric Glamour",
+        "Chrome Hearts",
+        "Number (N)ine",
+        "Who Decides War",
+        "Vultures",
+        "Grailz"
+      ],
+      "typesAvecMarque": [
+        "tshirts",
+        "pantalons",
+        "vestes",
+        "pulls",
+        "chemises"
+      ]
+    },
+    {
+      "id": "streetwear",
+      "nom": "Streetwear",
+      "desc": "Hoodies, graphiques, coupes larges, marques de rue",
+      "mots": [
+        "graphic",
+        "jorts",
+        "baggy",
+        "oversized",
+        "streetwear",
+        "varsity",
+        "track jacket",
+        "tracksuit",
+        "zip hoodie",
+        "puff print",
+        "rapper",
+        "kanye",
+        "tyler the creator",
+        "playboi carti",
+        "drake",
+        "frank ocean",
+        "skate",
+        "skater",
+        "camo",
+        "anime"
+      ],
+      "marques": [
+        "Stüssy",
+        "Supreme",
+        "Bape",
+        "Palace",
+        "Corteiz",
+        "Trapstar",
+        "Denim Tears",
+        "Sp5der",
+        "Hellstar",
+        "Gallery Dept",
+        "Broken Planet",
+        "Eric Emanuel",
+        "Syna World",
+        "Carhartt",
+        "Kith",
+        "Off-White",
+        "Travis Scott",
+        "Vlone",
+        "Anti Social Social Club",
+        "Nike",
+        "Jordan",
+        "Adidas",
+        "Rhude",
+        "Represent",
+        "Fear of God",
+        "Who Decides War"
+      ],
+      "typesAvecMarque": [
+        "tshirts",
+        "pulls",
+        "vestes",
+        "pantalons",
+        "shorts",
+        "ensembles",
+        "couvrechefs"
+      ]
+    },
+    {
+      "id": "gorpcore",
+      "nom": "Gorpcore / Outdoor",
+      "desc": "Rando, techwear, ça tient la pluie",
+      "mots": [
+        "gore-tex",
+        "goretex",
+        "gore tex",
+        "shell jacket",
+        "hardshell",
+        "softshell",
+        "fleece",
+        "polaire",
+        "trail",
+        "hiking",
+        "outdoor",
+        "technical",
+        "windbreaker",
+        "rain jacket",
+        "waterproof",
+        "beta lt",
+        "atom",
+        "xt-6",
+        "xt6",
+        "mountain",
+        "utility vest",
+        "climbing"
+      ],
+      "marques": [
+        "Arc'teryx",
+        "The North Face",
+        "Salomon",
+        "Patagonia",
+        "Montbell",
+        "Mammut",
+        "Columbia",
+        "And Wander",
+        "Hoka"
+      ],
+      "typesAvecMarque": [
+        "vestes",
+        "pulls",
+        "pantalons",
+        "chaussures",
+        "shorts",
+        "sacs",
+        "couvrechefs"
+      ]
+    },
+    {
+      "id": "oldmoney",
+      "nom": "Old Money",
+      "desc": "Maille, polo, mocassins, chic discret",
+      "mots": [
+        "cable knit",
+        "cashmere",
+        "cachemire",
+        "quarter zip",
+        "half zip",
+        "oxford shirt",
+        "loafer",
+        "loafers",
+        "mocassin",
+        "chino",
+        "chinos",
+        "cardigan",
+        "pleated trousers",
+        "linen shirt",
+        "rugby shirt",
+        "tweed",
+        "merino",
+        "polo sweater",
+        "knit polo"
+      ],
+      "marques": [
+        "Ralph Lauren",
+        "Lacoste",
+        "Loro Piana",
+        "Brunello Cucinelli",
+        "Tommy Hilfiger",
+        "Gant",
+        "Max Mara",
+        "Zegna"
+      ],
+      "motsAvecMarque": [
+        "polo shirt",
+        "knit",
+        "knitted",
+        "sweater",
+        "cardigan",
+        "oxford",
+        "button",
+        "chino",
+        "loafer",
+        "blazer",
+        "rugby",
+        "cashmere",
+        "linen",
+        "cable",
+        "quarter zip",
+        "half zip",
+        "trouser"
+      ]
+    },
+    {
+      "id": "y2k",
+      "nom": "Y2K",
+      "desc": "Strass, baby tee, taille basse, début 2000",
+      "mots": [
+        "y2k",
+        "baby tee",
+        "rhinestone",
+        "rhinestones",
+        "strass",
+        "low rise",
+        "taille basse",
+        "bling",
+        "butterfly",
+        "tribal",
+        "bedazzled",
+        "2000s",
+        "00s",
+        "00’s",
+        "00's",
+        "velour"
+      ],
+      "marques": [
+        "Ed Hardy",
+        "Von Dutch",
+        "True Religion",
+        "Evisu",
+        "Juicy Couture",
+        "Dsquared2"
+      ],
+      "typesAvecMarque": [
+        "tshirts",
+        "pantalons",
+        "pulls",
+        "couvrechefs",
+        "vestes",
+        "shorts",
+        "ensembles"
+      ]
+    },
+    {
+      "id": "opium",
+      "nom": "Opium / Dark",
+      "desc": "Silhouettes longues, cuir, avant-garde sombre",
+      "mots": [
+        "opium",
+        "avant garde",
+        "avant-garde",
+        "layered",
+        "harness",
+        "bondage",
+        "gothic",
+        "gothique",
+        "goth",
+        "all black",
+        "geobasket",
+        "ramones",
+        "creatch",
+        "inverted cross"
+      ],
+      "marques": [
+        "Rick Owens",
+        "Carol Christian Poell",
+        "Julius",
+        "Boris Bidjan Saberi",
+        "Guidi",
+        "Enfants Riches Déprimés",
+        "Ann Demeulemeester"
+      ],
+      "typesAvecMarque": [
+        "tshirts",
+        "pulls",
+        "vestes",
+        "pantalons",
+        "shorts",
+        "chaussures"
+      ]
+    },
+    {
+      "id": "designer",
+      "nom": "Designer",
+      "desc": "Les grandes maisons",
+      "mots": [],
+      "marques": [
+        "Rick Owens",
+        "Maison Margiela",
+        "Chrome Hearts",
+        "Balenciaga",
+        "Prada",
+        "Dior",
+        "Louis Vuitton",
+        "Gucci",
+        "Saint Laurent",
+        "Raf Simons",
+        "Helmut Lang",
+        "Yohji Yamamoto",
+        "Comme des Garçons",
+        "Issey Miyake",
+        "Number (N)ine",
+        "Undercover",
+        "Kapital",
+        "Vivienne Westwood",
+        "Jean Paul Gaultier",
+        "Givenchy",
+        "Valentino",
+        "Bottega Veneta",
+        "Loewe",
+        "Celine",
+        "Miu Miu",
+        "Fendi",
+        "Burberry",
+        "Versace",
+        "Moncler",
+        "Stone Island",
+        "Amiri",
+        "Alyx",
+        "Enfants Riches Déprimés",
+        "Vetements",
+        "Acne Studios",
+        "Lanvin",
+        "Thom Browne",
+        "Ann Demeulemeester",
+        "Hermès",
+        "Chanel",
+        "Loro Piana",
+        "Brunello Cucinelli",
+        "Jacquemus",
+        "Marni",
+        "Dolce & Gabbana",
+        "Off-White",
+        "Carol Christian Poell",
+        "Boris Bidjan Saberi",
+        "Guidi",
+        "Julius"
+      ],
+      "typesAvecMarque": "*"
+    },
+    {
+      "id": "hiver",
+      "nom": "Spécial hiver",
+      "desc": "Doudounes, maille, bonnets : de quoi passer l'hiver au chaud",
+      "_doc": "Thème de saison (pas un style) : déduit des mots du titre.",
+      "mots": [
+        "puffer",
+        "down jacket",
+        "down coat",
+        "doudoune",
+        "parka",
+        "beanie",
+        "beanies",
+        "bonnet",
+        "knit",
+        "knitted",
+        "knitwear",
+        "cable knit",
+        "cashmere",
+        "cachemire",
+        "wool",
+        "laine",
+        "fleece",
+        "polaire",
+        "sherpa",
+        "shearling",
+        "coat",
+        "overcoat",
+        "manteau",
+        "scarf",
+        "echarpe",
+        "gloves",
+        "gants",
+        "balaclava",
+        "cagoule",
+        "thermal",
+        "fur",
+        "fourrure",
+        "nuptse",
+        "mohair",
+        "turtleneck",
+        "col roule"
+      ],
+      "seulementTypes": [
+        "vestes",
+        "pulls",
+        "couvrechefs",
+        "accessoires",
+        "chaussures"
+      ]
+    },
+    {
+      "id": "archive",
+      "nom": "Archive",
+      "desc": "Saison ou collection identifiée dans le titre",
+      "_doc": "Seulement si le titre cite une saison (SS05, AW06, FW14…) ou le mot « runway ». Le mot « archive » seul ne suffit pas.",
+      "regex": "\\b(ss|fw|aw)\\s?'?\\d{2}\\b|\\b(ss|fw|aw)(19|20)\\d{2}\\b|\\b(s/s|f/w|a/w)\\s?\\d{2,4}\\b|\\brunway\\b"
+    },
+    {
+      "id": "sneakers",
+      "nom": "Sneakers",
+      "desc": "Les paires que tout le monde cherche",
+      "seulementTypes": [
+        "chaussures"
+      ],
+      "mots": [
+        "sneaker",
+        "sneakers",
+        "trainer",
+        "trainers",
+        "runner",
+        "runners",
+        "basket",
+        "baskets",
+        "jordan",
+        "dunk",
+        "af1",
+        "air force",
+        "air max",
+        "airmax",
+        "yeezy",
+        "samba",
+        "gazelle",
+        "campus",
+        "spezial",
+        "geobasket",
+        "ramones",
+        "gats",
+        "gat",
+        "german army trainer",
+        "9060",
+        "2002r",
+        "1906r",
+        "550",
+        "gel-",
+        "xt-6",
+        "xt6",
+        "tn",
+        "shox",
+        "vomero",
+        "bapesta",
+        "triple s",
+        "cortez",
+        "high top",
+        "high tops",
+        "low top",
+        "low tops",
+        "skate shoe",
+        "mihara",
+        "golden goose",
+        "new balance",
+        "asics",
+        "onitsuka",
+        "converse",
+        "vans",
+        "nike",
+        "adidas",
+        "puma"
+      ],
+      "exclure": [
+        "boot",
+        "boots",
+        "loafer",
+        "loafers",
+        "slide",
+        "slides",
+        "sandal",
+        "sandals",
+        "clog",
+        "clogs",
+        "derby",
+        "mule",
+        "mules"
+      ]
+    }
+  ],
+  "_mentionsDoc": "Mentions de vendeur retirées du titre affiché (gardées dans la fiche comme « mention du vendeur, non vérifiée »).",
+  "mentionsVendeur": [
+    "premium quality",
+    "best quality",
+    "top quality",
+    "high quality",
+    "best batch",
+    "best version",
+    "top batch",
+    "1:1",
+    "insane quality",
+    "insane details",
+    "god quality",
+    "highest quality",
+    "same as runway and campaign",
+    "premium",
+    "(best)",
+    "[best]"
+  ],
+  "_tauxDoc": "Conversion INDICATIVE vers l'euro, pour trier et filtrer. Le vrai prix est sur la page LoveGoBuy.",
+  "tauxEUR": {
+    "EUR": 1,
+    "USD": 0.87,
+    "CNY": 0.12,
+    "GBP": 1.15
+  },
+  "deviseParDefaut": "CNY",
+  "_motsFaiblesDoc": "Mots de type ambigus : si la spread donne une catégorie précise, elle l'emporte sans doute (« shirt » pour un t-shirt rangé T-SHIRTS).",
+  "motsFaibles": [
+    "shirt",
+    "shirts",
+    "set",
+    "sets",
+    "denim",
+    "top",
+    "shell",
+    "tank",
+    "cargo",
+    "fleece",
+    "vest",
+    "jersey"
+  ],
+  "_stylesSourceDoc": "Groupes donnés par le finder (colonne marque ou catégorie de la spread) qui indiquent un style pour les vêtements.",
+  "stylesSource": {
+    "ASIAN BRANDS": [
+      "streetwear"
+    ],
+    "IG BRANDS": [
+      "streetwear"
+    ],
+    "MERCH": [
+      "streetwear"
+    ],
+    "ANIME MERCH": [
+      "streetwear"
+    ],
+    "FOOTBALL MERCH": [
+      "streetwear"
+    ],
+    "⚽Maillot de football⚽": [
+      "streetwear"
+    ],
+    "sprort": [
+      "streetwear"
+    ],
+    "JERSEYS": [
+      "streetwear"
+    ]
+  }
+}
