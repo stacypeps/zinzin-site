@@ -217,3 +217,71 @@ dialog::backdrop { background: rgba(2, 6, 18, .78); }
 .swipe-compteur { margin: 0; font: 600 13px var(--ui); color: var(--doux); text-align: center; }
 
 @media (prefers-reduced-motion: reduce) { .titre-pluie, .titre-fond img, .titre-lapin { animation: none; } }
+
+/* ===== v7 : touches, boîte de dialogue, boîtiers façon jeu PS2 ===== */
+.touches { gap: 6px 16px; }
+.touche { display: inline-flex; align-items: center; gap: 6px; }
+.touche svg { width: 24px; height: 24px; padding: 3px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #3a3f52, #12141c 70%); box-shadow: inset 0 1px 1px rgba(255, 255, 255, .25), 0 2px 4px rgba(0, 0, 0, .6); fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.touches span.touche { width: auto; height: auto; border: 0; margin: 0; font-size: 12px; color: var(--doux); }
+.touche.t-rond svg { color: #ff5b6e; } .touche.t-croix svg { color: #7fb2ff; } .touche.t-tri svg { color: #5fe0a0; } .touche.t-carre svg { color: #ff8ad8; }
+
+/* Boîte de dialogue façon RPG : portrait en entier (plus de tête rognée) */
+.lapin-bulle { left: 50%; right: auto; transform: translate(-50%, 12px); width: min(520px, calc(100% - 20px)); max-width: none; padding: 10px 14px 10px 10px; gap: 12px; align-items: stretch; border-radius: 10px; border: 2px solid #9ff6ff; background: linear-gradient(180deg, rgba(14, 40, 96, .97), rgba(6, 18, 52, .97)); box-shadow: 0 0 0 3px rgba(5, 11, 30, .9), 0 0 26px rgba(69, 233, 255, .35); }
+.lapin-bulle.visible { transform: translate(-50%, 0); }
+.bulle-portrait { flex: none; width: 64px; height: 80px; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--ligne-forte); background: radial-gradient(circle at 50% 30%, #2f8bff, #0a2a6b); }
+.lapin-bulle .bulle-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; border: 0; border-radius: 0; background: none; }
+.bulle-texte { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; }
+.bulle-nom { font: 900 12px var(--titre); letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); }
+.lapin-bulle p { font: 600 14px/1.35 var(--ui); color: #fff; }
+
+/* Boîtier de jeu (format DVD PS2) : plastique noir, bande du haut, reflet, sticker de prix d'occasion */
+.carte { border-radius: 6px 6px 10px 10px; border: 2px solid #1d2030; background: linear-gradient(90deg, #08080c, #15161e 6%, #0b0b11 12%, #0b0b11 100%); }
+.carte::before { content: "ZINZIN"; height: 30px; padding: 0 10px; justify-content: space-between; background: linear-gradient(180deg, #24262f, #0b0c12 70%); border-bottom: 0; box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .08); font: 900 11px var(--titre); letter-spacing: .32em; color: #fff; }
+.carte-photo, .carte-photo.charge { aspect-ratio: 5 / 6.6; margin: 0 6px; width: calc(100% - 12px); border-radius: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .05); }
+/* reflet du film plastique */
+.carte-photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, .38) 0%, rgba(255, 255, 255, .06) 22%, transparent 40%, transparent 70%, rgba(255, 255, 255, .08) 85%, transparent); mix-blend-mode: screen; }
+/* sticker de prix d'occasion */
+.carte .badge { top: 38px; left: auto; right: 12px; padding: 4px 8px; border-radius: 3px; transform: rotate(4deg); background: linear-gradient(180deg, #ffe76a, #ffc61a); color: #3a1d00; font: 700 10px var(--ui); letter-spacing: .08em; box-shadow: 0 2px 4px rgba(0, 0, 0, .35); }
+.carte .coeur { top: auto; bottom: 12px; right: 12px; }
+.carte-photo { position: relative; }
+.carte-corps { background: transparent; padding-top: 10px; }
+.carte.petite .carte-photo { margin: 0 5px; width: calc(100% - 10px); }
+.boitier { border-radius: 8px; background: linear-gradient(90deg, #08080c, #15161e 5%, #0b0b11 10%); }
+.boitier-bande { height: 36px; border-bottom: 0; background: linear-gradient(180deg, #24262f, #0b0c12 70%); }
+.boitier-cover { margin: 0 8px; border-radius: 2px; }
+.boitier-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, .35) 0%, rgba(255, 255, 255, .05) 22%, transparent 40%); mix-blend-mode: screen; }
+
+/* ===== Fluidité (mobile surtout) ===== */
+body { background-attachment: scroll; }
+.carte .badge, .carte .coeur, .barre, .outils, .lapin-bulle, dialog::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.barre { background: rgba(5, 11, 30, .96); }
+.outils { background: rgba(5, 11, 30, .97); }
+.titre-jeu.pause *, .titre-jeu.pause { animation-play-state: paused !important; }
+.carte { animation-duration: .3s; animation-delay: calc(var(--i, 0) * 12ms); }
+@media (hover: none) { .carte, .couv { transform: none !important; } .carte-photo img { transition: none; } }
+@media (max-width: 899px) { .titre-pluie { animation-duration: .8s; opacity: .22; } .titre-fond img { animation: none; } }
+
+/* ===== Fond du site : néons d'Akihabara floutés + grain (plus de grille « ordinateur ») ===== */
+body {
+  background-color: #04091a;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(4, 9, 26, .2), #04091a 92%),
+    url("assets/tokyo/fond-flou.jpg");
+  background-size: 180px 180px, 100% 100%, cover;
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-position: 0 0, 0 0, 50% 0;
+}
+.swipe-boite { background-image: linear-gradient(180deg, rgba(10, 26, 64, .92), #04091a 75%); }
+
+/* ===== Lapin plus discret et mieux fondu dans la scène ===== */
+.titre-lapin { filter: brightness(.86) saturate(.85) contrast(1.05) drop-shadow(0 0 1.5px rgba(5, 11, 30, .95)) drop-shadow(0 0 18px rgba(69, 233, 255, .22)) drop-shadow(0 22px 22px rgba(0, 0, 0, .65)); }
+@media (max-width: 899px) {
+  .titre-contenu { position: relative; }
+  .titre-lapin { position: absolute; right: -10px; top: 108px; height: clamp(120px, 19svh, 180px); margin: 0; z-index: 0; opacity: .95; }
+  .logo-jeu { position: relative; z-index: 1; }
+  .menu-jeu { position: relative; z-index: 1; margin-top: clamp(70px, 12svh, 120px); }
+  .logo-sous { max-width: 70%; }
+}
+@media (min-width: 900px) { .titre-lapin { height: min(50svh, 470px); opacity: .95; } }
+.carte .coeur { top: 38px; bottom: auto; left: 12px; right: auto; width: 36px; height: 36px; }

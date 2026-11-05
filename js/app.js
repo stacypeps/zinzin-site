@@ -219,7 +219,7 @@ function selections() {
   const paires = avecPhoto.filter((a) => a.styles.includes('sneakers') && a.eur < 50);
   rails.push(rail('Sneakers à moins de 50 €', `${paires.length} paires dans le catalogue sous ce prix.`, paires.slice(0, 12), { voir: { texte: 'Tout voir', action: voirFiltre({ style: 'sneakers', max: '50' }) } }));
   const hiver = avecPhoto.filter((a) => a.styles.includes('hiver') && ['haut', 'bas', 'chaussures', 'accessoire'].includes(S.GROUPE[a.type]));
-  const rHiver = rail('Spécial hiver ❄', `${nombre(hiver.length)} pièces pour passer l’hiver au chaud : doudounes, maille, bonnets, polaires.`, hiver.slice(0, 14), { voir: { texte: 'Tout voir', action: voirFiltre({ style: 'hiver' }) } });
+  const rHiver = rail('Spécial hiver', `${nombre(hiver.length)} pièces pour passer l’hiver au chaud : doudounes, maille, bonnets, polaires.`, hiver.slice(0, 14), { voir: { texte: 'Tout voir', action: voirFiltre({ style: 'hiver' }) } });
   if (rHiver) { rHiver.classList.add('rail-hiver'); rHiver.prepend(Object.assign(document.createElement('canvas'), { className: 'neige', ariaHidden: 'true' })); }
   rails.push(rHiver);
   const cuir = avecPhoto.filter((a) => a.styles.includes('rockstar') && a.type === 'vestes');

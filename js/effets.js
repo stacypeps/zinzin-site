@@ -50,8 +50,10 @@ function curseur() {
   addEventListener('pointerover', (e) => anneau.classList.toggle('actif', !!e.target.closest('a, button, select, input, label, [role=button]')));
   document.addEventListener('pointerleave', () => { point.style.opacity = anneau.style.opacity = 0; });
   document.addEventListener('pointerenter', () => { point.style.opacity = anneau.style.opacity = 1; });
-  const boucle = () => { ax += (x - ax) * .18; ay += (y - ay) * .18; anneau.style.transform = `translate(${ax}px, ${ay}px)`; requestAnimationFrame(boucle); };
-  boucle();
+  // La boucle ne tourne que pendant que la souris bouge (pas de calcul permanent).
+  let enCours = false;
+  const boucle = () => { ax += (x - ax) * .2; ay += (y - ay) * .2; anneau.style.transform = `translate(${ax}px, ${ay}px)`; if (Math.abs(x - ax) + Math.abs(y - ay) > .5) requestAnimationFrame(boucle); else enCours = false; };
+  addEventListener('pointermove', () => { if (!enCours) { enCours = true; requestAnimationFrame(boucle); } }, { passive: true });
 }
 
 // Inclinaison 3D qui suit la souris (cartes, couvertures).
