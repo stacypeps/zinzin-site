@@ -28,7 +28,7 @@ export function carte(a, { i = 0, liste = null, petite = false } = {}) {
   el.innerHTML = `
     <button class="carte-photo" type="button"><img loading="lazy" decoding="async" alt=""><span class="photo-vide">Photo indisponible</span></button>
     <button class="coeur" type="button" aria-pressed="false">${COEUR}</button>
-    <span class="badge">${PLATEFORME[a.plateforme] ?? ''}</span>
+    <span class="badge" title="${PLATEFORME[a.plateforme] ?? ''}">${(PLATEFORME[a.plateforme] ?? '?')[0]}</span>
     <div class="carte-corps">
       <p class="carte-marque"></p>
       <h3 class="carte-titre"><button type="button" class="lien-titre"></button></h3>

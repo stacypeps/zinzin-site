@@ -322,3 +322,43 @@ body {
 .carte::after { border-radius: inherit; }
 .boitier-bande { background: linear-gradient(180deg, #050506, #000 60%, #111); font: italic 600 15px "Chakra Petch", sans-serif; letter-spacing: .2em; }
 .boitier-bande i { color: #8a93ab; }
+
+/* ===== Boîtier CD de jeu (format PS1) : tranche noire à gauche avec ZINZIN vertical, notre logo, encart de classification ===== */
+.carte::before { display: none; }
+.carte { padding-top: 6px; background: #050507; border-color: #1c1d26; border-radius: 4px; }
+.carte-photo, .carte-photo.charge, .carte.petite .carte-photo {
+  aspect-ratio: 1.12 / 1; margin: 0 6px; width: calc(100% - 12px); padding: 0 0 0 18%; border-radius: 1px;
+  background: radial-gradient(120% 90% at 60% 30%, #ffffff, #cde8ff 60%, #8fc6ff);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .12), inset 0 0 0 1px rgba(0, 0, 0, .4);
+}
+.carte-photo img { padding: 6% 6% 6% 7%; }
+/* tranche */
+.carte-photo::before {
+  content: "ZINZIN"; position: absolute; z-index: 1; left: 0; top: 0; bottom: 0; width: 18%;
+  display: flex; align-items: center; justify-content: center; padding: 24% 0 30%;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  background: linear-gradient(90deg, #000 0%, #1c1c1f 55%, #050505 100%);
+  border-left: 1px solid rgba(255, 255, 255, .18);
+  font: 500 clamp(13px, 3.6vw, 22px)/1 "Chakra Petch", Inter, sans-serif; letter-spacing: .04em; color: #fff;
+}
+/* notre logo en haut de la tranche (losange Z) */
+.carte-photo > .photo-vide { z-index: 0; }
+.carte .badge {
+  display: grid; place-items: center; position: absolute; z-index: 2; left: calc(6px + 1.5%); top: auto; bottom: 6%; right: auto;
+  width: calc((100% - 12px) * .15); aspect-ratio: .78; padding: 0; transform: none; border-radius: 2px;
+  background: #fff; color: #000; border: 2px solid #000; outline: 1px solid #fff;
+  font: 900 clamp(13px, 3.4vw, 20px)/1 "Chakra Petch", sans-serif; letter-spacing: 0; box-shadow: none;
+}
+.carte { --logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='6' y='6' width='28' height='28' rx='4' transform='rotate(45 20 20)' fill='%23111' stroke='%2345e9ff' stroke-width='2.5'/%3E%3Cpath d='M14 14h12l-12 12h12' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.carte .carte-photo { background-image: var(--logo), radial-gradient(120% 90% at 60% 30%, #ffffff, #cde8ff 60%, #8fc6ff); background-repeat: no-repeat; background-size: calc(18% - 6px) auto, auto; background-position: 3px 5%, 0 0; }
+.carte-photo::before { background: transparent; }
+.carte-photo { background-color: #000; }
+.carte .carte-photo::after { left: 18%; }
+/* le cœur passe en haut à droite de la jaquette */
+.carte .coeur { top: 12px; bottom: auto; left: auto; right: 12px; width: 34px; height: 34px; z-index: 3; }
+.carte .carte-photo {
+  background-image: var(--logo), linear-gradient(90deg, #000 0%, #1c1c1f 55%, #050505 100%), radial-gradient(120% 90% at 60% 30%, #ffffff, #cde8ff 60%, #8fc6ff);
+  background-size: calc(18% - 8px) auto, 18% 100%, 100% 100%;
+  background-position: 4px 5%, 0 0, 0 0;
+  background-repeat: no-repeat;
+}
