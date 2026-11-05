@@ -4,7 +4,7 @@ import { carte, ouvrirFiche, initFiche } from './fiche.js';
 import { initLook, ouvrirLook, composer } from './look.js';
 import { initCollections, ouvrirCollections, afficherPartage, ouvrirSurprise } from './collections.js';
 import { initEffets, motsTournants } from './effets.js';
-import { initMenu, charger } from './menu.js';
+import { initMenu, charger, bip } from './menu.js';
 import { initSwipe, ouvrirSwipe } from './swipe.js';
 
 const PAR_LOT = 30;
@@ -235,14 +235,35 @@ function majVus() {
 
 // ---------- Démarrage ----------
 const p0 = new URLSearchParams(location.search);
+function presentation(m) {
+  const pr = $('#presentation');
+  let vue = false; try { vue = sessionStorage.getItem('zinzin-entre') === '1'; } catch {}
+  if (vue || p0.get('article') || p0.get('selection')) return;
+  $('#pres-nb').textContent = nombre(S.DATA.articles.length);
+  if (m.couponMontant) $('#pres-coupon').textContent = `${m.couponMontant} ${m.couponDevise}`; else $('#pres-coupon').parentElement.lastChild.remove();
+  pr.hidden = false; document.documentElement.classList.add('fige');
+  const entrer = () => {
+    if (pr.classList.contains('entre')) return;
+    try { sessionStorage.setItem('zinzin-entre', '1'); } catch {}
+    bip('valide'); pr.classList.add('entre');
+    setTimeout(() => { pr.hidden = true; document.documentElement.classList.remove('fige'); $('#menu-jeu button')?.focus({ preventScroll: true }); }, MOUVEMENT_REDUIT ? 0 : 900);
+  };
+  $('#manette').onclick = entrer;
+  addEventListener('keydown', (e) => { if (!pr.hidden && ['Enter', ' '].includes(e.key)) { e.preventDefault(); entrer(); } });
+  const pad = () => { if (pr.hidden) return; if (navigator.getGamepads?.().some((g) => g?.buttons.some((b) => b.pressed))) entrer(); else requestAnimationFrame(pad); };
+  addEventListener('gamepadconnected', () => requestAnimationFrame(pad), { once: true });
+  $('#manette').focus({ preventScroll: true });
+}
 function construire(d, couv) {
   S.DATA = d;
   const m = d.meta;
   S.STYLES = Object.fromEntries(m.styles.map((s) => [s.id, { ...s, court: s.nom.split(' / ')[0] }]));
   S.TYPES = Object.fromEntries(m.types.map((t) => [t.id, t]));
   S.GROUPE = Object.fromEntries(m.types.map((t) => [t.id, t.groupe]));
+  const SHOP = { taobao: 'taobao', weidian: 'weidian', '1688': 'ali_1688' };
   for (const a of d.articles) {
     a.eur ??= null; S.PAR_ID.set(a.id, a);
+    a.lien ??= `https://www.lovegobuy.com/product?id=${a.pid}&shop_type=${SHOP[a.plateforme]}&invite_code=${m.code}`;
     a._cherche = ` ${normal([a.titre, a.marque, a.categorieSource, S.TYPES[a.type]?.nom, ...a.styles.map((s) => S.STYLES[s]?.nom)].join(' '))} `;
   }
   // Mélange du jour, pièces avec photo d'abord.
@@ -321,13 +342,8 @@ function construire(d, couv) {
     favoris: () => ouvrirCollections(),
   });
   if (m.couponMontant) $('#menu-coupon').textContent = `${m.couponMontant} ${m.couponDevise} de coupons`;
-  // Intro : le lapin surgit et le nom s'assemble (une fois par visite, coupée si on réduit les animations).
-  let vue = false; try { vue = sessionStorage.getItem('zinzin-intro') === '1'; sessionStorage.setItem('zinzin-intro', '1'); } catch {}
-  if (!vue && !MOUVEMENT_REDUIT && !p0.get('article') && !p0.get('selection')) {
-    const intro = $('#intro'); intro.hidden = false;
-    $('#intro-nom').textContent = m.perso;
-    setTimeout(() => intro.classList.add('fin'), 1300); setTimeout(() => (intro.hidden = true), 1900);
-  }
+  // Page de présentation : on entre dans le site en appuyant sur Start (clic, toucher, Entrée ou bouton de manette).
+  presentation(m);
   motsTournants($('#mot-tournant'), m.styles.filter((s) => s.n && !['a-verifier', 'designer', 'archive'].includes(s.id)).map((s) => s.nom.split(' / ')[0].toLowerCase()));
   // Liens partagés : ?article=…, ?selection=…, ou des filtres (?style=…) → on va direct au bon endroit.
   const p = new URLSearchParams(location.search);
@@ -344,6 +360,6 @@ function construire(d, couv) {
 window.zinzin = { etat, S, C, get liste() { return liste; }, rendre };
 
 lireURL();
-Promise.all([fetch('data/articles.json').then((r) => r.json()), fetch('data/couvertures.json').then((r) => r.json()).catch(() => ({}))])
+Promise.all([fetch('data/catalogue.json').then((r) => r.json()), fetch('data/couvertures.json').then((r) => r.json()).catch(() => ({}))])
   .then(([d, couv]) => construire(d, couv))
   .catch((e) => { console.error(e); $('#resultat').textContent = 'Impossible de charger les articles. Recharge la page.'; });

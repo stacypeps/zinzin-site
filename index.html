@@ -11,14 +11,49 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://img.alicdn.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1793917512">
-  <link rel="stylesheet" href="tokyo.css?v=1793917512">
+  <link rel="stylesheet" href="style.css?v=1793917870">
+  <link rel="stylesheet" href="tokyo.css?v=1793917870">
 </head>
 <body>
   <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
-  <div class="intro" id="intro" aria-hidden="true" hidden><p class="intro-nom" id="intro-nom"></p><p class="intro-charge">Chargement<span>…</span></p></div>
+  <div class="presentation" id="presentation" role="dialog" aria-modal="true" aria-labelledby="pres-titre" hidden>
+    <div class="pres-fond" aria-hidden="true"></div>
+    <div class="pres-contenu">
+      <p class="pres-kicker">Les finds de la commu</p>
+      <h1 class="pres-logo" id="pres-titre"><span class="logo-chrome" data-perso>Zinzin</span><span class="logo-kata" lang="ja">ジンジン</span></h1>
+      <p class="pres-chapo"><b id="pres-nb">5 000+</b> pièces triées par style · <b id="pres-coupon">400 $</b> de coupons LoveGoBuy</p>
+      <button class="manette" id="manette" type="button" aria-label="Appuie sur Start pour entrer dans le site">
+        <svg viewBox="0 0 360 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="mCorps" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8e9ee"/><stop offset=".55" stop-color="#c7c9d2"/><stop offset="1" stop-color="#9ea2ae"/></linearGradient>
+            <linearGradient id="mCreux" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9adb8"/><stop offset="1" stop-color="#d9dbe2"/></linearGradient>
+            <radialGradient id="mBouton" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#ffb066"/><stop offset="1" stop-color="#e05a00"/></radialGradient>
+            <radialGradient id="mBouton2" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#9ff6ff"/><stop offset="1" stop-color="#1f7fe0"/></radialGradient>
+          </defs>
+          <!-- corps : forme originale « haricot » avec deux poignées -->
+          <path d="M70 40 Q180 18 290 40 Q338 48 346 100 Q352 150 322 182 Q300 200 278 178 L248 140 Q180 128 112 140 L82 178 Q60 200 38 182 Q8 150 14 100 Q22 48 70 40Z" fill="url(#mCorps)" stroke="#6d717d" stroke-width="2"/>
+          <!-- croix directionnelle -->
+          <circle cx="92" cy="92" r="34" fill="url(#mCreux)"/>
+          <path d="M84 66h16v18h18v16h-18v18H84v-18H66V84h18z" fill="#2b2e38"/>
+          <!-- boutons d'action (couleurs Zinzin) -->
+          <circle cx="268" cy="70" r="13" fill="url(#mBouton2)" stroke="#5c606c"/>
+          <circle cx="294" cy="94" r="13" fill="url(#mBouton)" stroke="#5c606c"/>
+          <circle cx="242" cy="94" r="13" fill="url(#mBouton)" stroke="#5c606c"/>
+          <circle cx="268" cy="118" r="13" fill="url(#mBouton2)" stroke="#5c606c"/>
+          <!-- select / start -->
+          <rect x="150" y="96" width="24" height="9" rx="4.5" fill="#3a3d48"/>
+          <g class="manette-start"><rect x="186" y="94" width="30" height="13" rx="6.5" fill="#ff7a1a"/></g>
+          <text x="162" y="120" font-size="8" font-family="Chakra Petch, sans-serif" fill="#4a4e5a" text-anchor="middle">SELECT</text>
+          <text x="201" y="120" font-size="8" font-family="Chakra Petch, sans-serif" fill="#4a4e5a" text-anchor="middle">START</text>
+          <!-- emblème Zinzin au centre -->
+          <g transform="translate(166 46) scale(.42)"><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#1f8fff" transform="translate(4 3)"/><path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="#ff7a1a"/></g>
+        </svg>
+      </button>
+      <p class="pres-start">Appuie sur <b>Start</b></p>
+    </div>
+  </div>
   <div class="chargement" id="chargement" aria-hidden="true" hidden><span></span><span></span><span></span><span></span><p>Chargement</p></div>
   <header class="barre">
     <a class="marque" href="#haut"><img data-perso-img src="assets/lapin-zizanie.png" alt="" width="30" height="30"><span data-perso>Zinzin</span></a>
@@ -303,6 +338,6 @@
 
   <div class="lapin-bulle" id="lapin-bulle" role="status" aria-live="polite" hidden><div class="bulle-portrait"><img alt="" width="64" height="80"></div><div class="bulle-texte"><b class="bulle-nom" data-perso>Zinzin</b><p></p></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="js/app.js?v=1793917512"></script>
+  <script type="module" src="js/app.js?v=1793917870"></script>
 </body>
 </html>

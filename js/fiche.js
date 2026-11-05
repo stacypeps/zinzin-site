@@ -36,7 +36,7 @@ export function carte(a, { i = 0, liste = null, petite = false } = {}) {
     </div>`;
   const cadre = $('.carte-photo', el);
   cadre.setAttribute('aria-label', `Voir la fiche : ${titre(a)}`);
-  photo($('img', cadre), a, petite ? 300 : 400, cadre);
+  photo($('img', cadre), a, petite || innerWidth < 760 ? 300 : 400, cadre);
   cadre.append($('.badge', el)); // l'encart de la tranche va dans le boîtier
   $('.carte-marque', el).textContent = a.marque || S.TYPES[a.type]?.nom || '';
   const bt = $('.lien-titre', el); bt.textContent = titre(a); bt.tabIndex = -1;
@@ -78,7 +78,7 @@ export function ouvrirFiche(a, liste = null) {
   li(NOTE_PRIX);
   (a.infos ?? []).forEach(li);
   if (a.titreCourt) li(`Titre d’origine : ${a.titre}`);
-  li(`Vendu sur ${PLATEFORME[a.plateforme]}${a.sources?.length ? ` · repéré dans : ${a.sources.join(', ')}` : ''}`);
+  li(`Vendu sur ${PLATEFORME[a.plateforme]}`);
   if (a.styles.includes('a-verifier')) li('Style pas encore identifié : on préfère le dire plutôt que d’inventer.');
   $('#fiche-lgb').href = a.lien;
   $('#fiche-origine').href = origine(a);
