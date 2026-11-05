@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Emblème Zinzin : un Z en volume, deux faces (orange / cyan) + dessus blanc -->
+  <defs>
+    <linearGradient id="o" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb066"/><stop offset="1" stop-color="#ff6a00"/></linearGradient>
+    <linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ff6ff"/><stop offset="1" stop-color="#1f8fff"/></linearGradient>
+  </defs>
+  <path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="url(#c)" transform="translate(4 3)"/>
+  <path d="M12 10h38l-22 30h20l-6 14H8l22-30H8z" fill="url(#o)"/>
+  <path d="M12 10h38l-4 6H14z" fill="#fff" opacity=".85"/>
+</svg>

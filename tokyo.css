@@ -363,3 +363,32 @@ body {
   background-repeat: no-repeat;
 }
 .carte .carte-photo .badge { left: 1.6%; bottom: 5%; width: 14.5%; }
+
+/* ===== Boîtier CD de jeu, version réaliste (logo Zinzin original) ===== */
+.carte .carte-photo {
+  /* contour plastique transparent + charnière à gauche */
+  box-shadow: 0 0 0 2px #c9ced8, 0 0 0 3px #6e7484, inset 0 0 0 1px rgba(0, 0, 0, .5), 0 6px 14px rgba(0, 0, 0, .5);
+  border-radius: 2px;
+  background-image:
+    url("assets/logo-z.svg"),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, #000 0%, #121214 70%, #000 100%),
+    radial-gradient(120% 90% at 60% 30%, #ffffff, #cde8ff 60%, #8fc6ff);
+  background-size: calc(18% - 10px) auto, 18% 100%, 18% 100%, 100% 100%;
+  background-position: 5px 4%, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat;
+}
+.carte { padding: 8px 4px 0; background: #050507; }
+.carte .carte-photo { margin: 0 8px; width: calc(100% - 16px); }
+.carte-photo::before { font: 600 clamp(14px, 3.8vw, 22px)/1 Inter, "Helvetica Neue", Arial, sans-serif; letter-spacing: -.01em; padding: 30% 0 34%; }
+/* encart de classification : petit texte en haut et en bas, grosse lettre au centre */
+.carte .carte-photo .badge {
+  display: grid; grid-template-rows: auto 1fr auto; place-items: center; gap: 0; padding: 2px 0;
+  background: #fff; color: #000; border: 2px solid #000; outline: 1.5px solid #fff; border-radius: 1px;
+  font: 900 clamp(14px, 3.6vw, 22px)/1 Inter, Arial, sans-serif;
+}
+.carte .carte-photo .badge::before { content: "ZINZIN"; font: 800 5px/1 Inter, Arial, sans-serif; letter-spacing: .05em; }
+.carte .carte-photo .badge::after { content: "FINDS"; font: 800 5px/1 Inter, Arial, sans-serif; letter-spacing: .05em; }
+.carte-photo::before { font-size: clamp(11px, 2.9vw, 18px); padding: 26% 0 44%; }
+.carte .carte-photo .badge::before { content: "ZZ"; font-size: 6px; }
+.carte .carte-photo .badge::after { content: "FIND"; font-size: 5.5px; }
