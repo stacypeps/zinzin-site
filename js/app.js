@@ -262,7 +262,7 @@ function construire(d, couv) {
   S.GROUPE = Object.fromEntries(m.types.map((t) => [t.id, t.groupe]));
   const SHOP = { taobao: 'taobao', weidian: 'weidian', '1688': 'ali_1688' };
   for (const a of d.articles) {
-    a.eur ??= null; S.PAR_ID.set(a.id, a);
+    a.eur = a.eur >= 1 ? a.eur : null; S.PAR_ID.set(a.id, a); // prix bidon (moins d'1 €) = prix sur la page
     a.lien ??= `https://www.lovegobuy.com/product?id=${a.pid}&shop_type=${SHOP[a.plateforme]}&invite_code=${m.code}`;
     a._cherche = ` ${normal([a.titre, a.marque, a.categorieSource, S.TYPES[a.type]?.nom, ...a.styles.map((s) => S.STYLES[s]?.nom)].join(' '))} `;
   }

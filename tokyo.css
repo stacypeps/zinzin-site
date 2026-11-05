@@ -437,3 +437,12 @@ html.fige, html.fige body { overflow: hidden; }
 .manette { width: min(430px, 94vw); }
 .touche.t-forme svg { color: #e9eef7; }
 .touche.t-forme svg path, .touche.t-forme svg circle, .touche.t-forme svg rect { fill: none; stroke: currentColor; stroke-width: 2.2; }
+/* Petites cartes (sélections, collections, surprise) : même boîtier CD que le catalogue */
+.carte.petite .carte-photo, .carte.petite .carte-photo.charge {
+  padding: 0 0 0 18%;
+  background-image: url("assets/logo-z.svg"), repeating-linear-gradient(90deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 3px), linear-gradient(90deg, #000 0%, #121214 70%, #000 100%), linear-gradient(#fff, #fff);
+  background-size: calc(18% - 8px) auto, 18% 100%, 18% 100%, 100% 100%;
+  background-position: 4px 5%, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat;
+  margin: 0 8px; width: calc(100% - 16px);
+}
