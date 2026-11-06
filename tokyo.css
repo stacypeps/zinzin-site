@@ -576,3 +576,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
 .fiche-note { margin: 14px 0 0; font: 400 12.5px/1.45 var(--ui); color: var(--doux); opacity: .85; }
 @media (prefers-reduced-motion: reduce) { .grille .carte, .couv { rotate: none !important; translate: none !important; } }
 .carte .prix-eur { width: fit-content; align-self: flex-start; justify-self: start; }
+
+/* ===== Logo : le Z seul, sans rond bleu ===== */
+.marque img, .pied-marque img, .rail-tete .avatar, .lapin-bulle img, .surprise-intro img { background: none; border: 0; border-radius: 0; box-shadow: none; object-position: center; filter: drop-shadow(0 2px 0 rgba(0, 0, 0, .55)); }
+.marque img { width: 30px; height: 30px; padding: 0; }
+.marque { gap: 6px; }
