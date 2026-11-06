@@ -13,13 +13,57 @@ export const LOOKS = { liste: lire(CLE_LOOKS, []), sauver() { ecrire(CLE_LOOKS, 
 
 const L = { style: '', budget: 120, accessoire: false, pieces: {}, verrous: new Set(), horsStyle: new Set() };
 
+// Claquettes, sandales, sous-vêtements : pas pour une tenue.
+const PAS_TENUE = /slides?|claquettes?|sandal|flip[- ]?flop|slippers?|mules?|tongs?/i;
+const SOUS_VET = /boxers?|underwear|cale[cç]on|briefs?/i;
 // Pièces possibles pour une case : bon type, prix connu, photo, et dans le style choisi.
 function candidats(c, style) {
-  const base = S.ORDRE.filter((a) => a.eur > 0 && a.img && c.groupes.includes(S.GROUPE[a.type]));
+  const base = S.ORDRE.filter((a) => a.eur > 0 && a.img && a.photoQ !== 'mauvaise' && c.groupes.includes(S.GROUPE[a.type]) && !(c.id === 'chaussures' && PAS_TENUE.test(a.titre || '')) && !(c.id === 'bas' && SOUS_VET.test(a.titre || '')));
   if (!style) return { liste: base, hors: false };
   const dans = base.filter((a) => a.styles.includes(style));
   return dans.length ? { liste: dans, hors: false } : { liste: base.filter((a) => !a.styles.includes('a-verifier')), hors: true };
 }
+// ----- Ce qui fait une belle tenue (couleurs et motifs lus sur les photos par vision.mjs) -----
+const NEUTRES = new Set(['noir', 'blanc', 'creme', 'gris', 'beige', 'marron', 'marine', 'denim-clair', 'denim-fonce', 'kaki', 'argent']);
+const SOMBRES = new Set(['noir', 'gris', 'marron', 'bordeaux', 'denim-fonce', 'marine', 'kaki', 'argent']);
+const TERRE = new Set(['kaki', 'noir', 'gris', 'beige', 'marron', 'vert', 'creme']);
+const BRUYANTS = new Set(['graphique', 'imprime', 'camouflage', 'carreaux']);
+const couleursDe = (a) => [a.coul, ...(a.coul2 || [])].filter(Boolean);
+export function noteTenue(p, style, budget) {
+  const l = Object.values(p).filter(Boolean); if (!l.length) return 0;
+  let n = 0;
+  for (const a of l) n += a.photoQ === 'bonne' ? 1 : a.photoQ === 'moyenne' ? -0.6 : a.photoQ ? -4 : 0;
+  const vus = l.filter((a) => a.coul);
+  if (vus.length >= 2) {
+    // Une seule couleur vive, de préférence rappelée par une autre pièce.
+    const vives = vus.filter((a) => !NEUTRES.has(a.coul));
+    const coulVives = new Set(vives.map((a) => a.coul));
+    if (!vives.length) n += 2;
+    else if (coulVives.size === 1) n += vus.some((b) => !vives.includes(b) && couleursDe(b).includes(vives[0].coul)) ? 3 : 1;
+    else n -= 3 * (coulVives.size - 1);
+    // Une seule pièce « forte » (gros visuel, imprimé, camo…).
+    const forts = vus.filter((a) => BRUYANTS.has(a.motif)).length;
+    n += forts === 0 ? 1 : forts === 1 ? 2 : -3 * (forts - 1);
+    // Haut et bas : contraste, ou total noir assumé ; jamais deux fois la même couleur claire.
+    const h = p.haut, b = p.bas;
+    if (h?.coul && b?.coul) {
+      if (h.coul === b.coul) n += h.coul === 'noir' ? 1.5 : -2;
+      if (h.coul.startsWith('denim') && b.coul.startsWith('denim')) n -= 2;
+    }
+    // Chaussures qui rappellent une couleur du haut ou du bas.
+    const ch = p.chaussures;
+    if (ch?.coul && [h, b].some((x) => x && couleursDe(x).includes(ch.coul))) n += 1;
+    // Selon le style.
+    if (['clean', 'oldmoney'].includes(style)) { n -= 2 * vives.length; n -= 2 * forts; }
+    if (style === 'opium') n += vus.reduce((t, a) => t + (SOMBRES.has(a.coul) ? 0.5 : -2), 0);
+    if (style === 'rockstar') n += vus.reduce((t, a) => t + (SOMBRES.has(a.coul) ? 0.4 : -0.6), 0);
+    if (style === 'gorpcore') n += vus.reduce((t, a) => t + (TERRE.has(a.coul) ? 0.5 : -0.3), 0);
+  }
+  const t = l.reduce((s, a) => s + a.eur, 0);
+  return n + Math.min(1, t / budget) * 1.5;
+}
+const parmiLesMeilleures = (liste, k = 3) => liste.sort((x, y) => y.n - x.n)[Math.floor(Math.random() * Math.min(k, liste.length))];
+
 const casesActives = () => CASES.filter((c) => !c.facultatif || L.accessoire);
 const total = () => casesActives().reduce((t, c) => t + (L.pieces[c.id]?.eur ?? 0), 0);
 
@@ -30,22 +74,23 @@ export function composer({ style = L.style, budget = L.budget, accessoire = L.ac
   if (garder) for (const c of actives) if (L.verrous.has(c.id) && L.pieces[c.id]) { fixes[c.id] = L.pieces[c.id]; fixe += L.pieces[c.id].eur; }
   const libres = actives.filter((c) => !fixes[c.id]);
   const pools = Object.fromEntries(libres.map((c) => [c.id, candidats(c, style)]));
+  const mins = Object.fromEntries(libres.map((c) => [c.id, Math.min(...pools[c.id].liste.map((a) => a.eur), Infinity)]));
   const min = libres.reduce((t, c) => t + Math.min(...pools[c.id].liste.map((a) => a.eur), Infinity), 0) + fixe;
   if (!isFinite(min) || min > budget) return { ok: false, min, fixe };
   // Tirages au hasard : on garde une tenue qui utilise une bonne partie du budget sans le dépasser.
-  let meilleure = null;
-  for (let essai = 0; essai < 600; essai++) {
+  const tirages = [];
+  for (let essai = 0; essai < 900; essai++) {
     const p = { ...fixes }; let t = fixe;
     for (const c of melangeCases(libres)) {
-      const reste = budget - t - libres.filter((x) => !p[x.id] && x !== c).reduce((s, x) => s + Math.min(...pools[x.id].liste.map((a) => a.eur)), 0);
+      const reste = budget - t - libres.filter((x) => !p[x.id] && x !== c).reduce((s, x) => s + mins[x.id], 0);
       const ok = pools[c.id].liste.filter((a) => a.eur <= reste);
       if (!ok.length) { t = Infinity; break; }
       p[c.id] = auHasard(ok); t += p[c.id].eur;
     }
-    if (t <= budget && (!meilleure || (t > meilleure.t && t <= budget))) meilleure = { p, t };
-    if (meilleure && meilleure.t >= budget * .6) break;
+    if (t <= budget) tirages.push({ p, t, n: noteTenue(p, style, budget) });
   }
-  if (!meilleure) return { ok: false, min, fixe };
+  if (!tirages.length) return { ok: false, min, fixe };
+  const meilleure = parmiLesMeilleures(tirages);
   return { ok: true, pieces: meilleure.p, horsStyle: new Set(libres.filter((c) => pools[c.id].hors).map((c) => c.id)) };
 }
 const melangeCases = (l) => [...l].sort(() => Math.random() - .5);
@@ -56,7 +101,8 @@ function changerUne(caseId) {
   const { liste, hors } = candidats(c, L.style);
   const ok = liste.filter((a) => a !== L.pieces[caseId] && a.eur <= L.budget - autres);
   if (!ok.length) { message(`Pas d’autre ${c.nom.toLowerCase()} qui rentre dans le budget avec le reste de la tenue. Monte un peu le budget ou déverrouille une pièce.`, true); return; }
-  L.pieces[caseId] = auHasard(ok);
+  const essais = Array.from({ length: Math.min(160, ok.length) }, () => auHasard(ok)).map((a) => ({ a, n: noteTenue({ ...L.pieces, [caseId]: a }, L.style, L.budget) }));
+  L.pieces[caseId] = parmiLesMeilleures(essais, 4).a;
   hors ? L.horsStyle.add(caseId) : L.horsStyle.delete(caseId);
   dessiner();
 }

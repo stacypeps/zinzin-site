@@ -16,7 +16,10 @@ function precharger(a) {
 
 function remplir() {
   const ok = (a) => a.img && a.eur > 0 && ['haut', 'bas', 'chaussures', 'accessoire', 'ensemble'].includes(S.GROUPE[a.type]) && (!W.style || a.styles.includes(W.style)) && !W.vus.has(a.id);
-  W.file = melange(S.ORDRE.filter(ok), Date.now() % 1e6).slice(0, 200); W.i = 0;
+  const tout = S.ORDRE.filter(ok);
+  // Que des belles photos (pièce seule, pas de collage ni de pub) quand il y en a assez.
+  const belles = tout.filter((a) => a.photoQ === 'bonne');
+  W.file = melange(belles.length >= 30 ? belles : tout, Date.now() % 1e6).slice(0, 200); W.i = 0;
 }
 
 function carteSwipe(a) {

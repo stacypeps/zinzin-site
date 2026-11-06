@@ -607,3 +607,119 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
   .neon-jp { position: static; order: -1; writing-mode: horizontal-tb; padding: 4px 10px; font-size: 17px; }
   .titre-bloc h2, .titre-bloc p { padding-right: 0; width: 100%; }
 }
+
+/* ===== Pluie au canvas ===== */
+.titre-pluie, .decor-pluie { inset: 0; opacity: 1; background: none; animation: none; transform: none; }
+.titre-pluie canvas, .decor-pluie canvas { display: block; }
+
+/* ===== Le lapin fait partie du décor : dans la ruelle, derrière le voile et la pluie ===== */
+.titre-scene { position: absolute; inset: 0; z-index: -2; pointer-events: none; }
+.titre-scene .titre-lapin { position: absolute; left: 50%; bottom: 33%; translate: 8% 0; height: clamp(150px, 24svh, 230px); width: auto; margin: 0; opacity: 1; animation: none;
+  filter: brightness(.62) saturate(.7) contrast(.92) sepia(.12) hue-rotate(185deg) drop-shadow(-3px 0 6px rgba(255, 110, 60, .28)) drop-shadow(4px -2px 8px rgba(80, 190, 255, .35)) blur(.3px); }
+.lapin-ombre { position: absolute; left: 50%; bottom: calc(33% - 6px); translate: 4% 0; width: clamp(70px, 11svh, 110px); height: 14px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .65), transparent); }
+@media (min-width: 900px) {
+  .titre-scene .titre-lapin { left: auto; right: 17%; bottom: 14%; translate: 0 0; height: min(40svh, 380px); }
+  .lapin-ombre { left: auto; right: calc(17% + 40px); bottom: calc(14% - 8px); translate: 0 0; width: 150px; }
+  .titre-contenu { grid-template-columns: 1fr; grid-template-areas: "logo" "menu" "cherche" "start" "touches"; }
+}
+@media (max-width: 899px) { .menu-jeu { margin-top: clamp(150px, 26svh, 240px); } .logo-sous { max-width: none; } }
+
+/* ===== Écran titre au toucher : pas de « Appuie sur start » ni de touches de manette ===== */
+@media (hover: none) { .titre-jeu .start, .titre-jeu .touches { display: none; } }
+
+/* ===== Barre du haut opaque ===== */
+.barre { background: #050b1e; }
+
+/* ===== Fiche produit : fond sombre, photo en boîtier ===== */
+.fiche-photo { background: #050507; padding: 16px 16px 16px 58px; }
+.fiche-photo::before { content: "ZINZIN"; position: absolute; left: 14px; top: 16px; bottom: 16px; width: 32px; display: grid; place-items: center; writing-mode: vertical-rl; rotate: 180deg;
+  font: 900 15px var(--titre); letter-spacing: .25em; color: #fff; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .06) 0 1px, transparent 1px 3px), linear-gradient(90deg, #000, #16171d 70%, #000); border-radius: 3px; }
+.fiche-photo img { background: #fff; padding: 3%; border-radius: 3px; box-shadow: 0 0 0 2px #c9ced8, 0 18px 30px rgba(0, 0, 0, .55); }
+.fiche-photo.sans-photo img { box-shadow: none; background: none; }
+
+/* ===== Univers sur mobile : une ligne qui défile au doigt ===== */
+@media (max-width: 759px) {
+  .univers-grille { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 calc(-1 * var(--g)); padding: 12px var(--g) 14px; scrollbar-width: none; }
+  .univers-grille::-webkit-scrollbar { display: none; }
+  .univers-grille > * { flex: 0 0 62%; scroll-snap-align: start; }
+}
+
+/* ===== Bouton remonter ===== */
+.remonter { position: fixed; right: 14px; bottom: 18px; z-index: 60; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--ligne-forte); background: #0c1834; color: #fff; box-shadow: 0 8px 20px rgba(0, 0, 0, .5); cursor: pointer; }
+.remonter svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.remonter[hidden] { display: none; }
+/* Mobile : la recherche juste sous le logo, puis le lapin dans la ruelle, puis le menu */
+@media (max-width: 899px) {
+  .titre-contenu > .logo-jeu { order: 0; } .titre-contenu > .recherche-jeu { order: 1; width: 100%; } .titre-contenu > .menu-jeu { order: 2; } .titre-contenu > * { order: 3; }
+  .titre-contenu > .logo-jeu { order: 0; } .titre-contenu > .recherche-jeu { order: 1; } .titre-contenu > .menu-jeu { order: 2; }
+}
+@media (max-width: 899px) {
+  .titre-scene .titre-lapin { top: 252px; bottom: auto; left: 50%; translate: -42% 0; height: 196px; }
+  .lapin-ombre { top: 440px; bottom: auto; left: 50%; translate: -50% 0; width: 96px; }
+  .menu-jeu { margin-top: 222px; }
+}
+@media (max-width: 899px) { .titre-scene .titre-lapin { top: 214px; } .lapin-ombre { top: 402px; } }
+/* Photos du look et des mini-vignettes : fond sombre, photo blanche en boîtier (comme la fiche) */
+.look-photo, .mini-photo { background: #050507; }
+.look-photo img { background: #fff; padding: 4%; box-shadow: inset 0 0 0 2px #c9ced8; }
+.mini-photo img { background: #fff; }
+
+/* ===== Bonus de bienvenue ===== */
+.bonus { width: min(420px, calc(100vw - 32px)); padding: 0; border: 2px dashed rgba(255, 150, 70, .85); border-radius: 16px; background: #050b1e; color: #fff; overflow: visible; }
+.bonus::backdrop { background: rgba(2, 5, 15, .78); backdrop-filter: blur(4px); }
+.bonus[open] { animation: bonus-arrive .45s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes bonus-arrive { from { opacity: 0; transform: scale(.85) translateY(16px); } }
+.bonus-x { position: absolute; top: 10px; right: 10px; z-index: 2; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, .35); background: rgba(5, 11, 30, .6); color: #fff; font-size: 16px; cursor: pointer; }
+.bonus-haut { padding: 26px 22px 18px; text-align: center; border-radius: 14px 14px 0 0; background: radial-gradient(120% 120% at 50% 0%, rgba(255, 122, 26, .45), transparent 65%), linear-gradient(180deg, #0c2457, #061232); border-bottom: 2px dashed rgba(255, 150, 70, .5); }
+.bonus-kicker { margin: 0; font: 700 12px var(--ui); letter-spacing: .25em; text-transform: uppercase; color: var(--cyan); }
+.bonus-kicker span { color: #ff6a3d; letter-spacing: .05em; margin-right: 6px; }
+.bonus-montant { margin: 6px 0 0; font: 900 clamp(60px, 18vw, 84px)/1 var(--titre); color: var(--orange); white-space: nowrap; text-shadow: 0 0 24px rgba(255, 122, 26, .45); }
+.bonus h2 { margin: 4px 0 0; font: 900 18px/1.2 var(--titre); text-transform: uppercase; letter-spacing: .02em; }
+.bonus-bas { display: grid; gap: 12px; padding: 18px 22px 16px; text-align: center; }
+.bonus-bas > p { margin: 0; font: 400 14px/1.5 var(--ui); color: var(--doux); }
+.bonus-code { display: grid; justify-items: center; gap: 2px; padding: 10px; border-radius: 10px; border: 2px dashed rgba(159, 246, 255, .55); background: rgba(69, 233, 255, .06); color: #fff; cursor: pointer; font: inherit; }
+.bonus-code span, .bonus-code small { font: 600 11px var(--ui); letter-spacing: .15em; text-transform: uppercase; color: var(--doux); }
+.bonus-code b { font: 900 22px var(--titre); letter-spacing: .12em; }
+.bonus-cta { width: 100%; justify-content: center; }
+.bonus-non { justify-self: center; padding: 6px 10px; border: 0; background: none; color: var(--doux); font: 600 12px var(--ui); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.bonus-x:focus-visible, .bonus-non:focus-visible, .bonus-code:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .bonus[open] { animation: none; } }
+
+/* ===== Swipe : la photo prend tout le boîtier, tranche fine, infos posées sur la photo ===== */
+.swipe-carte .boitier { padding: 6px; }
+.boitier-tranche { width: 9%; min-width: 26px; gap: 10px; padding-top: 8px; }
+.boitier-tranche img { width: 72%; }
+.boitier-tranche span { font: 800 12px/1 var(--titre); letter-spacing: .3em; }
+.swipe-carte .boitier-cover { overflow: hidden; background: #fff; }
+.swipe-carte .boitier-cover img { object-fit: cover; padding: 0; }
+.swipe-carte .swipe-infos { position: absolute; z-index: 2; left: calc(6px + max(9%, 26px)); right: 6px; bottom: 6px; margin: 0; padding: 48px 16px 14px; border-radius: 0 0 2px 0;
+  background: linear-gradient(180deg, transparent, rgba(3, 4, 10, .72) 40%, rgba(3, 4, 10, .94)); pointer-events: none; }
+.swipe-carte .swipe-infos h3 { color: #fff; }
+.swipe-carte:not([data-rang="0"]) .swipe-infos { visibility: hidden; }
+.swipe-btn svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.swipe-btn.oui svg { fill: currentColor; stroke-width: 1.5; }
+.swipe-btn.non { color: #ff5a6e; }
+.swipe-btn.oui { color: #ff6fae; }
+.swipe-btn.lgb { color: #1a0900; }
+/* Bonus : « Non merci » assez grand au toucher */
+.bonus-non { min-height: 40px; padding: 10px 16px; }
+.swipe-btn svg { width: 30px; height: 30px; flex: none; } .swipe-btn.lgb svg { width: 24px; height: 24px; }
+
+/* ===== Bouton BUY du Swipe : gros, brillant, qui donne envie ===== */
+.swipe-actions { align-items: center; }
+.swipe-buy { position: relative; overflow: hidden; display: grid; place-items: center; align-content: center; gap: 1px; min-width: 132px; height: 70px; padding: 0 22px; border-radius: 999px; cursor: pointer;
+  border: 2px solid #ffd2a6; color: #1a0900; background: linear-gradient(180deg, #ffc48a 0%, #ff8a2a 46%, #ef6400 54%, #ff9a3c 100%);
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, .18), 0 10px 26px rgba(255, 110, 20, .45), inset 0 2px 0 rgba(255, 255, 255, .6); transition: transform .15s ease; }
+.swipe-buy b { font: 900 26px/1 var(--titre); letter-spacing: .12em; }
+.swipe-buy span { font: 700 10px/1 var(--ui); letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+.swipe-buy::after { content: ""; position: absolute; top: -20%; bottom: -20%; left: -60%; width: 40%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .75), transparent); animation: buy-reflet 2.8s ease-in-out infinite; }
+@keyframes buy-reflet { 0%, 55% { left: -60%; } 85%, 100% { left: 130%; } }
+.swipe-buy:hover { transform: translateY(-2px) scale(1.03); }
+.swipe-buy:active { transform: scale(.96); }
+.swipe-buy:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .swipe-buy::after { animation: none; display: none; } }
+
+/* ===== Pied simple ===== */
+.pied.pied-simple { display: grid; justify-items: center; gap: 10px; max-width: none; margin: 40px 0 0; padding: 26px var(--g) 34px; background: none; color: var(--doux); border: 0; border-top: 1px solid var(--ligne); box-shadow: none; text-align: center; }
+.pied.pied-simple::before, .pied.pied-simple::after { display: none; }
+.pied-simple .petit { margin: 0; font-size: 12px; opacity: .7; }

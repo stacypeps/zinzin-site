@@ -25,8 +25,8 @@
   <link rel="preconnect" href="https://img.alicdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1793959694">
-  <link rel="stylesheet" href="tokyo.css?v=1793959694">
+  <link rel="stylesheet" href="style.css?v=1793961080">
+  <link rel="stylesheet" href="tokyo.css?v=1793961080">
 </head>
 <body>
   <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
@@ -104,11 +104,11 @@
 
 <section class="titre-jeu" id="haut" aria-labelledby="titre-accueil">
     <picture class="titre-fond" aria-hidden="true"><source media="(min-width: 760px)" srcset="assets/tokyo/fond-akiba-ordi.jpg"><img src="assets/tokyo/fond-akiba-mobile.jpg" alt="" fetchpriority="high"></picture>
+    <div class="titre-scene" aria-hidden="true"><span class="lapin-ombre"></span><img class="titre-lapin" data-img="imageHeros" alt="" width="600" height="800"></div>
     <div class="titre-voile" aria-hidden="true"></div>
     <div class="titre-pluie" aria-hidden="true"></div>
     <div class="titre-contenu">
       <h1 id="titre-accueil" class="logo-jeu"><span class="logo-chrome" data-perso>Zinzin</span><span class="logo-kata" lang="ja">ジンジン</span><span class="logo-sous">Les finds de la commu · <b id="stat-total">…</b> pièces</span></h1>
-      <img class="titre-lapin" data-img="imageHeros" alt="" width="600" height="800">
       <nav class="menu-jeu" id="menu-jeu" aria-label="Menu principal">
         <button type="button" data-action="catalogue">Catalogue</button>
         <button type="button" data-action="univers">Univers</button>
@@ -151,6 +151,22 @@
     </ol>
   </section>
 
+  <!-- Bonus de bienvenue : une seule fois par visiteur, juste après Start -->
+  <dialog class="bonus" id="bonus" aria-labelledby="bonus-titre">
+    <button class="bonus-x" type="button" data-fermer aria-label="Fermer">✕</button>
+    <div class="bonus-haut">
+      <p class="bonus-kicker"><span lang="ja">ボーナス</span> Bonus débloqué</p>
+      <p class="bonus-montant" id="bonus-montant">400 $</p>
+      <h2 id="bonus-titre">de coupons offerts sur LoveGoBuy</h2>
+    </div>
+    <div class="bonus-bas">
+      <p>Inscris-toi avec notre lien et les coupons sont pour toi. Les conditions sont indiquées sur LoveGoBuy.</p>
+      <button class="bonus-code" id="bonus-code" type="button"><span>Code parrain</span><b id="bonus-code-v">64IBX9</b><small>Toucher pour copier</small></button>
+      <a class="btn btn-orange btn-grand bonus-cta" id="bonus-cta" target="_blank" rel="noopener sponsored">Récupérer mes coupons →</a>
+      <button class="bonus-non" type="button" data-fermer>Non merci</button>
+    </div>
+  </dialog>
+  <button class="remonter" id="remonter" type="button" aria-label="Remonter en haut" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg></button>
   <div class="decor" aria-hidden="true"><div class="decor-pluie"></div><span class="lanterne l1"></span><span class="lanterne l2"></span><span class="lanterne l3"></span><span class="lanterne l4"></span></div>
   <main>
     <section class="bloc" id="univers" aria-labelledby="titre-univers">
@@ -209,16 +225,11 @@
     </section>
   </main>
 
-  <footer class="pied ticket-caisse">
-    <p class="caisse-tete"><b data-perso>Zinzin</b> 商店 · Reçu n°<span id="caisse-num">0001</span></p>
-    <div class="pied-marque"><img src="assets/logo-z.svg" alt="" width="44" height="44"><p><strong data-perso>Zinzin</strong></p></div>
+  <!-- Pied simple (le ticket de caisse est retiré pour l'instant) -->
+  <footer class="pied pied-simple">
     <a id="lien-discord-pied" class="btn btn-orange discord-pied" target="_blank" rel="noopener" hidden>Rejoins la commu sur Discord</a>
-    <div class="pied-notes">
-      <p id="credits" hidden></p>
-      <p class="caisse-merci" lang="ja">ありがとうございました</p>
-      <p class="caisse-code" aria-hidden="true"></p>
-      <p class="petit">Fan-art Lapins Crétins · non affilié à Ubisoft. Les marques citées appartiennent à leurs propriétaires. Photos : pages des vendeurs.</p>
-    </div>
+    <p class="petit">Les marques citées appartiennent à leurs propriétaires. Photos : pages des vendeurs.</p>
+    <span id="caisse-num" hidden></span><p id="credits" hidden></p>
   </footer>
 
   <!-- Filtres -->
@@ -363,12 +374,12 @@
         <select id="swipe-style"></select>
         <button class="fermer" id="swipe-fermer" type="button" aria-label="Fermer">✕</button>
       </header>
-      <p class="swipe-aide">← passer · → garder en favori · ↑ voir sur LoveGoBuy</p>
+      <p class="swipe-aide">← passer · → garder · ↑ acheter</p>
       <div class="swipe-pile" id="swipe-pile"></div>
       <div class="swipe-actions">
-        <button class="swipe-btn non" id="swipe-non" type="button" aria-label="Passer">✕</button>
-        <button class="swipe-btn lgb" id="swipe-lgb" type="button" aria-label="Voir sur LoveGoBuy">↑</button>
-        <button class="swipe-btn oui" id="swipe-oui" type="button" aria-label="Garder en favori">♥</button>
+        <button class="swipe-btn non" id="swipe-non" type="button" aria-label="Passer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <button class="swipe-buy" id="swipe-lgb" type="button" aria-label="Acheter sur LoveGoBuy"><b>BUY</b><span>sur LoveGoBuy ↗</span></button>
+        <button class="swipe-btn oui" id="swipe-oui" type="button" aria-label="Garder en favori"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></button>
       </div>
       <p class="swipe-compteur" id="swipe-compteur" aria-live="polite"></p>
     </div>
@@ -376,6 +387,6 @@
 
   <div class="lapin-bulle" id="lapin-bulle" role="status" aria-live="polite" hidden><div class="bulle-portrait"><img alt="" width="64" height="80"></div><div class="bulle-texte"><b class="bulle-nom" data-perso>Zinzin</b><p></p></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="js/app.js?v=1793959694"></script>
+  <script type="module" src="js/app.js?v=1793961080"></script>
 </body>
 </html>

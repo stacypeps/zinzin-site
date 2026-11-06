@@ -1,10 +1,11 @@
 // Point d'entrée : charge les données, l'accueil, les univers, les sélections et le catalogue filtrable.
-import { $, $$, S, C, VUS, COULEURS, MOUVEMENT_REDUIT, normal, nombre, euros, titre, photo, melange, lapinDit, lirePartage, surEvt, lire, ecrire } from './noyau.js';
+import { $, $$, S, C, VUS, COULEURS, MOUVEMENT_REDUIT, normal, nombre, euros, titre, photo, melange, lapinDit, lirePartage, surEvt, lire, ecrire, copier } from './noyau.js';
 import { carte, ouvrirFiche, initFiche } from './fiche.js';
 import { initLook, ouvrirLook, composer } from './look.js';
 import { initCollections, ouvrirCollections, afficherPartage, ouvrirSurprise } from './collections.js';
 import { initEffets, motsTournants } from './effets.js';
 import { initMenu, charger, bip } from './menu.js';
+import { pluie } from './pluie.js';
 import { initSwipe, ouvrirSwipe } from './swipe.js';
 
 const PAR_LOT = 30;
@@ -235,10 +236,26 @@ function majVus() {
 
 // ---------- Démarrage ----------
 const p0 = new URLSearchParams(location.search);
+// Bonus de bienvenue (coupons LoveGoBuy) : une seule fois par visiteur, facile à fermer.
+function bonus(m) {
+  const d = $('#bonus');
+  let deja = false; try { deja = localStorage.getItem('zinzin-bonus-vu') === '1'; } catch {}
+  if (deja || !m.couponMontant || !m.inscription || document.querySelector('dialog[open]')) return;
+  try { localStorage.setItem('zinzin-bonus-vu', '1'); } catch {}
+  $('#bonus-montant').textContent = `${m.couponMontant} ${m.couponDevise}`;
+  $('#bonus-cta').href = m.inscription;
+  if (m.code) $('#bonus-code-v').textContent = m.code; else $('#bonus-code').hidden = true;
+  $('#bonus-code').onclick = () => copier(m.code, 'Code copié');
+  for (const b of d.querySelectorAll('[data-fermer]')) b.onclick = () => d.close();
+  $('#bonus-cta').addEventListener('click', () => d.close());
+  d.onclick = (e) => { if (e.target === d) d.close(); };
+  d.showModal(); bip('valide');
+}
 function presentation(m) {
   const pr = $('#presentation');
   let vue = false; try { vue = sessionStorage.getItem('zinzin-entre') === '1'; } catch {}
-  if (vue || p0.get('article') || p0.get('selection')) return;
+  if (p0.get('article') || p0.get('selection')) return;
+  if (vue) { setTimeout(() => bonus(m), 1500); return; }
   $('#pres-nb').textContent = nombre(S.DATA.articles.length);
   if (m.couponMontant) $('#pres-coupon').textContent = `${m.couponMontant} ${m.couponDevise}`; else $('#pres-coupon').parentElement.lastChild.remove();
   pr.hidden = false; document.documentElement.classList.add('fige');
@@ -246,7 +263,7 @@ function presentation(m) {
     if (pr.classList.contains('entre')) return;
     try { sessionStorage.setItem('zinzin-entre', '1'); } catch {}
     bip('valide'); pr.classList.add('entre');
-    setTimeout(() => { pr.hidden = true; document.documentElement.classList.remove('fige'); $('#menu-jeu button')?.focus({ preventScroll: true }); }, MOUVEMENT_REDUIT ? 0 : 900);
+    setTimeout(() => { pr.hidden = true; document.documentElement.classList.remove('fige'); $('#menu-jeu button')?.focus({ preventScroll: true }); setTimeout(() => bonus(m), 700); }, MOUVEMENT_REDUIT ? 0 : 900);
   };
   $('#manette').onclick = entrer;
   addEventListener('keydown', (e) => { if (!pr.hidden && ['Enter', ' '].includes(e.key)) { e.preventDefault(); entrer(); } });
@@ -271,8 +288,8 @@ function construire(d, couv) {
   // Mélange du jour, pièces avec photo d'abord.
   const mel = melange(d.articles);
   // Vêtements et chaussures avec photo d'abord ; high-tech, objets et pièces sans photo à la fin.
-  const rang = (a) => (a.img ? 0 : 2) + (['tech', 'autres'].includes(a.type) ? 1 : 0);
-  S.ORDRE = [0, 1, 2, 3].flatMap((r) => mel.filter((a) => rang(a) === r));
+  const rang = (a) => (a.img ? 0 : 2) + (['tech', 'autres'].includes(a.type) ? 1 : 0) + (a.photoQ === 'mauvaise' ? 2 : a.photoQ === 'moyenne' ? .5 : 0);
+  S.ORDRE = mel.map((a) => [rang(a), a]).sort((x, y) => x[0] - y[0]).map((x) => x[1]); // tri stable : le mélange du jour est gardé à rang égal
 
   for (const el of $$('[data-perso]')) el.textContent = m.perso;
   for (const el of $$('[data-perso-img]')) el.src = m.image;
@@ -350,6 +367,8 @@ function construire(d, couv) {
   if (m.couponMontant) $('#menu-coupon').textContent = `${m.couponMontant} ${m.couponDevise} de coupons`;
   // Page de présentation : on entre dans le site en appuyant sur Start (clic, toucher, Entrée ou bouton de manette).
   presentation(m);
+  { const r = $('#remonter'); let v = false; addEventListener('scroll', () => { const n = scrollY > innerHeight * 1.5; if (n !== v) { v = n; r.hidden = !n; } }, { passive: true }); r.onclick = () => scrollTo({ top: $('#catalogue')?.offsetTop < scrollY ? $('#catalogue').offsetTop - 60 : 0, behavior: 'smooth' }); }
+  pluie($('.titre-pluie'), { densite: 1 }); pluie($('.decor-pluie'), { densite: .5, opacite: .7 });
   motsTournants($('#mot-tournant'), m.styles.filter((s) => s.n && !['a-verifier', 'designer', 'archive'].includes(s.id)).map((s) => s.nom.split(' / ')[0].toLowerCase()));
   // Liens partagés : ?article=…, ?selection=…, ou des filtres (?style=…) → on va direct au bon endroit.
   const p = new URLSearchParams(location.search);
