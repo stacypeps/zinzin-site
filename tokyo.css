@@ -736,3 +736,11 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
 /* Rangées qui défilent : les cartes hors écran ne doivent pas garder la hauteur estimée (340 px), sinon toute la rangée s'étire */
 .carte.petite { content-visibility: visible; contain-intrinsic-size: none; }
 .rail-piste { align-items: stretch; }
+/* Titres des rangées sur téléphone : le texte prend toute la largeur, le bouton passe dessous */
+@media (max-width: 560px) {
+  .rail-tete { flex-wrap: wrap; gap: 8px 12px; }
+  .rail-tete .avatar { width: 34px; height: 34px; align-self: flex-start; margin-top: 2px; }
+  .rail-tete div { flex: 1 1 calc(100% - 46px); }
+  .rail-tete h3 { font-size: 19px; line-height: 1.15; }
+  .rail-tete .rail-voir { margin-left: 46px; }
+}
