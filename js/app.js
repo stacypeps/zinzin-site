@@ -244,8 +244,8 @@ function bonus(m) {
   try { localStorage.setItem('zinzin-bonus-vu', '1'); } catch {}
   $('#bonus-montant').textContent = `${m.couponMontant} ${m.couponDevise}`;
   $('#bonus-cta').href = m.inscription;
-  if (m.code) $('#bonus-code-v').textContent = m.code; else $('#bonus-code').hidden = true;
-  $('#bonus-code').onclick = () => copier(m.code, 'Code copié');
+  if (m.codePromo) { $('#bonus-code-v').textContent = m.codePromo; $('#bonus-code-a').textContent = `${m.codePromoAvantage} · toucher pour copier`; } else $('#bonus-code').hidden = true;
+  $('#bonus-code').onclick = () => copier(m.codePromo, 'Code copié');
   for (const b of d.querySelectorAll('[data-fermer]')) b.onclick = () => d.close();
   $('#bonus-cta').addEventListener('click', () => d.close());
   d.onclick = (e) => { if (e.target === d) d.close(); };
@@ -299,6 +299,7 @@ function construire(d, couv) {
   $('#code-parrain').textContent = m.code ?? '';
   if (m.couponMontant && m.inscription) {
     $('#lgb').hidden = false; $('#lgb-coupon').textContent = m.coupon; $('#lgb-inscription').href = m.inscription;
+    if (m.codePromo) { const b = $('#lgb-promo'); b.hidden = false; $('b', b).textContent = m.codePromo; $('small', b).textContent = `${m.codePromoAvantage} · toucher pour copier`; b.onclick = () => copier(m.codePromo, 'Code copié'); }
     const c = $('[data-compte]'); c.dataset.compte = m.couponMontant; c.dataset.suffixe = ' ' + m.couponDevise;
   }
   for (const el of $$('[data-img]')) el.src = m[el.dataset.img] || m.image;
@@ -368,7 +369,9 @@ function construire(d, couv) {
   // Page de présentation : on entre dans le site en appuyant sur Start (clic, toucher, Entrée ou bouton de manette).
   presentation(m);
   { const r = $('#remonter'); let v = false; addEventListener('scroll', () => { const n = scrollY > innerHeight * 1.5; if (n !== v) { v = n; r.hidden = !n; } }, { passive: true }); r.onclick = () => scrollTo({ top: $('#catalogue')?.offsetTop < scrollY ? $('#catalogue').offsetTop - 60 : 0, behavior: 'smooth' }); }
-  pluie($('.titre-pluie'), { densite: 1 }); pluie($('.decor-pluie'), { densite: .5, opacite: .7 });
+  // ?apercu : capture de l'image de partage (pas d'animation ni de pluie).
+  if (p0.has('apercu')) document.documentElement.classList.add('apercu');
+  else { pluie($('.titre-pluie'), { densite: 1 }); pluie($('.decor-pluie'), { densite: .5, opacite: .7 }); }
   motsTournants($('#mot-tournant'), m.styles.filter((s) => s.n && !['a-verifier', 'designer', 'archive'].includes(s.id)).map((s) => s.nom.split(' / ')[0].toLowerCase()));
   // Liens partagés : ?article=…, ?selection=…, ou des filtres (?style=…) → on va direct au bon endroit.
   const p = new URLSearchParams(location.search);

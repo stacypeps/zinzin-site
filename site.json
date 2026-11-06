@@ -7,10 +7,12 @@
   "discordNom": "La Zizanie",
   "imageConfus": "assets/tokyo/lapin-confus.webp",
   "imageContent": "assets/tokyo/lapin-content.webp",
-  "coupon": "Offerts à l’inscription sur LoveGoBuy avec notre lien. Les conditions d’utilisation des coupons sont indiquées sur LoveGoBuy.",
+  "coupon": "À récupérer en créant ton compte LoveGoBuy avec notre lien.",
   "imageCoupon": "assets/lapin/coupon.webp",
   "imageFouille": "assets/lapin/fouille.webp",
-  "couponMontant": 400,
+  "couponMontant": 540,
+  "codePromo": "ZINZIN25",
+  "codePromoAvantage": "2 coupons de -25 %",
   "couponDevise": "$",
   "imageHeros": "assets/tokyo/lapin-heros.webp"
 }

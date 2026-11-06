@@ -723,3 +723,10 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
 .pied.pied-simple { display: grid; justify-items: center; gap: 10px; max-width: none; margin: 40px 0 0; padding: 26px var(--g) 34px; background: none; color: var(--doux); border: 0; border-top: 1px solid var(--ligne); box-shadow: none; text-align: center; }
 .pied.pied-simple::before, .pied.pied-simple::after { display: none; }
 .pied-simple .petit { margin: 0; font-size: 12px; opacity: .7; }
+
+/* Code promo dans le ticket coupon */
+.ticket2 .code-promo { justify-self: start; min-width: 240px; }
+.ticket2 .code-promo[hidden] { display: none; }
+@media (max-width: 759px) { .ticket2 .code-promo { justify-self: stretch; } }
+.bonus-bas { padding-bottom: 22px; }
+.apercu *, .apercu *::before, .apercu *::after { animation: none !important; transition: none !important; }
