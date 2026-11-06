@@ -3,6 +3,7 @@ import { $, S, titre, locale, euros, auHasard, melange, toast, copier } from './
 import { composer, ouvrirLook } from './look.js';
 import { ouvrirFiche } from './fiche.js';
 import { bip } from './menu.js';
+import { partagerTenue } from './partage-image.js';
 
 const STYLES = ['clean', 'rockstar', 'streetwear', 'gorpcore', 'oldmoney', 'y2k', 'opium'];
 const KANJI = { clean: '清', rockstar: '狂', streetwear: '街', gorpcore: '山', oldmoney: '品', y2k: '光', opium: '闇' };
@@ -61,7 +62,8 @@ function resultat() {
       return b;
     }));
     $('#quiz-total').textContent = `Ta tenue : ≈ ${euros(pieces.reduce((s, a) => s + a.eur, 0))} € les trois pièces`;
-  } else { tenue.replaceChildren(); $('#quiz-total').textContent = ''; }
+    $('#quiz-image').hidden = false; $('#quiz-image').onclick = () => partagerTenue(pieces, style);
+  } else { tenue.replaceChildren(); $('#quiz-total').textContent = ''; $('#quiz-image').hidden = true; }
   $('#quiz-voir').onclick = () => { $('#quiz').close(); Q.actions.voirStyle?.(style); };
   $('#quiz-look').onclick = () => { $('#quiz').close(); ouvrirLook({ style, budget: 150 }); };
   $('#quiz-partager').onclick = async () => {

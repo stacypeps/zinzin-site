@@ -859,3 +859,8 @@ h1 { padding-right: 0; } /* reste de l'ancien thème : décalait le logo à gauc
 .drop-buy { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) { .drop-disque { animation: none; } }
 .drop-disque { right: -6%; width: 82%; }
+/* Bouton « 540 $ de coupons » du menu : doré, avec un reflet qui passe */
+.menu-jeu button#menu-coupon { position: relative; overflow: hidden; color: #2a0f00; border-color: #ffe3b0; text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+  background: linear-gradient(180deg, #ffe0a3, #ffb347 46%, #ff8a1a 54%, #ffc46e); box-shadow: 0 0 18px rgba(255, 160, 60, .55), inset 0 1px 0 rgba(255, 255, 255, .7); }
+.menu-jeu button#menu-coupon::after { content: ""; position: absolute; top: -20%; bottom: -20%; left: -40%; width: 30%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .85), transparent); animation: buy-reflet 2.6s ease-in-out infinite; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .menu-jeu button#menu-coupon::after { animation: none; display: none; } }
