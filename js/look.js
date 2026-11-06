@@ -14,14 +14,19 @@ export const LOOKS = { liste: lire(CLE_LOOKS, []), sauver() { ecrire(CLE_LOOKS, 
 const L = { style: '', budget: 120, accessoire: false, pieces: {}, verrous: new Set(), horsStyle: new Set() };
 
 // Claquettes, sandales, sous-vêtements : pas pour une tenue.
-const PAS_TENUE = /slides?|claquettes?|sandal|flip[- ]?flop|slippers?|mules?|tongs?/i;
-const SOUS_VET = /boxers?|underwear|cale[cç]on|briefs?/i;
-// Pièces possibles pour une case : bon type, prix connu, photo, et dans le style choisi.
+const PAS_TENUE = /slides?|claquettes?|sandal|flip[- ]?flop|slippers?|mules?|tongs?|pool|fluffy|furry|shower/i;
+const SOUS_VET = /boxers?|underwear|cale[cç]on|briefs?|socks?|chaussettes?/i;
+const BOTTES = /boots?|bottes?|bottines?|ramones|rick owens geobasket|combat/i;
+// Pas de shorts quand le style est chaud, sombre ou chic.
+const SANS_SHORT = new Set(['hiver', 'opium', 'oldmoney', 'gorpcore']);
 function candidats(c, style) {
-  const base = S.ORDRE.filter((a) => a.eur > 0 && a.img && a.photoQ !== 'mauvaise' && c.groupes.includes(S.GROUPE[a.type]) && !(c.id === 'chaussures' && PAS_TENUE.test(a.titre || '')) && !(c.id === 'bas' && SOUS_VET.test(a.titre || '')));
-  if (!style) return { liste: base, hors: false };
+  let base = S.ORDRE.filter((a) => a.eur > 0 && a.img && a.photoQ !== 'mauvaise' && c.groupes.includes(S.GROUPE[a.type])
+    && !(c.id === 'chaussures' && PAS_TENUE.test(a.titre || ''))
+    && !(c.id === 'bas' && (SOUS_VET.test(a.titre || '') || (SANS_SHORT.has(style) && a.type === 'shorts'))));
+  const tri = (l) => { const belles = l.filter((a) => a.photoQ === 'bonne'); return belles.length >= 8 ? belles : l; };
+  if (!style) return { liste: tri(base), hors: false };
   const dans = base.filter((a) => a.styles.includes(style));
-  return dans.length ? { liste: dans, hors: false } : { liste: base.filter((a) => !a.styles.includes('a-verifier')), hors: true };
+  return dans.length ? { liste: tri(dans), hors: false } : { liste: tri(base.filter((a) => !a.styles.includes('a-verifier'))), hors: true };
 }
 // ----- Ce qui fait une belle tenue (couleurs et motifs lus sur les photos par vision.mjs) -----
 const NEUTRES = new Set(['noir', 'blanc', 'creme', 'gris', 'beige', 'marron', 'marine', 'denim-clair', 'denim-fonce', 'kaki', 'argent']);
@@ -47,9 +52,13 @@ export function noteTenue(p, style, budget) {
     // Haut et bas : contraste, ou total noir assumé ; jamais deux fois la même couleur claire.
     const h = p.haut, b = p.bas;
     if (h?.coul && b?.coul) {
-      if (h.coul === b.coul) n += h.coul === 'noir' ? 1.5 : -2;
+      if (h.coul === b.coul) n += h.coul === 'noir' ? (['opium', 'rockstar'].includes(style) ? 1.5 : -0.5) : -2;
       if (h.coul.startsWith('denim') && b.coul.startsWith('denim')) n -= 2;
     }
+    // Hors Opium / Rockstar : une tenue a besoin de contraste (pas tout noir).
+    if (!['opium', 'rockstar'].includes(style)) { const dist = new Set(vus.map((a) => a.coul)).size; n += dist >= 3 ? 2 : dist === 2 ? 1 : -1; }
+    // Short avec des bottes : non.
+    if (b?.type === 'shorts' && p.chaussures && BOTTES.test(p.chaussures.titre || '')) n -= 4;
     // Chaussures qui rappellent une couleur du haut ou du bas.
     const ch = p.chaussures;
     if (ch?.coul && [h, b].some((x) => x && couleursDe(x).includes(ch.coul))) n += 1;
@@ -90,7 +99,7 @@ export function composer({ style = L.style, budget = L.budget, accessoire = L.ac
     if (t <= budget) tirages.push({ p, t, n: noteTenue(p, style, budget) });
   }
   if (!tirages.length) return { ok: false, min, fixe };
-  const meilleure = parmiLesMeilleures(tirages);
+  const meilleure = parmiLesMeilleures(tirages, 8);
   return { ok: true, pieces: meilleure.p, horsStyle: new Set(libres.filter((c) => pools[c.id].hors).map((c) => c.id)) };
 }
 const melangeCases = (l) => [...l].sort(() => Math.random() - .5);
