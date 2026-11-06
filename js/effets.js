@@ -114,5 +114,5 @@ export function initEffets() {
   neige();
   if (SOURIS && !MOUVEMENT_REDUIT) curseur();
   aimants(); parallaxe(); compteurs(); revelations();
-  inclinaison('.couv', 10); inclinaison('.carte', 6); inclinaison('.ticket', 6);
+  inclinaison('.couv', 10); inclinaison('.carte', 6); inclinaison('.ticket', 6); inclinaison('.coupon-carte', 16);
 }

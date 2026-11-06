@@ -1,6 +1,7 @@
 // « Compose ton look » : haut + bas + chaussures (+ accessoire facultatif) tirés du vrai catalogue, dans un style et un budget.
 import { $, $$, S, C, euros, titre, photo, toast, lapinDit, lire, ecrire, copier, lienPartage, NOTE_PRIX, auHasard, evt } from './noyau.js';
 import { ouvrirFiche, prixEl } from './fiche.js';
+import { partagerTenue } from './partage-image.js';
 
 export const CASES = [
   { id: 'haut', nom: 'Haut', groupes: ['haut'] },
@@ -173,6 +174,7 @@ function dessiner() {
   $('#look-total').innerHTML = complet ? `Total <strong>≈ ${euros(t)} €</strong> <span>/ budget ${euros(L.budget)} €</span>` : 'Total : —';
   $('#look-total').classList.toggle('depasse', complet && t > L.budget);
   $('#look-enregistrer').disabled = !complet;
+  $('#look-image').disabled = !complet;
   if ([...L.horsStyle].some((k) => casesActives().some((c) => c.id === k))) message(`Il n’y a pas assez de pièces de ce type classées ${S.STYLES[L.style]?.nom} : les cases « hors style » viennent du reste du catalogue.`);
 }
 
@@ -222,6 +224,7 @@ export function initLook() {
   $('#look-budget').onchange = () => proposer();
   $('#look-accessoire').onchange = (e) => { L.accessoire = e.target.checked; proposer(); };
   $('#look-proposer').onclick = proposer;
+  $('#look-image').onclick = (e) => { e.currentTarget.disabled = true; partagerTenue(casesActives().map((c) => L.pieces[c.id]), L.style).finally(() => { $('#look-image').disabled = false; }); };
   $('#look-enregistrer').onclick = () => {
     const nom = (prompt('Nom de la tenue :', `${L.style ? S.STYLES[L.style].court : 'Tenue'} à ${euros(total())} €`) ?? '').trim();
     if (!nom) return;

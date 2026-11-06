@@ -6,6 +6,7 @@ import { initCollections, ouvrirCollections, afficherPartage, ouvrirSurprise } f
 import { initEffets, motsTournants } from './effets.js';
 import { initMenu, charger, bip } from './menu.js';
 import { pluie } from './pluie.js';
+import { initQuiz, ouvrirQuiz } from './quiz.js';
 import { initSwipe, ouvrirSwipe } from './swipe.js';
 
 const PAR_LOT = 30;
@@ -51,9 +52,28 @@ function filtrer() {
 const score = (a, q) => (normal(a.marque).includes(q) ? 2 : 0) + (normal(titre(a)).startsWith(q) ? 1 : 0) + (a.img ? .5 : 0);
 
 // ---------- Rendu du catalogue (par lots, pour ne pas mettre 5 000 cartes dans la page) ----------
+// Carte coupon holographique glissée dans le catalogue (6e place, puis toutes les 30 pièces).
+function carteCoupon() {
+  const m = S.DATA.meta;
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'coupon-carte'; b.setAttribute('aria-label', `${m.couponMontant} ${m.couponDevise} de coupons LoveGoBuy : récupérer`);
+  b.innerHTML = `<span class="cc-holo" aria-hidden="true"></span><span class="cc-reflet" aria-hidden="true"></span>
+    <span class="cc-etincelles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="cc-kicker"><span lang="ja">ボーナス</span> Bonus</span>
+    <b class="cc-montant">${m.couponMontant} ${m.couponDevise}</b>
+    <span class="cc-texte">de coupons LoveGoBuy</span>
+    ${m.codePromo ? `<span class="cc-code">${m.codePromo}<small>${m.codePromoAvantage}</small></span>` : ''}
+    <span class="cc-cta">Récupérer →</span>`;
+  b.onclick = () => ouvrirBonus(true);
+  return b;
+}
 function afficherSuite() {
   const frag = document.createDocumentFragment();
-  liste.slice(affiches, affiches + PAR_LOT).forEach((a, i) => frag.append(carte(a, { i, liste })));
+  liste.slice(affiches, affiches + PAR_LOT).forEach((a, i) => {
+    const n = affiches + i;
+    if (S.DATA.meta.couponMontant && (n === 5 || (n > 5 && (n - 5) % 30 === 0))) frag.append(carteCoupon());
+    frag.append(carte(a, { i, liste }));
+  });
   affiches += PAR_LOT;
   $('#grille').append(frag);
   $('#plus').hidden = affiches >= liste.length;
@@ -237,6 +257,7 @@ function majVus() {
 // ---------- Démarrage ----------
 const p0 = new URLSearchParams(location.search);
 // Bonus de bienvenue (coupons LoveGoBuy) : à chaque visite après Start, fermable par la croix.
+function ouvrirBonus(force) { const d = $('#bonus'); if (force && d.open) return; bonus(S.DATA.meta); }
 function bonus(m) {
   const d = $('#bonus');
   // Affiché à chaque visite, juste après Start.
@@ -355,6 +376,24 @@ function construire(d, couv) {
   $('#led').replaceChildren(...[...ledTxt, ...ledTxt].map((t) => Object.assign(document.createElement('span'), { textContent: t })));
   $('#caisse-num').textContent = String(d.articles.length).padStart(4, '0');
   initSwipe();
+  // Drop du jour : même pièce pour tout le monde aujourd'hui (graine = date), change à minuit.
+  {
+    const jour = Number(new Date().toISOString().slice(0, 10).replaceAll('-', ''));
+    const belles = d.articles.filter((a) => a.m && a.photoQ === 'bonne' && a.eur >= 12 && ['haut', 'bas', 'chaussures'].includes(S.GROUPE[a.tv || a.type]) && !a.styles.includes('a-verifier'));
+    const a = belles.length && melange(belles, jour)[0];
+    if (a) {
+      $('#drop').hidden = false;
+      photo($('#drop-img'), a, 600, $('.drop-photo'));
+      $('#drop-titre').textContent = titre(a);
+      $('#drop-marque').textContent = [a.marque, S.STYLES[a.styles[0]]?.nom].filter(Boolean).join(' · ');
+      $('#drop-prix').textContent = `≈ ${euros(a.eur)} €`;
+      $('#drop-buy').href = a.lien;
+      $('#drop-voir').onclick = $('#drop-ouvrir').onclick = () => ouvrirFiche(a, [a]);
+      const tic = () => { const n = new Date(), f = new Date(n); f.setHours(24, 0, 0, 0); const r = Math.max(0, f - n) / 1000; $('#drop-compte').textContent = [r / 3600, (r % 3600) / 60, r % 60].map((x) => String(Math.floor(x)).padStart(2, '0')).join(':'); };
+      tic(); setInterval(tic, 1000);
+    }
+  }
+  initQuiz({ voirStyle: (st) => { etat.style = st; rendre(); $('#catalogue').scrollIntoView(); } });
   const aller = (sel) => charger(() => $(sel).scrollIntoView({ behavior: 'auto' }));
   initMenu({
     catalogue: () => aller('#catalogue'),
@@ -364,6 +403,7 @@ function construire(d, couv) {
     coupons: () => aller(m.couponMontant ? '#lgb' : '#catalogue'),
     favoris: () => ouvrirCollections(),
     discord: () => m.discord && window.open(m.discord, '_blank', 'noopener'),
+    quiz: () => charger(() => ouvrirQuiz()),
   });
   if (m.discord) $('#menu-discord').hidden = false;
   if (m.couponMontant) $('#menu-coupon').textContent = `${m.couponMontant} ${m.couponDevise} de coupons`;

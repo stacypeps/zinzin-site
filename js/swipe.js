@@ -3,6 +3,7 @@
 import { $, S, C, PLATEFORME, euros, titre, mini, locale, photo, toast, lapinDit, melange } from './noyau.js';
 import { ouvrirFiche } from './fiche.js';
 import { bip } from './menu.js';
+import { confettis } from './quiz.js';
 
 const W = { style: '', file: [], i: 0, gardes: 0, vus: new Set(), occupe: false };
 const TAILLE = innerWidth < 760 ? 500 : 700;
@@ -59,9 +60,9 @@ function decider(sens) {
   const a = W.file[W.i], carte = $('#swipe-pile .swipe-carte[data-rang="0"]');
   if (!a || !carte || W.occupe) return;
   W.occupe = true; W.vus.add(a.id);
-  if (sens === 'oui') { if (!C.estFavori(a.id)) C.basculer('favoris', a.id); W.gardes++; bip('garde'); if (W.gardes % 5 === 0) lapinDit(`${W.gardes} pièces gardées, t'as l'œil !`, 'content'); }
+  if (sens === 'oui') { if (!C.estFavori(a.id)) C.basculer('favoris', a.id); W.gardes++; bip('garde'); navigator.vibrate?.(12); if (W.gardes % 5 === 0) { confettis($('#swipe-pile')); navigator.vibrate?.([20, 40, 20]); lapinDit(`${W.gardes} pièces gardées, t'as l'œil !`, 'content'); } }
   else if (sens === 'haut') { bip('valide'); window.open(a.lien, '_blank', 'noopener'); }
-  else bip('retour');
+  else { bip('retour'); navigator.vibrate?.(6); }
   carte.classList.add(`part-${sens}`);
   // On fait monter les autres cartes tout de suite, sans attendre la fin de l'animation.
   W.i++;

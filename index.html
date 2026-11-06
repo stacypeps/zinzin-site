@@ -28,8 +28,8 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Chakra+Petch:wght@500;600;700&display=swap"></noscript>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B8%E3%83%B3&display=swap"></noscript>
-  <link rel="stylesheet" href="style.css?v=1793976185">
-  <link rel="stylesheet" href="tokyo.css?v=1793976185">
+  <link rel="stylesheet" href="style.css?v=1793985162">
+  <link rel="stylesheet" href="tokyo.css?v=1793985162">
 </head>
 <body>
   <a class="aller-contenu" href="#catalogue">Aller au catalogue</a>
@@ -115,6 +115,7 @@
       <nav class="menu-jeu" id="menu-jeu" aria-label="Menu principal">
         <button type="button" data-action="catalogue">Catalogue</button>
         <button type="button" data-action="discord" class="menu-discord" id="menu-discord" hidden>Rejoins le Discord</button>
+        <button type="button" data-action="quiz" class="menu-quiz">Quel est ton style&nbsp;?</button>
         <button type="button" data-action="univers">Univers</button>
         <button type="button" data-action="look">Compose ton look</button>
         <button type="button" data-action="swipe">Swipe</button>
@@ -156,6 +157,33 @@
     </ol>
   </section>
 
+  <!-- Quiz : quel est ton style ? -->
+  <dialog class="quiz" id="quiz" aria-labelledby="quiz-titre">
+    <div class="quiz-boite">
+      <button class="fermer quiz-x" id="quiz-fermer" type="button" aria-label="Fermer">✕</button>
+      <div id="quiz-jeu">
+        <p class="quiz-kicker"><span lang="ja">スタイル診断</span> Test de style</p>
+        <h2 id="quiz-titre">Quel est ton style&nbsp;?</h2>
+        <p class="quiz-consigne">Touche la pièce que tu porterais. <b id="quiz-etape">1 / 5</b></p>
+        <div class="quiz-barre" id="quiz-barre"><i></i></div>
+        <div class="quiz-choix" id="quiz-choix"></div>
+      </div>
+      <div class="quiz-resultat" id="quiz-resultat" hidden>
+        <p class="quiz-kicker">Ton style, c'est</p>
+        <div class="quiz-sceau"><span id="quiz-kanji" lang="ja">型</span></div>
+        <h2 class="quiz-style" id="quiz-style"></h2>
+        <p class="quiz-desc" id="quiz-desc"></p>
+        <div class="quiz-tenue" id="quiz-tenue"></div>
+        <p class="quiz-total" id="quiz-total"></p>
+        <div class="quiz-actions">
+          <button class="btn btn-orange" id="quiz-look" type="button">Composer ma tenue</button>
+          <button class="btn btn-fantome" id="quiz-voir" type="button">Voir tout le style</button>
+          <button class="btn btn-fantome" id="quiz-partager" type="button">Partager</button>
+          <button class="lien-discret" id="quiz-rejouer" type="button">Rejouer</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
   <!-- Bonus de bienvenue : une seule fois par visiteur, juste après Start -->
   <dialog class="bonus" id="bonus" aria-labelledby="bonus-titre">
     <button class="bonus-x" type="button" data-fermer aria-label="Fermer">✕</button>
@@ -173,6 +201,21 @@
   <button class="remonter" id="remonter" type="button" aria-label="Remonter en haut" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg></button>
   <div class="decor" aria-hidden="true"><div class="decor-pluie"></div><span class="lanterne l1"></span><span class="lanterne l2"></span><span class="lanterne l3"></span><span class="lanterne l4"></span></div>
   <main>
+    <!-- Drop du jour : une pièce par jour, change à minuit -->
+    <section class="drop" id="drop" aria-labelledby="drop-titre" hidden>
+      <div class="drop-scene">
+        <div class="drop-disque" aria-hidden="true"><i></i></div>
+        <button class="drop-boitier" id="drop-ouvrir" type="button" aria-label="Voir la pièce du jour"><span class="drop-tranche"><img src="assets/logo-z.svg" alt=""><b>ZINZIN</b></span><span class="drop-photo"><img id="drop-img" alt=""></span></button>
+      </div>
+      <div class="drop-texte">
+        <p class="drop-kicker"><span lang="ja">本日の</span> Drop du jour</p>
+        <h2 id="drop-titre"></h2>
+        <p class="drop-marque" id="drop-marque"></p>
+        <p class="drop-prix" id="drop-prix"></p>
+        <p class="drop-compte">Prochain drop dans <b id="drop-compte">--:--:--</b></p>
+        <div class="drop-actions"><a class="swipe-buy drop-buy" id="drop-buy" target="_blank" rel="noopener sponsored"><b>BUY</b><span>sur LoveGoBuy ↗</span></a><button class="btn btn-fantome" id="drop-voir" type="button">Voir la fiche</button></div>
+      </div>
+    </section>
     <section class="bloc" id="univers" aria-labelledby="titre-univers">
       <div class="titre-bloc" data-revele><span class="neon-jp" lang="ja" aria-hidden="true">ユニバース</span><h2 id="titre-univers"><span class="kicker">01</span> Les univers</h2></div>
       <div class="univers-grille" id="univers-grille"></div>
@@ -320,6 +363,7 @@
       <div class="look-pied">
         <p class="look-total" id="look-total" aria-live="polite"></p>
         <button class="btn btn-clair" id="look-enregistrer" type="button">Enregistrer la tenue</button>
+        <button class="btn btn-orange" id="look-image" type="button">Partager en image</button>
       </div>
       <p class="petit" id="look-note"></p>
       <div id="look-sauvees-bloc" hidden><p class="sous-titre">Tes tenues enregistrées</p><div class="look-sauvees" id="look-sauvees"></div></div>
@@ -391,6 +435,6 @@
 
   <div class="lapin-bulle" id="lapin-bulle" role="status" aria-live="polite" hidden><div class="bulle-portrait"><img alt="" width="64" height="80"></div><div class="bulle-texte"><b class="bulle-nom" data-perso>Zinzin</b><p></p></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="js/app.js?v=1793976185"></script>
+  <script type="module" src="js/app.js?v=1793985162"></script>
 </body>
 </html>
