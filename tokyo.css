@@ -581,3 +581,29 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
 .marque img, .pied-marque img, .rail-tete .avatar, .lapin-bulle img, .surprise-intro img { background: none; border: 0; border-radius: 0; box-shadow: none; object-position: center; filter: drop-shadow(0 2px 0 rgba(0, 0, 0, .55)); }
 .marque img { width: 30px; height: 30px; padding: 0; }
 .marque { gap: 6px; }
+.discord-pied { display: flex; width: fit-content; margin: 10px auto 4px; }
+.discord-pied[hidden] { display: none; }
+@media (max-width: 440px) { #btn-son { display: none; } }
+
+/* ===== Coupon : ticket en pleine largeur, montant sur une ligne, étapes dessous ===== */
+.lgb { grid-template-columns: 1fr !important; max-width: 1180px; gap: 12px; }
+.ticket2 .ticket-montant { font-size: clamp(54px, 8vw, 84px); white-space: nowrap; letter-spacing: -.02em; margin: 6px 0 4px; }
+.ticket2 .ticket-montant span { display: inline-block; }
+.ticket2 h2 { margin: 0; font-size: clamp(17px, 2.2vw, 22px); line-height: 1.15; max-width: 22ch; }
+.ticket2 .lgb-kicker { margin: 0; }
+.ticket2-droite { display: grid; gap: 12px; align-content: center; }
+.ticket2 .ticket-detail { margin: 0; font-size: 14px; line-height: 1.5; }
+.ticket2 .btn { width: auto; justify-self: start; }
+@media (max-width: 759px) { .ticket2 .btn { width: 100%; } }
+@media (min-width: 760px) { .ticket2 { grid-template-columns: auto 1fr; padding: 26px 40px; } }
+/* Étapes : numéro dans une pastille à gauche, texte sur une ou deux lignes */
+.etapes2 li { grid-template-columns: auto auto 1fr; gap: 12px; padding: 14px 16px; }
+.etapes2 b { position: static; order: -1; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--orange); color: var(--orange); font: 800 13px var(--titre); }
+.etapes2 svg { grid-row: auto; width: 28px; height: 28px; filter: none; }
+.etapes2 span { line-height: 1.35; }
+/* Enseignes néon : toujours à l'horizontale (en vertical sur mobile, elles se lisaient à l'envers) */
+@media (max-width: 759px) {
+  .titre-bloc { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+  .neon-jp { position: static; order: -1; writing-mode: horizontal-tb; padding: 4px 10px; font-size: 17px; }
+  .titre-bloc h2, .titre-bloc p { padding-right: 0; width: 100%; }
+}

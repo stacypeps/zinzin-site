@@ -278,7 +278,7 @@ function construire(d, couv) {
   for (const el of $$('[data-perso-img]')) el.src = m.image;
   document.title = `Les finds de ${m.perso}`;
   for (const id of ['#lien-lgb', '#lien-lgb-barre']) { const l = $(id); if (m.inscription) l.href = m.inscription; else l.hidden = true; }
-  if (m.discord) { const l = $('#lien-discord'); l.href = m.discord; l.hidden = false; }
+  if (m.discord) for (const id of ['#lien-discord', '#lien-discord-pied']) { const l = $(id); l.href = m.discord; l.hidden = false; }
   $('#code-parrain').textContent = m.code ?? '';
   if (m.couponMontant && m.inscription) {
     $('#lgb').hidden = false; $('#lgb-coupon').textContent = m.coupon; $('#lgb-inscription').href = m.inscription;
