@@ -236,12 +236,11 @@ function majVus() {
 
 // ---------- Démarrage ----------
 const p0 = new URLSearchParams(location.search);
-// Bonus de bienvenue (coupons LoveGoBuy) : une seule fois par visiteur, facile à fermer.
+// Bonus de bienvenue (coupons LoveGoBuy) : à chaque visite après Start, fermable par la croix.
 function bonus(m) {
   const d = $('#bonus');
-  let deja = false; try { deja = localStorage.getItem('zinzin-bonus-vu') === '1'; } catch {}
-  if (deja || !m.couponMontant || !m.inscription || document.querySelector('dialog[open]')) return;
-  try { localStorage.setItem('zinzin-bonus-vu', '1'); } catch {}
+  // Affiché à chaque visite, juste après Start.
+  if (!m.couponMontant || !m.inscription || document.querySelector('dialog[open]')) return;
   $('#bonus-montant').textContent = `${m.couponMontant} ${m.couponDevise}`;
   $('#bonus-cta').href = m.inscription;
   if (m.codePromo) { $('#bonus-code-v').textContent = m.codePromo; $('#bonus-code-a').textContent = `${m.codePromoAvantage} · toucher pour copier`; } else $('#bonus-code').hidden = true;
@@ -253,15 +252,15 @@ function bonus(m) {
 }
 function presentation(m) {
   const pr = $('#presentation');
-  let vue = false; try { vue = sessionStorage.getItem('zinzin-entre') === '1'; } catch {}
+  // La manette s'affiche à chaque ouverture du site (sauf lien direct vers une fiche ou une sélection, ou ?direct).
+  const vue = p0.has('direct');
   if (p0.get('article') || p0.get('selection')) return;
-  if (vue) { setTimeout(() => bonus(m), 1500); return; }
+  if (vue) return;
   $('#pres-nb').textContent = nombre(S.DATA.articles.length);
   if (m.couponMontant) $('#pres-coupon').textContent = `${m.couponMontant} ${m.couponDevise}`; else $('#pres-coupon').parentElement.lastChild.remove();
   pr.hidden = false; document.documentElement.classList.add('fige');
   const entrer = () => {
     if (pr.classList.contains('entre')) return;
-    try { sessionStorage.setItem('zinzin-entre', '1'); } catch {}
     bip('valide'); pr.classList.add('entre');
     setTimeout(() => { pr.hidden = true; document.documentElement.classList.remove('fige'); $('#menu-jeu button')?.focus({ preventScroll: true }); setTimeout(() => bonus(m), 700); }, MOUVEMENT_REDUIT ? 0 : 900);
   };
@@ -388,6 +387,7 @@ function construire(d, couv) {
 window.zinzin = { etat, S, C, get liste() { return liste; }, rendre };
 
 lireURL();
-Promise.all([fetch('data/catalogue.json').then((r) => r.json()), fetch('data/couvertures.json').then((r) => r.json()).catch(() => ({}))])
+const VERSION = new URL(import.meta.url).search; // même ?v= que le script : le catalogue se met à jour avec le site
+Promise.all([fetch('data/catalogue.json' + VERSION).then((r) => r.json()), fetch('data/couvertures.json' + VERSION).then((r) => r.json()).catch(() => ({}))])
   .then(([d, couv]) => construire(d, couv))
   .catch((e) => { console.error(e); $('#resultat').textContent = 'Impossible de charger les articles. Recharge la page.'; });

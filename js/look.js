@@ -20,12 +20,15 @@ const BOTTES = /boots?|bottes?|bottines?|ramones|rick owens geobasket|combat/i;
 // Pas de shorts quand le style est chaud, sombre ou chic.
 const SANS_SHORT = new Set(['hiver', 'opium', 'oldmoney', 'gorpcore']);
 function candidats(c, style) {
-  let base = S.ORDRE.filter((a) => a.eur > 0 && a.img && a.photoQ !== 'mauvaise' && c.groupes.includes(S.GROUPE[a.type])
+  let base = S.ORDRE.filter((a) => a.eur > 0 && a.img && a.photoQ !== 'mauvaise' && c.groupes.includes(S.GROUPE[a.type]) && (!a.tv || c.groupes.includes(S.GROUPE[a.tv]))
     && !(c.id === 'chaussures' && PAS_TENUE.test(a.titre || ''))
     && !(c.id === 'bas' && (SOUS_VET.test(a.titre || '') || (SANS_SHORT.has(style) && a.type === 'shorts'))));
   const tri = (l) => { const belles = l.filter((a) => a.photoQ === 'bonne'); return belles.length >= 8 ? belles : l; };
   if (!style) return { liste: tri(base), hors: false };
-  const dans = base.filter((a) => a.styles.includes(style));
+  let dans = base.filter((a) => a.styles.includes(style));
+  // Old Money / Clean : jamais de pièce à gros visuel, délavée ou colorée, même si elle est mal rangée.
+  if (style === 'oldmoney' && c.id === 'haut') dans = dans.filter((a) => (a.tv || a.type) !== 'vestes' || /blazer|trench|coat|manteau|overshirt|harrington|caban/i.test(a.titre || ''));
+  if (['oldmoney', 'clean'].includes(style)) dans = dans.filter((a) => !a.motif || (['uni', 'petit-logo', 'raye', 'carreaux'].includes(a.motif) && NEUTRES.has(a.coul) && a.coul !== 'denim-clair'));
   return dans.length ? { liste: tri(dans), hors: false } : { liste: tri(base.filter((a) => !a.styles.includes('a-verifier'))), hors: true };
 }
 // ----- Ce qui fait une belle tenue (couleurs et motifs lus sur les photos par vision.mjs) -----
