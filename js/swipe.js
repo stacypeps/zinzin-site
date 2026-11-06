@@ -1,6 +1,6 @@
 // Zinzin Swipe : une pièce à la fois. Glisser à droite = favori, à gauche = suivante, vers le haut = LoveGoBuy.
 // Fluide : 3 cartes seulement dans la page (on recycle au lieu de tout reconstruire) et photos préchargées.
-import { $, S, C, PLATEFORME, euros, titre, mini, toast, lapinDit, melange } from './noyau.js';
+import { $, S, C, PLATEFORME, euros, titre, mini, locale, photo, toast, lapinDit, melange } from './noyau.js';
 import { ouvrirFiche } from './fiche.js';
 import { bip } from './menu.js';
 
@@ -9,7 +9,7 @@ const TAILLE = innerWidth < 760 ? 500 : 700;
 const prechargees = new Map();
 function precharger(a) {
   if (!a || prechargees.has(a.id)) return;
-  const im = new Image(); im.decoding = 'async'; im.referrerPolicy = 'no-referrer'; im.src = mini(a.img, TAILLE);
+  const im = new Image(); im.decoding = 'async'; im.referrerPolicy = 'no-referrer'; im.src = locale(a) || mini(a.img, TAILLE);
   prechargees.set(a.id, im);
   if (prechargees.size > 30) prechargees.delete(prechargees.keys().next().value);
 }
@@ -27,9 +27,7 @@ function carteSwipe(a) {
     <div class="swipe-infos"><p class="swipe-marque"></p><h3></h3><p class="swipe-prix"></p></div>
     <span class="tampon tampon-oui" lang="ja">好き</span><span class="tampon tampon-non" lang="ja">次</span>`;
   const img = $('.boitier-cover img', el);
-  img.alt = titre(a); img.referrerPolicy = 'no-referrer'; img.decoding = 'async';
-  img.src = mini(a.img, TAILLE);
-  img.onerror = () => { if (img.src !== a.img) img.src = a.img; };
+  img.alt = titre(a); photo(img, a, TAILLE);
   $('.swipe-marque', el).textContent = [a.marque, S.TYPES[a.type]?.nom].filter(Boolean).join(' · ');
   $('h3', el).textContent = titre(a);
   $('.swipe-prix', el).textContent = `≈ ${euros(a.eur)} €`;

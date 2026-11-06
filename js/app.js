@@ -255,6 +255,8 @@ function presentation(m) {
   $('#manette').focus({ preventScroll: true });
 }
 function construire(d, couv) {
+  // Pièces dont la photo n'a pas pu être copiée (lien mort) : on ne les montre pas.
+  if (d.meta.miniatures) d.articles = d.articles.filter((a) => a.m);
   S.DATA = d;
   const m = d.meta;
   S.STYLES = Object.fromEntries(m.styles.map((s) => [s.id, { ...s, court: s.nom.split(' / ')[0] }]));

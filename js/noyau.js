@@ -29,16 +29,27 @@ export function mini(u, w = 400) {
   if (/geilicdn\.com/.test(u)) { try { const x = new URL(u); x.searchParams.set('w', w); x.searchParams.set('h', w); return x.href; } catch {} }
   return u;
 }
-// Charge une photo : miniature, puis original, puis « photo indisponible ».
+// Copie hébergée sur le site (m/…webp) : rapide et sans lien qui expire.
+export const locale = (a) => (a?.m ? `m/${a.id.replace(/[^a-z0-9]+/gi, '-')}.webp` : '');
+// Charge une photo : copie du site d'abord, puis miniature du vendeur, puis original, puis « photo indisponible ».
+// En grand (fiche, swipe), on affiche la copie tout de suite et on passe à la version nette dès qu'elle arrive.
 export function photo(img, a, w, cadre) {
-  const essais = [mini(a.img, w), a.img].filter((x, i, t) => x && t.indexOf(x) === i);
-  img.referrerPolicy = 'no-referrer';
+  const loc = locale(a);
+  const essais = [loc, mini(a.img, w), a.img].filter((x, i, t) => x && t.indexOf(x) === i);
+  img.referrerPolicy = 'no-referrer'; img.decoding = 'async';
   const suivant = () => {
     const u = essais.shift();
     if (u) img.src = u;
     else { img.removeAttribute('src'); img.onerror = null; cadre?.classList.add('sans-photo', 'charge'); }
   };
-  img.onload = () => cadre?.classList.add('charge');
+  img.onload = () => {
+    cadre?.classList.add('charge');
+    if (w > 400 && loc && img.src.endsWith(loc)) {
+      const net = new Image(); net.referrerPolicy = 'no-referrer'; net.decoding = 'async';
+      net.onload = () => { if (img.src.endsWith(loc) && net.naturalWidth > 360) { img.onload = null; img.src = net.src; } };
+      net.src = mini(a.img, w);
+    }
+  };
   img.onerror = suivant;
   suivant();
 }
