@@ -363,7 +363,9 @@ function construire(d, couv) {
     swipe: () => charger(() => ouvrirSwipe()),
     coupons: () => aller(m.couponMontant ? '#lgb' : '#catalogue'),
     favoris: () => ouvrirCollections(),
+    discord: () => m.discord && window.open(m.discord, '_blank', 'noopener'),
   });
+  if (m.discord) $('#menu-discord').hidden = false;
   if (m.couponMontant) $('#menu-coupon').textContent = `${m.couponMontant} ${m.couponDevise} de coupons`;
   // Page de présentation : on entre dans le site en appuyant sur Start (clic, toucher, Entrée ou bouton de manette).
   presentation(m);

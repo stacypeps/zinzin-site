@@ -730,3 +730,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
 @media (max-width: 759px) { .ticket2 .code-promo { justify-self: stretch; } }
 .bonus-bas { padding-bottom: 22px; }
 .apercu *, .apercu *::before, .apercu *::after { animation: none !important; transition: none !important; }
+/* Bouton Discord du menu : violet, pour qu'on le repère */
+.menu-jeu button.menu-discord { border-color: #a9a6ff; background: linear-gradient(180deg, rgba(150, 140, 255, .55), rgba(88, 101, 242, .7) 48%, rgba(64, 72, 200, .85) 52%, rgba(110, 120, 255, .65)); }
+.menu-jeu button.menu-discord[hidden] { display: none; }
