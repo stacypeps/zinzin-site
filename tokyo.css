@@ -744,3 +744,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 300; pointer-even
   .rail-tete h3 { font-size: 19px; line-height: 1.15; }
   .rail-tete .rail-voir { margin-left: 46px; }
 }
+
+/* Safari iPhone : le logo de la page manette était décalé à gauche */
+.pres-logo { justify-self: stretch; width: 100%; text-align: center; }
+.pres-logo .logo-chrome, .pres-logo .logo-kata { display: block; text-align: center; margin-inline: auto; }
+.pres-logo { padding: 0; }
+h1 { padding-right: 0; } /* reste de l'ancien thème : décalait le logo à gauche sur téléphone */
